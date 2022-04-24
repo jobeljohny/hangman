@@ -1,0 +1,19 @@
+<div id="gamePanel" class="mx-5 shadow-lg p-3 mb-5 bg-white rounded">
+  <div class="progress">
+    <div id="timer" class="progress-bar"></div>
+  </div>
+  <div id="gameWrapper">
+    <div id="gameArea" class="gameColumn">
+      <p id="movieGuesser">{{template.join('')}}</p>
+    </div>
+    <div id="hangArea" class="gameColumn">
+      <div>
+        <img id="hangImage" src="assets/hangman{{Lives-lives}}.png" alt="lives" />
+        <p id="errorBuffer">{{ wrongBuffer.join('')}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mx-5 shadow-lg p-2 bg-white rounded">
+  <p [innerHTML]="panelMessage" id="messageBox" class="lead"></p>
+</div>

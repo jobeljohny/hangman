@@ -1,0 +1,84 @@
+.gameColumn {
+  height: 400px;
+}
+#gameArea {
+  flex: 75%;
+}
+#hangArea {
+  display: flex;
+  flex: 25%;
+  align-items: center;
+}
+#gameWrapper {
+  display: flex;
+}
+#movieGuesser {
+  font-size: 3vw;
+  text-align: center;
+  margin: 0px;
+  height: 400px;
+  line-height: 400px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+#errorBuffer {
+  font-size: 2vw;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 15px;
+}
+
+#hangImage {
+  margin: auto;
+  display: block;
+}
+
+#gamePanel {
+  margin-bottom: 2rem !important;
+}
+
+#messageBox {
+  margin: 0px;
+  text-align: center;
+}
+#timer {
+  width: 50%;
+  background: rgb(0, 255, 0);
+  transition-timing-function: linear;
+}
+
+/*btrap*/
+.progress {
+  height: 10px;
+  background: #333;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 0px;
+  overflow: visible;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.progress .progress-bar {
+  position: relative;
+}
+
+.progress .progress-bar:after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  background: #fff;
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  right: -2px;
+  z-index: 1;
+  transform: rotate(35deg);
+}
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  -ms-transition: none !important;
+  transition: none !important;
+}
