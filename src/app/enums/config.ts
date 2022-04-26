@@ -15,4 +15,5 @@ export enum Vals {
   ERRORLIST_MSG=2,
   WIN_MSG=3,
   LOST_MSG=4,
+  BLINK_TIMER=600,
 }

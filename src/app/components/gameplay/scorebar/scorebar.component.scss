@@ -1,0 +1,10 @@
+#scorePanel{
+    display:flex;
+    padding: 0px 0px;
+    >p{
+        flex:1;
+        margin:0;
+        font-size:18px;
+        white-space: pre; 
+    }
+}

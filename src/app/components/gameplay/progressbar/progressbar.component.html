@@ -1,0 +1,7 @@
+<div class="progress">
+  <span 
+    id="timer"
+    [style.width.%]="value"
+    style.background-color="rgb({{(255 * value) / 100}},{{255 - (255 * value) / 100}},0)"
+  ></span>
+</div>

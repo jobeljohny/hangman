@@ -1,8 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { finalize, map, of, switchMap, takeWhile, tap, timer } from 'rxjs';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { GameConfig, Vals } from 'src/app/enums/config';
 import { MovieHelperService } from 'src/app/services/movie-helper.service';
 import { ApiService } from '../../services/api.service';
+import { ProgressbarComponent } from './progressbar/progressbar.component';
 
 @Component({
   selector: 'app-gameplay',
@@ -10,17 +10,27 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./gameplay.component.scss'],
 })
 export class GameplayComponent implements OnInit {
-  movieName:string=''
+  @ViewChild('progress')
+  progress: ProgressbarComponent;
+
+  movieName: string = '';
   movie: string[] = [];
   template: string[] = [];
-  lives:number = GameConfig.LIVES;
+  lives: number = GameConfig.LIVES;
   WIN = false;
   LOST = false;
+  Round=1;
+  Score=0;
   timeLeft = GameConfig.GAME_TIME;
   wrongBuffer: string[] = [];
-  panelMessage:string=''
+  panelMessage: string = '';
+  progressValue: number = 0.0;
+  interval: any = undefined;
+  guessBlinker: string = 'black';
+  errorBlinker: string = 'black';
 
   constructor(private api: ApiService, private ut: MovieHelperService) {
+    this.progress = new ProgressbarComponent();
     this.initialize();
   }
 
@@ -34,24 +44,24 @@ export class GameplayComponent implements OnInit {
     this.movieName = this.api.getMovie();
     [this.movie, this.template] = this.ut.getMovieAndTemplate(this.movieName);
     console.log(this.movie + '|' + this.template);
-    this.activateTimer(); //required!
+
+    this.activateTimer();
   }
-  activateTimer(){
-    of(5).pipe( // <- time in seconds we want the delay.
-    map(v => v * 1000),
-    switchMap(delay => {
-        const start = new Date().getTime();
-        return timer(0, 100).pipe( // <- speed of updates.
-            map(() => (new Date().getTime() - start) / delay),
-            takeWhile(result => result < 1, true),
-        );
-    }),
-    tap(v => console.log(v)), // <- your stuff
-    finalize(() =>console.log('done')), // <- your stuff
-).subscribe();
+  activateTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+        this.progressValue =
+          (100 * (GameConfig.GAME_TIME - this.timeLeft)) / GameConfig.GAME_TIME;
+      } else {
+        this.assignLost();
+      }
+    }, 1000);
+  }
+  stopTimer() {
+    clearInterval(this.interval);
   }
   resetBuffers() {
-    
     this.movie = [];
     this.template = [];
     this.lives = GameConfig.LIVES;
@@ -59,7 +69,8 @@ export class GameplayComponent implements OnInit {
     this.LOST = false;
     this.timeLeft = GameConfig.GAME_TIME;
     this.wrongBuffer = [];
-    this.panelMessage=Vals.PANEL_DEFAULT_MSG;
+    this.panelMessage = Vals.PANEL_DEFAULT_MSG;
+    this.progressValue = 0.0;
   }
   updateTemplate(key: string) {
     for (var i = 0; i < this.movie.length; i++) {
@@ -77,37 +88,50 @@ export class GameplayComponent implements OnInit {
 
   process(key: string) {
     if (this.movie.includes(key)) {
-      //blink(CORRECT);
+      this.blink('GUESSER', Vals.CORRECT);
       this.updateTemplate(key);
-      this.panelMessage=this.ut.setPanelMsg(Vals.CORRECT,key)
+      this.panelMessage = this.ut.setPanelMsg(Vals.CORRECT, key);
       this.checkWin();
     } else {
       if (this.wrongBuffer.includes(key)) {
-        //blinkErrorBuffer();
-        this.panelMessage=this.ut.setPanelMsg(Vals.ERRORLIST_MSG,key)
+        this.blink('ERROR_BUFFER', Vals.ERROR);
+        this.panelMessage = this.ut.setPanelMsg(Vals.ERRORLIST_MSG, key);
         return;
       }
-      //blink(ERROR);
+      this.blink('GUESSER', Vals.ERROR);
       this.wrongBuffer.push(key);
-      this.panelMessage=this.ut.setPanelMsg(Vals.INCORRECT_MSG,key)
-      this.lives-=1
-      this.checkLost();
+      this.panelMessage = this.ut.setPanelMsg(Vals.INCORRECT_MSG, key);
+      this.lives -= 1;
+      if (this.lives == 0) this.assignLost();
     }
   }
-   checkWin() {
-    if (!this.template.includes("-")){
-       this.WIN = true;
-       //pauseTimer();
-       //clearInterval(downloadTimer);
-       this.panelMessage=this.ut.setPanelMsg(Vals.WIN_MSG,this.movieName)
+  checkWin() {
+    if (!this.template.includes('-')) {
+      this.WIN = true;
+      this.stopTimer();
+      this.panelMessage = this.ut.setPanelMsg(Vals.WIN_MSG, this.movieName);
+      this.Round+=1;
+      this.Score+=10+Math.round((this.timeLeft*this.Round)/2);
+      this.initialize();
     }
   }
-   checkLost() {
-    if (this.lives == 0) {
-      this.LOST = true;
-      //pauseTimer();
-      //clearInterval(downloadTimer);
-      this.panelMessage=this.ut.setPanelMsg(Vals.LOST_MSG,this.movieName)
+
+  assignLost() {
+    this.stopTimer();
+    this.LOST = true;
+    this.panelMessage = this.ut.setPanelMsg(Vals.LOST_MSG, this.movieName);
+  }
+  
+  blink(entity: string, blinker: string) {
+    switch (entity) {
+      case 'GUESSER':
+        this.guessBlinker = blinker;
+        setTimeout(() => (this.guessBlinker = Vals.NORMAL), Vals.BLINK_TIMER);
+        break;
+      case 'ERROR_BUFFER':
+        this.errorBlinker = blinker;
+        setTimeout(() => (this.errorBlinker = Vals.NORMAL), Vals.BLINK_TIMER);
+        break;
     }
   }
 }
