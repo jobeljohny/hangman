@@ -3,6 +3,8 @@ import { GameConfig, Vals } from 'src/app/enums/config';
 import { MovieHelperService } from 'src/app/services/movie-helper.service';
 import { ApiService } from '../../services/api.service';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
+import party from "party-js";
+import { ResultModalComponent } from './result-modal/result-modal.component';
 
 @Component({
   selector: 'app-gameplay',
@@ -12,6 +14,8 @@ import { ProgressbarComponent } from './progressbar/progressbar.component';
 export class GameplayComponent implements OnInit {
   @ViewChild('progress')
   progress: ProgressbarComponent;
+  @ViewChild('Modal')
+  dialog:ResultModalComponent;
 
   movieName: string = '';
   movie: string[] = [];
@@ -31,6 +35,7 @@ export class GameplayComponent implements OnInit {
 
   constructor(private api: ApiService, private ut: MovieHelperService) {
     this.progress = new ProgressbarComponent();
+    this.dialog = new ResultModalComponent();
     this.initialize();
   }
 
@@ -113,6 +118,7 @@ export class GameplayComponent implements OnInit {
       this.Round+=1;
       this.Score+=10+Math.round((this.timeLeft*this.Round)/2);
       this.initialize();
+      party.confetti(document.getElementById('messageBox')!)
     }
   }
 
@@ -133,5 +139,8 @@ export class GameplayComponent implements OnInit {
         setTimeout(() => (this.errorBlinker = Vals.NORMAL), Vals.BLINK_TIMER);
         break;
     }
+  }
+  showModal(){
+    this.dialog.showModal();
   }
 }

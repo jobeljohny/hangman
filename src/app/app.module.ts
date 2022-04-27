@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { GameplayComponent } from './components/gameplay/gameplay.component';
 import { ProgressbarComponent } from './components/gameplay/progressbar/progressbar.component';
 import { ScorebarComponent } from './components/gameplay/scorebar/scorebar.component';
+import { ResultModalComponent } from './components/gameplay/result-modal/result-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameplayComponent,
     ProgressbarComponent,
-    ScorebarComponent
+    ScorebarComponent,
+    ResultModalComponent
   ],
   imports: [
     BrowserModule,
