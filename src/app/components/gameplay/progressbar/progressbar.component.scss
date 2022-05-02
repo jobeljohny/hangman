@@ -1,10 +1,15 @@
 /*btrap*/
+$dark-bg:#000000;
+$light-bg:#f6f1f7;
 .progress {
   width: 100%;
   height: 8px;
-  background: #f6f1f7;
+  background: $dark-bg;
   border-radius: 3px;
   overflow: hidden;
+}
+.light{
+  background:$light-bg;
 }
 #timer {
   background: rgb(0, 255, 0);

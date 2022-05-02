@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+$card-background-dark: #1d1d1d;
+$body-dark: #131313;
+$body-light: #fff9f1;
+$card-background-light: white;
+$text-light: black;
+$text-dark: white;
+
+body {
+  background-color: $body-dark;
+}
+.dark {
+  background-color: $body-dark;
+}
+.light {
+  background-color: $body-light;
+}
+.card-container {
+  background-color: $card-background-dark;
+}
+
+.wrapbox-light {
+  background-color: $card-background-light !important;
+}
+.text {
+  color: $text-dark;
+}
+.text-light-theme {
+  color: $text-light !important;
+}

@@ -1,4 +1,4 @@
-<div id="scorePanel" class="mx-5 shadow p-1 px-5 mb-1 bg-white rounded">
-        <p>ROUND : <b>{{round}}</b></p>
-        <p>SCORE : <b>{{score}}</b></p>
+<div id="scorePanel" class="mx-5 shadow p-1 px-5 mb-1 rounded" [ngClass]="{'wrapbox-light': !isDarkMode}">
+        <p [ngClass]="{'text-light-theme': !isDarkMode}">ROUND : <b>{{round}}</b></p>
+        <p [ngClass]="{'text-light-theme': !isDarkMode}"> SCORE : <b>{{score}}</b></p>
 </div>

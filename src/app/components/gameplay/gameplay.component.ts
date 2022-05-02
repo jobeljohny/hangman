@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { GameConfig, Result, Vals } from 'src/app/enums/config';
 import { MovieHelperService } from 'src/app/services/movie-helper.service';
+import { ThemeService } from 'src/app/services/theme.service';
 import { ApiService } from '../../services/api.service';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
 
@@ -15,7 +17,7 @@ export class GameplayComponent implements OnInit {
   @ViewChild('progress')
   progress: ProgressbarComponent;
   @ViewChild('Modal')
-  dialog:ResultModalComponent;
+  dialog: ResultModalComponent;
 
   movieName: string = '';
   movie: string[] = [];
@@ -23,23 +25,30 @@ export class GameplayComponent implements OnInit {
   lives: number = GameConfig.LIVES;
   WIN = false;
   LOST = false;
-  Round=1;
-  Score=0;
+  Round = 1;
+  Score = 0;
   timeLeft = GameConfig.GAME_TIME;
   wrongBuffer: string[] = [];
   panelMessage: string = '';
   progressValue: number = 0.0;
   interval: any = undefined;
-  guessBlinker: string = 'black';
-  errorBlinker: string = 'black';
-
-  constructor(private api: ApiService, private ut: MovieHelperService) {
-    this.progress = new ProgressbarComponent();
+  guessBlinker: string = Vals.NORMAL;
+  errorBlinker: string = Vals.NORMAL;
+  constructor(
+    private api: ApiService,
+    private ut: MovieHelperService,
+    private router: Router,
+    private theme: ThemeService
+  ) {
+    this.progress = new ProgressbarComponent(theme);
     this.dialog = new ResultModalComponent();
     this.initialize();
   }
 
   ngOnInit(): void {}
+  get isDarkMode() {
+    return this.theme.isDarkMode;
+  }
   get Lives() {
     return GameConfig.LIVES;
   }
@@ -125,37 +134,41 @@ export class GameplayComponent implements OnInit {
     this.panelMessage = this.ut.setPanelMsg(Vals.LOST_MSG, this.movieName);
     this.showModal();
   }
-  goToNextRound(){
-    this.Round+=1;
-    this.Score+=10+Math.round((this.timeLeft*this.Round)/2);
+  goToNextRound() {
+    this.Round += 1;
+    this.Score += 10 + Math.round((this.timeLeft * this.Round) / 2);
     this.initialize();
   }
-  
+
   blink(entity: string, blinker: string) {
     switch (entity) {
       case 'GUESSER':
         this.guessBlinker = blinker;
-        setTimeout(() => (this.guessBlinker = Vals.NORMAL), Vals.BLINK_TIMER);
+        setTimeout(
+          () => (this.guessBlinker = this.isDarkMode ? Vals.WHITE : Vals.BLACK),
+          Vals.BLINK_TIMER
+        );
         break;
       case 'ERROR_BUFFER':
         this.errorBlinker = blinker;
-        setTimeout(() => (this.errorBlinker = Vals.NORMAL), Vals.BLINK_TIMER);
+        setTimeout(
+          () => (this.errorBlinker = this.isDarkMode ? Vals.WHITE : Vals.BLACK),
+          Vals.BLINK_TIMER
+        );
         break;
     }
   }
-  showModal(){
-    this.dialog.showModal(this.WIN,this.movieName);
+  showModal() {
+    this.dialog.showModal(this.WIN, this.movieName);
   }
-  resultHandler(result:string){
+  resultHandler(result: string) {
     console.log(result);
-    if(result==Result.PASSED)
-      this.goToNextRound();
-    else{
-      //go to main menu not yet implemented so.....
-      this.Round=1;
-      this.Score=0;
-      this.initialize();
+    if (result == Result.PASSED) this.goToNextRound();
+    else {
+      this.router.navigate(['/']);
     }
-
+  }
+  darkMode() {
+    this.theme.toggleMode();
   }
 }
