@@ -1,0 +1,47 @@
+h5 {
+  text-align: center;
+  width: 100%;
+}
+#resultImage {
+  max-width: 40%;
+  height: auto;
+}
+#imageContainer {
+  display: flex;
+  justify-content: center;
+}
+#movie-name{
+    text-align: center;
+    margin-top: 5px;
+}
+#score-card{
+  text-align: center;
+}
+
+.btn{
+  display: inline-block;
+  text-decoration: none;
+  color: #FFF;
+  padding:8px 20px;
+  border-radius: 10px;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  transition: .4s;
+  font-size:18px;
+  letter-spacing: 1px;
+}
+.bg-green{
+  background: #02c764;
+}
+.bg-blue{
+  background: #018ea7;
+}
+
+.btn:hover{
+    background: #668ad8;
+}
+.modal-footer{
+  justify-content:center;
+}
+

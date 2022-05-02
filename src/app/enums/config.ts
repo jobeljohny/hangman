@@ -17,3 +17,7 @@ export enum Vals {
   LOST_MSG=4,
   BLINK_TIMER=600,
 }
+export enum Result{
+  PASSED='PASSED',
+  FAILED='FAILED',
+}

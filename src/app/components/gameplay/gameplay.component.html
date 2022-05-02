@@ -13,8 +13,8 @@
     </div>
   </div>
 </div>
-<app-result-modal #Modal [win]="WIN" [round]="Round" [movie]="movieName"></app-result-modal>
+<app-result-modal #Modal (resultEvent)="resultHandler($event)" [round]="Round" [score]="Score"></app-result-modal>
 <div class="mx-5 shadow-lg p-2 bg-white rounded">
   <p [innerHTML]="panelMessage" id="messageBox" class="lead"></p>
 </div>
-<button type="button" class="btn btn-primary" (click)="showModal()">ok</button>
+<!-- <button type="button" class="btn btn-primary" (click)="showModal()">ok</button> -->

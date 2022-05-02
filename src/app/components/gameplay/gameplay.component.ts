@@ -1,9 +1,9 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { GameConfig, Vals } from 'src/app/enums/config';
+import { GameConfig, Result, Vals } from 'src/app/enums/config';
 import { MovieHelperService } from 'src/app/services/movie-helper.service';
 import { ApiService } from '../../services/api.service';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
-import party from "party-js";
+
 import { ResultModalComponent } from './result-modal/result-modal.component';
 
 @Component({
@@ -115,10 +115,7 @@ export class GameplayComponent implements OnInit {
       this.WIN = true;
       this.stopTimer();
       this.panelMessage = this.ut.setPanelMsg(Vals.WIN_MSG, this.movieName);
-      this.Round+=1;
-      this.Score+=10+Math.round((this.timeLeft*this.Round)/2);
-      this.initialize();
-      party.confetti(document.getElementById('messageBox')!)
+      this.showModal();
     }
   }
 
@@ -126,6 +123,12 @@ export class GameplayComponent implements OnInit {
     this.stopTimer();
     this.LOST = true;
     this.panelMessage = this.ut.setPanelMsg(Vals.LOST_MSG, this.movieName);
+    this.showModal();
+  }
+  goToNextRound(){
+    this.Round+=1;
+    this.Score+=10+Math.round((this.timeLeft*this.Round)/2);
+    this.initialize();
   }
   
   blink(entity: string, blinker: string) {
@@ -141,6 +144,18 @@ export class GameplayComponent implements OnInit {
     }
   }
   showModal(){
-    this.dialog.showModal();
+    this.dialog.showModal(this.WIN,this.movieName);
+  }
+  resultHandler(result:string){
+    console.log(result);
+    if(result==Result.PASSED)
+      this.goToNextRound();
+    else{
+      //go to main menu not yet implemented so.....
+      this.Round=1;
+      this.Score=0;
+      this.initialize();
+    }
+
   }
 }
