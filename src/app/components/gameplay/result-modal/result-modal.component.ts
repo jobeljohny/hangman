@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import party from 'party-js';
 import { Result } from 'src/app/enums/config';
+import { ThemeService } from 'src/app/services/theme.service';
 
 declare var bootstrap: any;
 @Component({
@@ -17,12 +18,15 @@ export class ResultModalComponent implements AfterViewInit {
   myModal: any;
   Status:Boolean=true;
   movie: string = '';
-  constructor() {}
+  constructor(private theme: ThemeService) {}
   ngAfterViewInit() {
     this.myModal = new bootstrap.Modal(this.Modal.nativeElement, {
       backdrop: 'static',
       keyboard: false,
     });
+  }
+  get isDarkMode(){
+    return this.theme.isDarkMode;
   }
 
   showModal(currentStatus:Boolean,movieName:string) {

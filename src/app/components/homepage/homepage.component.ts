@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-homepage',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private theme:ThemeService) {
+    let mode=localStorage.getItem('isDarkMode');
+    if(mode!==null)
+      theme.setMode(mode);
+   }
+   get isDarkMode(){
+    return this.theme.isDarkMode;
+  }
 
   ngOnInit(): void {
+    
+
   }
 
 }

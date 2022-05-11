@@ -41,7 +41,7 @@ export class GameplayComponent implements OnInit {
     private theme: ThemeService
   ) {
     this.progress = new ProgressbarComponent(theme);
-    this.dialog = new ResultModalComponent();
+    this.dialog = new ResultModalComponent(theme);
     this.initialize();
   }
 

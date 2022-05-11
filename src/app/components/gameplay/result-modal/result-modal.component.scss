@@ -1,6 +1,7 @@
 h5 {
   text-align: center;
   width: 100%;
+  color:white;
 }
 #resultImage {
   max-width: 40%;
@@ -13,9 +14,11 @@ h5 {
 #movie-name{
     text-align: center;
     margin-top: 5px;
+    color:white;
 }
 #score-card{
   text-align: center;
+  color:white;
 }
 
 .btn{
@@ -43,5 +46,11 @@ h5 {
 }
 .modal-footer{
   justify-content:center;
+}
+.modal-content{
+  background: #1d1d1d;
+}
+.modal-light{
+  background: white !important;
 }
 

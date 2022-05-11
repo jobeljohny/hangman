@@ -1,8 +1,10 @@
+
 <div class="fab-container">
   <div class="Togglebutton" (click)="darkMode()" [ngClass]="{'darkModeButton': !isDarkMode}">
   <img id="dark-mode-icon" src = "../../../assets/sun.svg" alt="dark mode"/>
   </div>
   </div>
+  
   <div class="mt-5">
     <app-scorebar class="mt-5" [round]="Round" [score]="Score"></app-scorebar>
   </div>
@@ -16,7 +18,7 @@
     <div id="hangArea" class="gameColumn">
       <div>
         <img id="hangImage" src="assets/hangman{{Lives-lives}}.png" alt="lives" />
-        <p id="errorBuffer"  [style.color]="errorBlinker">{{ wrongBuffer.join('')}}</p>
+        <p id="errorBuffer"  [style.color]="errorBlinker" [ngClass]="{'text-light-theme': !isDarkMode}">{{ wrongBuffer.join('')}}</p>
       </div>
     </div>
   </div>
@@ -25,4 +27,5 @@
 <div class="mx-5 shadow-lg p-2 rounded card-container" [ngClass]="{'wrapbox-light': !isDarkMode}">
   <p [innerHTML]="panelMessage" id="messageBox" class="lead text" [ngClass]="{'text-light-theme': !isDarkMode}"></p>
 </div>
+
 <!-- <button type="button" class="btn btn-primary" (click)="showModal()">ok</button> -->
