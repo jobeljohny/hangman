@@ -6,4 +6,32 @@
     margin-bottom: 10px;
     display: block;
   }
+  .fab-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+  
+  .Togglebutton {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 3px 3px 8px #363636;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #dark-mode-icon {
+    height: 60%;
+    width: 60%;
+  }
+  .darkModeButton{
+    background: rgb(27, 27, 27);
+    #dark-mode-icon {
+      filter:invert(1);
+    }
+  }
  

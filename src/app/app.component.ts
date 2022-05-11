@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hangman';
+  constructor(private theme:ThemeService){}
+  get isDarkMode(){
+    return this.theme.isDarkMode;
+  }
+  darkMode() {
+    this.theme.toggleMode();
+  }
 }

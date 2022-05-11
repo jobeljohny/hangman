@@ -168,7 +168,5 @@ export class GameplayComponent implements OnInit {
       this.router.navigate(['/']);
     }
   }
-  darkMode() {
-    this.theme.toggleMode();
-  }
+  
 }
