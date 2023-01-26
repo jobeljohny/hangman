@@ -9,7 +9,7 @@ export class ApiService {
   
   getMovie(){
     const movie = this.MyMovies[Math.floor(Math.random() * this.MyMovies.length)];
-  //return "Night at t  he Museum"
+  //return "Night at the Museum"
   return movie;
   }
    MyMovies = [
