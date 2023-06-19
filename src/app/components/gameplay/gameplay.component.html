@@ -1,27 +1,58 @@
+<div class="mt-5">
+  <app-scorebar class="mt-5" [round]="Round" [score]="Score"></app-scorebar>
+</div>
 
-
-  
-  <div class="mt-5">
-    <app-scorebar class="mt-5" [round]="Round" [score]="Score"></app-scorebar>
-  </div>
-
-<div id="gamePanel" class="mx-5 shadow-lg p-3 mb-5 rounded card-container" [ngClass]="{'wrapbox-light': !isDarkMode}">
-  <app-progressbar #progress [value]="progressValue"></app-progressbar>
+<div
+  id="gamePanel"
+  class="mx-5 shadow-lg p-3 mb-5 rounded card-container"
+  [ngClass]="{ 'wrapbox-light': !isDarkMode }"
+>
+  <app-progressbar #progress></app-progressbar>
   <div id="gameWrapper">
     <div id="gameArea" class="gameColumn">
-      <p id="movieGuesser" class="text" [style.color]="guessBlinker" [ngClass]="{'text-light-theme': !isDarkMode}">{{template.join('')}}</p>
+      <p
+        id="movieGuesser"
+        class="text"
+        [style.color]="guessBlinker"
+        [ngClass]="{ 'text-light-theme': !isDarkMode }"
+      >
+        {{ round.template.join("") }}
+      </p>
     </div>
     <div id="hangArea" class="gameColumn">
       <div>
-        <img id="hangImage" src="assets/hangman{{Lives-lives}}.png" alt="lives" />
-        <p id="errorBuffer"  [style.color]="errorBlinker" [ngClass]="{'text-light-theme': !isDarkMode}">{{ wrongBuffer.join('')}}</p>
+        <img
+          id="hangImage"
+          src="assets/hangman{{ Lives - round.lives }}.png"
+          alt="lives"
+        />
+        <p
+          id="errorBuffer"
+          [style.color]="errorBlinker"
+          [ngClass]="{ 'text-light-theme': !isDarkMode }"
+        >
+          {{ round.wrongBuffer.join("") }}
+        </p>
       </div>
     </div>
   </div>
 </div>
-<app-result-modal #Modal (resultEvent)="resultHandler($event)" [round]="Round" [score]="Score"></app-result-modal>
-<div class="mx-5 shadow-lg p-2 rounded card-container" [ngClass]="{'wrapbox-light': !isDarkMode}">
-  <p [innerHTML]="panelMessage" id="messageBox" class="lead text" [ngClass]="{'text-light-theme': !isDarkMode}"></p>
+<app-result-modal
+  #Modal
+  (resultEvent)="resultHandler($event)"
+  [round]="Round"
+  [score]="Score"
+></app-result-modal>
+<div
+  class="mx-5 shadow-lg p-2 rounded card-container"
+  [ngClass]="{ 'wrapbox-light': !isDarkMode }"
+>
+  <p
+    [innerHTML]="panelMessage"
+    id="messageBox"
+    class="lead text"
+    [ngClass]="{ 'text-light-theme': !isDarkMode }"
+  ></p>
 </div>
 
 <!-- <button type="button" class="btn btn-primary" (click)="showModal()">ok</button> -->

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MovieHelperService } from './movie-helper.service';
+import { GameRoundService } from './game-round.service';
 
-describe('MovieHelperService', () => {
-  let service: MovieHelperService;
+describe('GameRoundService', () => {
+  let service: GameRoundService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MovieHelperService);
+    service = TestBed.inject(GameRoundService);
   });
 
   it('should be created', () => {

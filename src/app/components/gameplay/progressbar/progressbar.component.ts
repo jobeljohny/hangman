@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { GameRoundService } from 'src/app/services/game-round.service';
 import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
@@ -7,13 +9,26 @@ import { ThemeService } from 'src/app/services/theme.service';
   styleUrls: ['./progressbar.component.scss'],
 })
 export class ProgressbarComponent implements OnInit {
-  @Input() value: number = 0.0;
+  value = 0;
   transitionFlag: boolean = false;
-  constructor(private theme: ThemeService) {}
+  private subscription!: Subscription;
+  constructor(
+    private theme: ThemeService,
+    private gameRound: GameRoundService
+  ) {}
 
-  ngOnInit(): void {}
-get isDarkMode(){
-  return this.theme.isDarkMode;
-}
-}
+  ngOnInit(): void {
+    this.subscription = this.gameRound.getProgressValue.subscribe(
+      (progressValue: number) => {
+        this.value = progressValue;
+      }
+    );
+  }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+  get isDarkMode() {
+    return this.theme.isDarkMode;
+  }
+}
