@@ -1,12 +1,10 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { GameConfig, Result, Vals } from 'src/app/enums/config';
-import { ThemeService } from 'src/app/services/theme.service';
-import { ApiService } from '../../services/api.service';
-import { ResultModalComponent } from './result-modal/result-modal.component';
-import { setPanelMsg } from 'src/app/Classes/common';
-import { GameRoundService } from 'src/app/services/game-round.service';
 import { Round } from 'src/app/Classes/Round';
+import { GameConfig, Result, Vals } from 'src/app/enums/config';
+import { GameRoundService } from 'src/app/services/game-round.service';
+import { ThemeService } from 'src/app/services/theme.service';
+import { ResultModalComponent } from './result-modal/result-modal.component';
 
 @Component({
   selector: 'app-gameplay',
@@ -16,10 +14,10 @@ import { Round } from 'src/app/Classes/Round';
 export class GameplayComponent implements OnInit {
   @ViewChild('Modal')
   dialog: ResultModalComponent;
-
+  pressedKey = '';
+  panelMsgType = -1;
   Round = 1;
   Score = 0;
-  panelMessage: string = Vals.PANEL_DEFAULT_MSG;
   interval: any = undefined;
   guessBlinker: string = Vals.NORMAL;
   errorBlinker: string = Vals.NORMAL;
@@ -47,7 +45,7 @@ export class GameplayComponent implements OnInit {
   initialize(): void {
     this.gameRound.initialize();
     console.log(this.round.movieName);
-
+    this.setPanelMsg(-1, '');
     this.activateTimer();
   }
   activateTimer() {
@@ -74,27 +72,31 @@ export class GameplayComponent implements OnInit {
   process(key: string) {
     if (this.round.movie.includes(key)) {
       this.blink('GUESSER', Vals.CORRECT);
-      this.gameRound.updateTemplate(key);
-      this.panelMessage = setPanelMsg(Vals.CORRECT, key);
+      this.round.updateTemplate(key);
+      this.setPanelMsg(Vals.CORRECT_MSG, key);
       this.checkWin();
     } else if (this.round.wrongBuffer.includes(key)) {
       this.blink('ERROR_BUFFER', Vals.ERROR);
-      this.panelMessage = setPanelMsg(Vals.ERRORLIST_MSG, key);
+      this.setPanelMsg(Vals.ERRORLIST_MSG, key);
     } else {
       this.blink('GUESSER', Vals.ERROR);
       this.round.wrongBuffer.push(key);
-      this.panelMessage = setPanelMsg(Vals.INCORRECT_MSG, key);
+      this.setPanelMsg(Vals.INCORRECT_MSG, key);
       this.round.lives--;
       if (this.round.lives === 0) {
         this.assignLost();
       }
     }
   }
+
+  setPanelMsg(type: any, value: string) {
+    this.pressedKey = value;
+    this.panelMsgType = type;
+  }
   checkWin() {
     if (!this.round.template.includes('-')) {
       this.round.WIN = true;
       this.stopTimer();
-      this.panelMessage = setPanelMsg(Vals.WIN_MSG, this.round.movieName);
       this.showModal();
     }
   }
@@ -102,7 +104,6 @@ export class GameplayComponent implements OnInit {
   assignLost() {
     this.stopTimer();
     this.round.LOST = true;
-    this.panelMessage = setPanelMsg(Vals.LOST_MSG, this.round.movieName);
     this.showModal();
   }
   goToNextRound() {

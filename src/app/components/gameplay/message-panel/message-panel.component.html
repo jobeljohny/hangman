@@ -1,0 +1,11 @@
+<div
+  class="mx-5 shadow-lg p-2 rounded card-container"
+  [ngClass]="{ 'wrapbox-light': !isDarkMode }"
+>
+  <p
+    [innerHTML]="panelMessage"
+    id="messageBox"
+    class="lead text"
+    [ngClass]="{ 'text-light-theme': !isDarkMode }"
+  ></p>
+</div>

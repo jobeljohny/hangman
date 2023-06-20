@@ -25,12 +25,6 @@ export class GameRoundService {
     this.progressValue$.next(0);
   }
 
-  updateTemplate(key: string) {
-    for (var i = 0; i < this.round.movie.length; i++) {
-      if (this.round.movie[i] == key) this.round.template[i] = key;
-    }
-  }
-
   decrementGameTime() {
     this.round.timeLeft--;
     this.progressValue =

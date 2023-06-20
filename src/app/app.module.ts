@@ -8,6 +8,7 @@ import { ProgressbarComponent } from './components/gameplay/progressbar/progress
 import { ScorebarComponent } from './components/gameplay/scorebar/scorebar.component';
 import { ResultModalComponent } from './components/gameplay/result-modal/result-modal.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { MessagePanelComponent } from './components/gameplay/message-panel/message-panel.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     ProgressbarComponent,
     ScorebarComponent,
     ResultModalComponent,
-    HomepageComponent
+    HomepageComponent,
+    MessagePanelComponent
   ],
   imports: [
     BrowserModule,

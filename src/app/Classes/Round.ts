@@ -45,4 +45,10 @@ export class Round {
     }
     return [movie, template];
   }
+
+  updateTemplate(key: string) {
+    for (var i = 0; i < this.movie.length; i++) {
+      if (this.movie[i] == key) this.template[i] = key;
+    }
+  }
 }

@@ -43,16 +43,5 @@
   [round]="Round"
   [score]="Score"
 ></app-result-modal>
-<div
-  class="mx-5 shadow-lg p-2 rounded card-container"
-  [ngClass]="{ 'wrapbox-light': !isDarkMode }"
->
-  <p
-    [innerHTML]="panelMessage"
-    id="messageBox"
-    class="lead text"
-    [ngClass]="{ 'text-light-theme': !isDarkMode }"
-  ></p>
-</div>
-
+<app-message-panel [key]="pressedKey" [type]="panelMsgType"></app-message-panel>
 <!-- <button type="button" class="btn btn-primary" (click)="showModal()">ok</button> -->
