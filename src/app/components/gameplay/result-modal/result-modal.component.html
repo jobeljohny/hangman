@@ -1,38 +1,63 @@
 <!-- Modal HTML -->
-<div #Modal id="myModal" class="modal fade" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" [ngClass]="{'modal-light': !isDarkMode}">
-      <div class="modal-header border-0 pb-0">
-        <h5 class="modal-title" id="title" [ngClass]="{'text-light-theme': !isDarkMode}">YOU {{ Status ? "WON" : "LOST" }}</h5>
-      </div>
-      <div class="modal-body pb-0">
-        <p *ngIf="!Status" id="score-card" class="lead" [ngClass]="{'text-light-theme': !isDarkMode}">
-          Your Score : <b>{{ score }}</b>
-        </p>
-        <div id="imageContainer">
-          <img
-            id="resultImage"
-            [src]="
-            Status
-                ? '../../../../assets/trophy.svg'
-                : '../../../../assets/cry.svg'
-            "
-            alt="My Happy SVG"
-          />
-        </div>
-
-        <p id="movie-name" class="lead" [ngClass]="{'text-light-theme': !isDarkMode}">
-          Movie : <b>{{ movie }}</b>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" (click)="onClick()" *ngIf="Status" class="btn bg-green" data-dismiss="modal" >
-          Go To Round {{ round + 1 }}
-        </button>
-        <button type="button" (click)="onClick()" *ngIf="!Status" class="btn bg-blue" data-dismiss="modal">Main Menu</button>
-
-        <!-- green button for go to next round another button if lost only one button at a time, if lost show score too else show 'go to round x (->)' -->
-      </div>
+<div class="modal-content" [ngClass]="{ 'modal-light': !isDarkMode }">
+  <div class="modal-header border-0 pb-0">
+    <h5
+      class="modal-title"
+      id="title"
+      [ngClass]="{ 'text-light-theme': !isDarkMode }"
+    >
+      YOU {{ Status ? "WON" : "LOST" }}
+    </h5>
+  </div>
+  <div class="modal-body pb-0">
+    <p
+      *ngIf="!Status"
+      id="score-card"
+      class="lead"
+      [ngClass]="{ 'text-light-theme': !isDarkMode }"
+    >
+      Your Score : <b>{{ score }}</b>
+    </p>
+    <div id="imageContainer">
+      <img
+        id="resultImage"
+        [src]="
+          Status
+            ? '../../../../assets/trophy.svg'
+            : '../../../../assets/cry.svg'
+        "
+        alt="My Happy SVG"
+      />
     </div>
+
+    <p
+      id="movie-name"
+      class="lead"
+      [ngClass]="{ 'text-light-theme': !isDarkMode }"
+    >
+      Movie : <b>{{ movie }}</b>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      (click)="onClick()"
+      *ngIf="Status"
+      class="btn bg-green"
+      data-dismiss="modal"
+    >
+      Go To Round {{ round + 1 }}
+    </button>
+    <button
+      type="button"
+      (click)="onClick()"
+      *ngIf="!Status"
+      class="btn bg-blue"
+      data-dismiss="modal"
+    >
+      Main Menu
+    </button>
+
+    <!-- green button for go to next round another button if lost only one button at a time, if lost show score too else show 'go to round x (->)' -->
   </div>
 </div>

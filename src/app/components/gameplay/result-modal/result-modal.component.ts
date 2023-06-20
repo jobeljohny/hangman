@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import party from 'party-js';
 import { Result } from 'src/app/enums/config';
 import { ThemeService } from 'src/app/services/theme.service';
@@ -9,49 +18,57 @@ declare var bootstrap: any;
   templateUrl: './result-modal.component.html',
   styleUrls: ['./result-modal.component.scss'],
 })
-export class ResultModalComponent implements AfterViewInit {
-  @ViewChild('Modal') Modal: any; //note ElementRef;
-  @Input() round: number = -1;
-  @Input() score: number = -1;
- 
+export class ResultModalComponent {
+  round: number = -1;
+  score: number = -1;
+
   @Output() resultEvent = new EventEmitter();
-  myModal: any;
-  Status:Boolean=true;
+  Status: Boolean = true;
   movie: string = '';
-  constructor(private theme: ThemeService) {}
-  ngAfterViewInit() {
-    this.myModal = new bootstrap.Modal(this.Modal.nativeElement, {
-      backdrop: 'static',
-      keyboard: false,
-    });
+  constructor(
+    private theme: ThemeService,
+    public dialogRef: MatDialogRef<ResultModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.round = data.round;
+    this.score = data.score;
+    this.movie = data.movie;
+    this.Status = data.isWin;
+    if (this.Status)
+      setTimeout(
+        () =>
+          party.confetti(document.getElementById('myModal')!, {
+            count: party.variation.range(20, 100),
+          }),
+        500
+      );
   }
-  get isDarkMode(){
+
+  get isDarkMode() {
     return this.theme.isDarkMode;
   }
 
-  showModal(currentStatus:Boolean,movieName:string) {
+  showModal(currentStatus: Boolean, movieName: string) {
     console.log('show modal');
-    this.Status=currentStatus;
-    this.movie=movieName;
-    console.log(currentStatus)
-    this.myModal.show();
-    if(this.Status)
-    setTimeout(
-      () =>
-        party.confetti(document.getElementById('myModal')!, {
-          count: party.variation.range(20, 100),
-        }),
-      500
-    );
+    this.Status = currentStatus;
+    this.movie = movieName;
+    console.log(currentStatus);
+    if (this.Status)
+      setTimeout(
+        () =>
+          party.confetti(document.getElementById('myModal')!, {
+            count: party.variation.range(20, 100),
+          }),
+        500
+      );
   }
   onClick() {
-    console.log(this.Status)
-    this.myModal.hide();
+    console.log(this.Status);
+    this.dialogRef.close();
     if (this.Status) {
-      this.resultEvent.emit(Result.PASSED)
+      this.resultEvent.emit(Result.PASSED);
     } else {
-      this.resultEvent.emit(Result.FAILED)
+      this.resultEvent.emit(Result.FAILED);
     }
-   
   }
 }

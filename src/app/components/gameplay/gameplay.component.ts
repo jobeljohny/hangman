@@ -5,6 +5,7 @@ import { GameConfig, Result, Vals } from 'src/app/enums/config';
 import { GameRoundService } from 'src/app/services/game-round.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ResultModalComponent } from './result-modal/result-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-gameplay',
@@ -12,8 +13,6 @@ import { ResultModalComponent } from './result-modal/result-modal.component';
   styleUrls: ['./gameplay.component.scss'],
 })
 export class GameplayComponent implements OnInit {
-  @ViewChild('Modal')
-  dialog: ResultModalComponent;
   pressedKey = '';
   panelMsgType = -1;
   Round = 1;
@@ -24,9 +23,9 @@ export class GameplayComponent implements OnInit {
   constructor(
     private gameRound: GameRoundService,
     private router: Router,
-    private theme: ThemeService
+    private theme: ThemeService,
+    private dialog: MatDialog
   ) {
-    this.dialog = new ResultModalComponent(theme);
     this.initialize();
   }
 
@@ -131,7 +130,20 @@ export class GameplayComponent implements OnInit {
     }
   }
   showModal() {
-    this.dialog.showModal(this.round.WIN, this.round.movieName);
+    //this.dialog.showModal(this.round.WIN, this.round.movieName);
+    let dialogRef = this.dialog.open(ResultModalComponent, {
+      width: '250px',
+      data: {
+        round: this.Round,
+        name: this.round.movieName,
+        isWin: this.round.WIN,
+        score: this.Score,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('dialog closed');
+    });
   }
   resultHandler(result: string) {
     console.log(result);

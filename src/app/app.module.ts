@@ -9,7 +9,7 @@ import { ScorebarComponent } from './components/gameplay/scorebar/scorebar.compo
 import { ResultModalComponent } from './components/gameplay/result-modal/result-modal.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { MessagePanelComponent } from './components/gameplay/message-panel/message-panel.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,13 +18,10 @@ import { MessagePanelComponent } from './components/gameplay/message-panel/messa
     ScorebarComponent,
     ResultModalComponent,
     HomepageComponent,
-    MessagePanelComponent
+    MessagePanelComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, MatDialogModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

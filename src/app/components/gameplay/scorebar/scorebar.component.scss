@@ -1,15 +1,13 @@
-@import '../../../../styles.scss';
-#scorePanel{
-    display:flex;
-    padding: 0px 0px;
-    background-color: $card-background-dark;
-    >p{
-        flex:1;
-        margin:0;
-        font-size:18px;
-        white-space: pre; 
-        color:$text-dark;
-    }
+@import "../../../../styles.scss";
+#scorePanel {
+  display: flex;
+  flex: 1;
+  background-color: $card-background-dark;
+  > p {
+    flex: 1;
+    margin: 0;
+    font-size: 18px;
+    white-space: pre;
+    color: $text-dark;
+  }
 }
-
-  
