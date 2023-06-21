@@ -1,15 +1,12 @@
-<!-- Modal HTML -->
-<div class="modal-content" [ngClass]="{ 'modal-light': !isDarkMode }">
-  <div class="modal-header border-0 pb-0">
+<div id="dbody" class="dialog-container" [ngClass]="{ 'modal-light': !isDarkMode }">
     <h5
-      class="modal-title"
+      class="lead"
       id="title"
       [ngClass]="{ 'text-light-theme': !isDarkMode }"
     >
       YOU {{ Status ? "WON" : "LOST" }}
     </h5>
-  </div>
-  <div class="modal-body pb-0">
+  <div  class="dialog-body">
     <p
       *ngIf="!Status"
       id="score-card"
@@ -38,10 +35,10 @@
       Movie : <b>{{ movie }}</b>
     </p>
   </div>
-  <div class="modal-footer">
+  <div class="dialog-footer">
     <button
       type="button"
-      (click)="onClick()"
+      (click)="onClick(Result.PASSED)"
       *ngIf="Status"
       class="btn bg-green"
       data-dismiss="modal"
@@ -50,7 +47,7 @@
     </button>
     <button
       type="button"
-      (click)="onClick()"
+      (click)="onClick(Result.FAILED)"
       *ngIf="!Status"
       class="btn bg-blue"
       data-dismiss="modal"

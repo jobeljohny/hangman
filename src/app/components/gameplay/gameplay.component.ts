@@ -1,11 +1,12 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Round } from 'src/app/Classes/Round';
 import { GameConfig, Result, Vals } from 'src/app/enums/config';
 import { GameRoundService } from 'src/app/services/game-round.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ResultModalComponent } from './result-modal/result-modal.component';
-import { MatDialog } from '@angular/material/dialog';
+import { isAlphaNum } from 'src/app/Classes/common';
 
 @Component({
   selector: 'app-gameplay',
@@ -63,8 +64,7 @@ export class GameplayComponent implements OnInit {
   @HostListener('document:keydown', ['$event'])
   onKeyPress(event: KeyboardEvent) {
     let key = event.key;
-    let code = key.charCodeAt(0);
-    if (!((code >= 97 && code <= 122) || (code >= 48 && code <= 57))) return;
+    if (!isAlphaNum(key)) return;
     if (!this.round.LOST && !this.round.WIN) this.process(key);
   }
 
@@ -130,9 +130,8 @@ export class GameplayComponent implements OnInit {
     }
   }
   showModal() {
-    //this.dialog.showModal(this.round.WIN, this.round.movieName);
     let dialogRef = this.dialog.open(ResultModalComponent, {
-      width: '250px',
+      width: '500px',
       data: {
         round: this.Round,
         name: this.round.movieName,
@@ -142,7 +141,11 @@ export class GameplayComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('dialog closed');
+      if (result) {
+        this.resultHandler(result); // logic to restart game later
+      } else {
+        this.resultHandler(this.round.WIN ? Result.PASSED : Result.FAILED);
+      }
     });
   }
   resultHandler(result: string) {

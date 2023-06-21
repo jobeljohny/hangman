@@ -1,18 +1,9 @@
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  Inject,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import party from 'party-js';
 import { Result } from 'src/app/enums/config';
 import { ThemeService } from 'src/app/services/theme.service';
 
-declare var bootstrap: any;
 @Component({
   selector: 'app-result-modal',
   templateUrl: './result-modal.component.html',
@@ -22,7 +13,6 @@ export class ResultModalComponent {
   round: number = -1;
   score: number = -1;
 
-  @Output() resultEvent = new EventEmitter();
   Status: Boolean = true;
   movie: string = '';
   constructor(
@@ -32,12 +22,12 @@ export class ResultModalComponent {
   ) {
     this.round = data.round;
     this.score = data.score;
-    this.movie = data.movie;
+    this.movie = data.name;
     this.Status = data.isWin;
     if (this.Status)
       setTimeout(
         () =>
-          party.confetti(document.getElementById('myModal')!, {
+          party.confetti(document.getElementById('dbody')!, {
             count: party.variation.range(20, 100),
           }),
         500
@@ -46,6 +36,10 @@ export class ResultModalComponent {
 
   get isDarkMode() {
     return this.theme.isDarkMode;
+  }
+
+  get Result() {
+    return Result;
   }
 
   showModal(currentStatus: Boolean, movieName: string) {
@@ -62,13 +56,7 @@ export class ResultModalComponent {
         500
       );
   }
-  onClick() {
-    console.log(this.Status);
-    this.dialogRef.close();
-    if (this.Status) {
-      this.resultEvent.emit(Result.PASSED);
-    } else {
-      this.resultEvent.emit(Result.FAILED);
-    }
+  onClick(result: Result) {
+    this.dialogRef.close(result);
   }
 }
