@@ -10,6 +10,8 @@ import { ResultModalComponent } from './components/gameplay/result-modal/result-
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { MessagePanelComponent } from './components/gameplay/message-panel/message-panel.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HeaderComponent } from './components/header/header.component';
+import { LoginSignupComponent } from './components/login-signup/login-signup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ResultModalComponent,
     HomepageComponent,
     MessagePanelComponent,
+    HeaderComponent,
+    LoginSignupComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, MatDialogModule],
   providers: [],

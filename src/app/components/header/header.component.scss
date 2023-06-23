@@ -1,0 +1,41 @@
+$text-color: rgb(0, 108, 231);
+.navbar {
+  height: 60px;
+  background: none !important;
+  .container-fluid {
+    .navbar-brand {
+      img {
+        width: 40px;
+      }
+    }
+    .content {
+      .navbar-nav {
+        .nav-item {
+          a {
+            color: $text-color;
+          }
+        }
+      }
+      .login-panel {
+        display: flex;
+        gap: 8px;
+        .login-btn {
+          background: none;
+          padding: 4px 10px;
+          color: $text-color;
+          border-radius: 16px;
+          &:hover {
+            background: $text-color;
+            color: white;
+          }
+        }
+        #login {
+          border: 0;
+        }
+        #sign-up {
+          border: 1px solid $text-color;
+        }
+      }
+    }
+  }
+}

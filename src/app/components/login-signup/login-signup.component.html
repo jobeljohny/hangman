@@ -1,0 +1,63 @@
+<div class="login-signup-container">
+  <div class="left-panel"></div>
+  <div class="right-panel">
+    <div class="switch-page">
+      <span
+        (click)="page = Login.LOGIN"
+        [ngClass]="{ selected: page === Login.LOGIN }"
+        >LOGIN</span
+      >
+      <span
+        (click)="page = Login.SIGNUP"
+        [ngClass]="{ selected: page === Login.SIGNUP }"
+        >SIGN UP</span
+      >
+    </div>
+    <div *ngIf="page === Login.LOGIN">
+      <div class="loginBox">
+        <img class="user regular" src="https://i.ibb.co/yVGxFPR/2.png" />
+        <h4>Sign in</h4>
+        <form action="1" method="post">
+          <div class="inputBox">
+            <input
+              id="uname"
+              type="text"
+              name="Username"
+              placeholder="Username"
+            />
+            <input
+              id="pass"
+              type="password"
+              name="Password"
+              placeholder="Password"
+            />
+          </div>
+          <input type="submit" name="" value="Login" />
+        </form>
+      </div>
+    </div>
+    <div *ngIf="page === Login.SIGNUP">
+      <div class="loginBox">
+        <img class="user small" src="https://i.ibb.co/yVGxFPR/2.png" />
+        <h4>Register</h4>
+        <form action="2" method="post">
+          <div class="inputBox">
+            <input
+              id="uname"
+              type="text"
+              name="Username"
+              placeholder="Username"
+            />
+            <input
+              id="pass"
+              type="password"
+              name="Password"
+              placeholder="Password"
+            />
+          </div>
+          <input type="submit" name="" value="Register" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

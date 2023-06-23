@@ -1,6 +1,6 @@
 export enum GameConfig {
   LIVES = 6,
-  GAME_TIME = 60,
+  GAME_TIME = 600,
 }
 
 export enum Vals {
@@ -18,4 +18,9 @@ export enum Vals {
 export enum Result {
   PASSED = 'PASSED',
   FAILED = 'FAILED',
+}
+
+export enum Login {
+  LOGIN = 'LOGIN',
+  SIGNUP = 'SIGNIN',
 }

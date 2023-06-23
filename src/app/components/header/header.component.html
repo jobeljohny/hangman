@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="../../../assets/hangman-menu-logo.png" alt="" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="content collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerlink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerlink="/">Leaderboard</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerlink="/">Stats</a>
+        </li>
+      </ul>
+      <div class="login-panel">
+        <button class="login-btn" id="login" (click)="loginSignup(Login.LOGIN)">
+          Login
+        </button>
+        <button
+          class="login-btn"
+          id="sign-up"
+          (click)="loginSignup(Login.SIGNUP)"
+        >
+          Sign up
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
