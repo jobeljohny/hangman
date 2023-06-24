@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginSignupComponent } from './components/login-signup/login-signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,7 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControlOptions,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Login } from 'src/app/enums/config';
+import { AuthService } from 'src/app/services/auth.service';
 import { CustomValidationService } from 'src/app/services/custom-validation.service';
 
 @Component({
@@ -14,6 +20,7 @@ export class LoginSignupComponent implements OnInit {
   loginForm!: FormGroup;
   registerForm!: FormGroup;
   registerSubmitted: boolean = false;
+  loginSubmitted: boolean = false;
 
   get Login() {
     return Login;
@@ -21,6 +28,7 @@ export class LoginSignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private validator: CustomValidationService,
+    private auth: AuthService,
     private dialogRef: MatDialogRef<LoginSignupComponent>,
     @Inject(MAT_DIALOG_DATA) data: Login
   ) {
@@ -47,21 +55,52 @@ export class LoginSignupComponent implements OnInit {
       },
       {
         validator: this.validator.MatchPassword('password', 'confirmPassword'),
-      }
+      } as AbstractControlOptions
     );
+
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
   get registerFormControl() {
     return this.registerForm.controls;
   }
 
-  onSubmit() {
+  get loginFormControl() {
+    return this.loginForm.controls;
+  }
+
+  onRegisterSubmit() {
     this.registerSubmitted = true;
     if (this.registerForm.valid) {
-      alert(
-        'Form Submitted succesfully!!!\n Check the values in browser console.'
-      );
-      console.table(this.registerForm.value);
+      this.auth.register(this.registerForm.value).subscribe({
+        next: (res) => {
+          this.registerForm.reset();
+          this.page = Login.LOGIN;
+        },
+        error: (err) => {
+          console.log(err);
+
+          alert(err?.error.message);
+        },
+      });
+    }
+  }
+  onLoginSubmit() {
+    this.loginSubmitted = true;
+    if (this.loginForm.valid) {
+      console.log('valid');
+      this.auth.login(this.loginForm.value).subscribe({
+        next: (res) => {
+          this.loginForm.reset();
+          this.dialogRef.close();
+        },
+        error: (err) => {
+          alert(err?.error.message);
+        },
+      });
     }
   }
 }

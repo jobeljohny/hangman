@@ -14,15 +14,37 @@
   <div class="loginBox" *ngIf="page === Login.LOGIN">
     <img class="user regular" src="../../../assets/profile-icon.png" />
     <h4 class="lead">Sign in</h4>
-    <form action="1" method="post">
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
       <div class="form-wrapper">
         <label>Username</label>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" formControlName="username" />
+        <span
+          class="text-danger"
+          *ngIf="
+              (loginFormControl['username'].touched || loginSubmitted) &&
+              loginFormControl['username'].errors?.['required']
+            "
+        >
+          Username is required
+        </span>
       </div>
 
       <div class="form-wrapper">
         <label>Password</label>
-        <input type="password" class="form-control" />
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+              (loginFormControl['password'].touched || loginSubmitted) &&
+              loginFormControl['password'].errors?.['required']
+            "
+        >
+          Password is required
+        </span>
       </div>
       <input type="submit" name="" value="Login" />
     </form>
@@ -30,7 +52,11 @@
   <!--REGISTRATION FORM-->
   <div class="loginBox" *ngIf="page === Login.SIGNUP">
     <img class="user small" src="../../../assets/profile-icon.png" />
-    <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form
+      class="form"
+      [formGroup]="registerForm"
+      (ngSubmit)="onRegisterSubmit()"
+    >
       <div class="form-group">
         <div class="form-wrapper">
           <label>First Name</label>
