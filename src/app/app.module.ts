@@ -13,6 +13,7 @@ import { ScorebarComponent } from './components/gameplay/scorebar/scorebar.compo
 import { HeaderComponent } from './components/header/header.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginSignupComponent } from './components/login-signup/login-signup.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,8 @@ import { LoginSignupComponent } from './components/login-signup/login-signup.com
     AppRoutingModule,
     MatDialogModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

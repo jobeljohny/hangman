@@ -1,62 +1,152 @@
-<div class="login-signup-container">
-  <div class="left-panel"></div>
-  <div class="right-panel">
-    <div class="switch-page">
-      <span
-        (click)="page = Login.LOGIN"
-        [ngClass]="{ selected: page === Login.LOGIN }"
-        >LOGIN</span
-      >
-      <span
-        (click)="page = Login.SIGNUP"
-        [ngClass]="{ selected: page === Login.SIGNUP }"
-        >SIGN UP</span
-      >
-    </div>
-    <div class="loginBox" *ngIf="page === Login.LOGIN">
-      <img class="user regular" src="../../../assets/profile-icon.png" />
-      <h4 class="lead">Sign in</h4>
-      <form action="1" method="post">
-        <div class="form-wrapper">
-          <label for="">Username</label>
-          <input type="text" class="form-control" />
-        </div>
+<div class="dialog-container">
+  <div class="switch-page">
+    <span
+      (click)="page = Login.LOGIN"
+      [ngClass]="{ selected: page === Login.LOGIN }"
+      >LOGIN</span
+    >
+    <span
+      (click)="page = Login.SIGNUP"
+      [ngClass]="{ selected: page === Login.SIGNUP }"
+      >SIGN UP</span
+    >
+  </div>
+  <div class="loginBox" *ngIf="page === Login.LOGIN">
+    <img class="user regular" src="../../../assets/profile-icon.png" />
+    <h4 class="lead">Sign in</h4>
+    <form action="1" method="post">
+      <div class="form-wrapper">
+        <label>Username</label>
+        <input type="text" class="form-control" />
+      </div>
 
+      <div class="form-wrapper">
+        <label>Password</label>
+        <input type="password" class="form-control" />
+      </div>
+      <input type="submit" name="" value="Login" />
+    </form>
+  </div>
+  <!--REGISTRATION FORM-->
+  <div class="loginBox" *ngIf="page === Login.SIGNUP">
+    <img class="user small" src="../../../assets/profile-icon.png" />
+    <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
         <div class="form-wrapper">
-          <label for="">Password</label>
-          <input type="password" class="form-control" />
-        </div>
-        <input type="submit" name="" value="Login" />
-      </form>
-    </div>
-    <div class="loginBox" *ngIf="page === Login.SIGNUP">
-      <img class="user small" src="../../../assets/profile-icon.png" />
-      <form action="2" method="post">
-        <div class="form-group">
-          <div class="form-wrapper">
-            <label for="">First Name</label>
-            <input type="text" class="form-control" />
-          </div>
-          <div class="form-wrapper">
-            <label for="">Last Name</label>
-            <input type="text" class="form-control" />
-          </div>
-        </div>
-        <div class="form-wrapper">
-          <label for="">Username</label>
-          <input type="text" class="form-control" />
-        </div>
-        <div class="form-wrapper">
-          <label for="">Password</label>
-          <input type="password" class="form-control" />
+          <label>First Name</label>
+          <input type="text" class="form-control" formControlName="firstName" />
+          <span
+            class="text-danger"
+            *ngIf="
+                (registerFormControl['firstName'].touched ||
+                  registerSubmitted) &&
+                registerFormControl['firstName'].errors?.['required']
+              "
+          >
+            Name is required
+          </span>
         </div>
         <div class="form-wrapper">
-          <label for="">Confirm Password</label>
-          <input type="password" class="form-control" />
+          <label>Last Name</label>
+          <input type="text" class="form-control" formControlName="lastName" />
+          <span
+            class="text-danger"
+            *ngIf="
+                (registerFormControl['lastName'].touched ||
+                  registerSubmitted) &&
+                registerFormControl['lastName'].errors?.['required']
+              "
+          >
+            Name is required
+          </span>
         </div>
+      </div>
+      <div class="form-wrapper">
+        <label>Username</label>
+        <input type="text" class="form-control" formControlName="username" />
+        <span
+          class="text-danger"
+          *ngIf="
+              (registerFormControl['username'].touched || registerSubmitted) &&
+              registerFormControl['username'].errors?.['required']
+            "
+        >
+          Username is required
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="
+              registerFormControl['username'].touched &&
+              registerFormControl['username'].errors?.['userNameNotAvailable']
+            "
+        >
+          Username is not available
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="
+              registerFormControl['username'].touched &&
+              registerFormControl['username'].errors?.['minlength']
+            "
+        >
+          Username should be atleast 4 characters
+        </span>
+      </div>
+      <div class="form-wrapper">
+        <label>Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+              (registerFormControl['password'].touched || registerSubmitted) &&
+              registerFormControl['password'].errors?.['required']
+            "
+        >
+          Password is required
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="
+              registerFormControl['password'].touched &&
+              registerFormControl['password'].errors?.['invalidPassword']
+            "
+        >
+          Password should have minimum 6 characters
+        </span>
+      </div>
+      <div class="form-wrapper">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="confirmPassword"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+              (registerFormControl['confirmPassword'].touched ||
+                registerSubmitted) &&
+              registerFormControl['confirmPassword'].errors?.['required']
+            "
+        >
+          Confirm Password is required
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="
+              registerFormControl['confirmPassword'].touched &&
+              registerFormControl['confirmPassword'].errors?.['passwordMismatch']
+            "
+        >
+          Passwords does not match
+        </span>
+      </div>
 
-        <input type="submit" name="" value="Register" />
-      </form>
-    </div>
+      <input type="submit" name="" value="Register" />
+    </form>
   </div>
 </div>

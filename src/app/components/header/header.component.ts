@@ -21,7 +21,7 @@ export class HeaderComponent {
     console.log(loginType);
     const dialogRef = this.dialog.open(LoginSignupComponent, {
       height: '600px',
-      width: '1000px',
+      width: '450px',
       data: loginType,
     });
   }
