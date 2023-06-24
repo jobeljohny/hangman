@@ -13,51 +13,50 @@
         >SIGN UP</span
       >
     </div>
-    <div *ngIf="page === Login.LOGIN">
-      <div class="loginBox">
-        <img class="user regular" src="https://i.ibb.co/yVGxFPR/2.png" />
-        <h4>Sign in</h4>
-        <form action="1" method="post">
-          <div class="inputBox">
-            <input
-              id="uname"
-              type="text"
-              name="Username"
-              placeholder="Username"
-            />
-            <input
-              id="pass"
-              type="password"
-              name="Password"
-              placeholder="Password"
-            />
-          </div>
-          <input type="submit" name="" value="Login" />
-        </form>
-      </div>
+    <div class="loginBox" *ngIf="page === Login.LOGIN">
+      <img class="user regular" src="../../../assets/profile-icon.png" />
+      <h4 class="lead">Sign in</h4>
+      <form action="1" method="post">
+        <div class="form-wrapper">
+          <label for="">Username</label>
+          <input type="text" class="form-control" />
+        </div>
+
+        <div class="form-wrapper">
+          <label for="">Password</label>
+          <input type="password" class="form-control" />
+        </div>
+        <input type="submit" name="" value="Login" />
+      </form>
     </div>
-    <div *ngIf="page === Login.SIGNUP">
-      <div class="loginBox">
-        <img class="user small" src="https://i.ibb.co/yVGxFPR/2.png" />
-        <h4>Register</h4>
-        <form action="2" method="post">
-          <div class="inputBox">
-            <input
-              id="uname"
-              type="text"
-              name="Username"
-              placeholder="Username"
-            />
-            <input
-              id="pass"
-              type="password"
-              name="Password"
-              placeholder="Password"
-            />
+    <div class="loginBox" *ngIf="page === Login.SIGNUP">
+      <img class="user small" src="../../../assets/profile-icon.png" />
+      <form action="2" method="post">
+        <div class="form-group">
+          <div class="form-wrapper">
+            <label for="">First Name</label>
+            <input type="text" class="form-control" />
           </div>
-          <input type="submit" name="" value="Register" />
-        </form>
-      </div>
+          <div class="form-wrapper">
+            <label for="">Last Name</label>
+            <input type="text" class="form-control" />
+          </div>
+        </div>
+        <div class="form-wrapper">
+          <label for="">Username</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-wrapper">
+          <label for="">Password</label>
+          <input type="password" class="form-control" />
+        </div>
+        <div class="form-wrapper">
+          <label for="">Confirm Password</label>
+          <input type="password" class="form-control" />
+        </div>
+
+        <input type="submit" name="" value="Register" />
+      </form>
     </div>
   </div>
 </div>

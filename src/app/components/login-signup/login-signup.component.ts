@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Login } from 'src/app/enums/config';
 
 @Component({
@@ -11,5 +12,10 @@ export class LoginSignupComponent {
   get Login() {
     return Login;
   }
-  constructor() {}
+  constructor(
+    private dialogRef: MatDialogRef<LoginSignupComponent>,
+    @Inject(MAT_DIALOG_DATA) data: Login
+  ) {
+    this.page = data;
+  }
 }

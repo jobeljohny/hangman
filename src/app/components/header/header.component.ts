@@ -9,7 +9,10 @@ import { LoginSignupComponent } from '../login-signup/login-signup.component';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {
+    //TODO remove
+    setTimeout(() => this.loginSignup(Login.SIGNUP), 100);
+  }
 
   get Login() {
     return Login;
@@ -19,7 +22,7 @@ export class HeaderComponent {
     const dialogRef = this.dialog.open(LoginSignupComponent, {
       height: '600px',
       width: '1000px',
-      data: { type: loginType },
+      data: loginType,
     });
   }
 }
