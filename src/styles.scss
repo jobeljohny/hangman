@@ -1,3 +1,8 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "ngx-toastr/toastr-bs5-alert";
+
 $card-background-dark: #1d1d1d;
 $body-dark: #131313;
 $body-light: #fff9f1;

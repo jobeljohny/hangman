@@ -6,9 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { Login } from 'src/app/enums/config';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomValidationService } from 'src/app/services/custom-validation.service';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 @Component({
   selector: 'app-login-signup',
@@ -29,6 +31,7 @@ export class LoginSignupComponent implements OnInit {
     private fb: FormBuilder,
     private validator: CustomValidationService,
     private auth: AuthService,
+    private toaster: ToasterService,
     private dialogRef: MatDialogRef<LoginSignupComponent>,
     @Inject(MAT_DIALOG_DATA) data: Login
   ) {
@@ -78,12 +81,13 @@ export class LoginSignupComponent implements OnInit {
       this.auth.register(this.registerForm.value).subscribe({
         next: (res) => {
           this.registerForm.reset();
+          this.loginForm.reset();
+          this.toaster.RegisterToastSuccess();
           this.page = Login.LOGIN;
         },
         error: (err) => {
           console.log(err);
-
-          alert(err?.error.message);
+          this.toaster.RegisterToastFail(err);
         },
       });
     }
@@ -94,11 +98,13 @@ export class LoginSignupComponent implements OnInit {
       console.log('valid');
       this.auth.login(this.loginForm.value).subscribe({
         next: (res) => {
+          this.toaster.LoginToastSuccess();
           this.loginForm.reset();
           this.dialogRef.close();
         },
         error: (err) => {
-          alert(err?.error.message);
+          console.log(err);
+          this.toaster.LoginToastFail(err);
         },
       });
     }

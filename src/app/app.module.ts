@@ -14,6 +14,7 @@ import { ScorebarComponent } from './components/gameplay/scorebar/scorebar.compo
 import { HeaderComponent } from './components/header/header.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginSignupComponent } from './components/login-signup/login-signup.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { LoginSignupComponent } from './components/login-signup/login-signup.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
