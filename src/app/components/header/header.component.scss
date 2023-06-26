@@ -38,9 +38,20 @@ $text-color: rgb(0, 108, 231);
       }
       .user-panel {
         display: flex;
-        gap: 8;
-        span {
-          color: white;
+        gap: 16px;
+        .profile-panel {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          img {
+            width: 27px;
+            height: 27px;
+          }
+          span {
+            color: rgb(2, 113, 165);
+            font-size: 1rem;
+            text-transform: capitalize;
+          }
         }
         .signout-btn {
           background: none;

@@ -40,7 +40,10 @@
         </button>
       </div>
       <div *ngIf="isLoggedIn" class="user-panel">
-        <span>User</span>
+        <div class="profile-panel">
+          <img src="../../../assets/profile-icon.png" alt="profile" />
+          <span>{{ username }}</span>
+        </div>
         <button class="signout-btn" (click)="signOut()">Log out</button>
       </div>
     </div>

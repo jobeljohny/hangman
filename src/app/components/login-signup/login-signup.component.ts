@@ -6,11 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
 import { Login } from 'src/app/enums/config';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomValidationService } from 'src/app/services/custom-validation.service';
 import { ToasterService } from 'src/app/services/toaster.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
   selector: 'app-login-signup',
@@ -32,6 +32,7 @@ export class LoginSignupComponent implements OnInit {
     private validator: CustomValidationService,
     private auth: AuthService,
     private toaster: ToasterService,
+    private userStore: UserStoreService,
     private dialogRef: MatDialogRef<LoginSignupComponent>,
     @Inject(MAT_DIALOG_DATA) data: Login
   ) {
@@ -95,11 +96,14 @@ export class LoginSignupComponent implements OnInit {
   onLoginSubmit() {
     this.loginSubmitted = true;
     if (this.loginForm.valid) {
-      console.log('valid');
       this.auth.login(this.loginForm.value).subscribe({
         next: (res) => {
           this.toaster.LoginToastSuccess();
-          this.auth.storeToken(res.token);
+          this.auth.storeToken(res.accessToken);
+          this.auth.storeRefreshToken(res.refreshToken);
+          const tokenPayload = this.auth.decodedToken();
+          this.userStore.setUserName(tokenPayload.unique_name);
+          this.userStore.setRole(tokenPayload.role);
           this.loginForm.reset();
           this.dialogRef.close();
         },

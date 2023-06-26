@@ -6,9 +6,10 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { ToasterService } from '../services/toaster.service';
+import { TokenApiModel } from '../Models/token-api.model';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -31,10 +32,32 @@ export class TokenInterceptor implements HttpInterceptor {
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status == 401) {
-            this.toasterService.tokenExpired();
+            return this.handleUnAuthorizedRequest(request, next);
           }
         }
-        return throwError(() => new Error('Some other error'));
+        return throwError(() => err);
+      })
+    );
+  }
+  handleUnAuthorizedRequest(req: HttpRequest<any>, next: HttpHandler) {
+    let tokenApiModel = new TokenApiModel();
+    tokenApiModel.accessToken = this.auth.getToken()!;
+    tokenApiModel.refreshToken = this.auth.getRefreshToken()!;
+
+    return this.auth.renewToken(tokenApiModel).pipe(
+      switchMap((data: TokenApiModel) => {
+        this.auth.storeRefreshToken(data.refreshToken);
+        this.auth.storeToken(data.accessToken);
+        req = req.clone({
+          setHeaders: { Authorization: `Bearer ${data.accessToken}` },
+        });
+        return next.handle(req);
+      }),
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => {
+          this.toasterService.tokenExpired();
+        });
       })
     );
   }
