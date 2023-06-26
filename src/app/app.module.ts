@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -15,6 +15,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginSignupComponent } from './components/login-signup/login-signup.component';
 import { ToastrModule } from 'ngx-toastr';
+import { StatsPageComponent } from './components/stats-page/stats-page.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
     MessagePanelComponent,
     HeaderComponent,
     LoginSignupComponent,
+    StatsPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,9 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

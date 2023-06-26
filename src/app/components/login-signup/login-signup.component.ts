@@ -99,6 +99,7 @@ export class LoginSignupComponent implements OnInit {
       this.auth.login(this.loginForm.value).subscribe({
         next: (res) => {
           this.toaster.LoginToastSuccess();
+          this.auth.storeToken(res.token);
           this.loginForm.reset();
           this.dialogRef.close();
         },

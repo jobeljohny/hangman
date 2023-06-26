@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand">
       <img src="../../../assets/hangman-menu-logo.png" alt="" />
     </a>
     <button
@@ -17,17 +17,17 @@
     <div class="content collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerlink="/">Home</a>
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerlink="/">Leaderboard</a>
+          <a class="nav-link" routerLink="/">Leaderboard</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerlink="/">Stats</a>
+          <a routerLink="/stats" class="nav-link">Stats</a>
         </li>
       </ul>
-      <div class="login-panel">
+      <div *ngIf="!isLoggedIn" class="login-panel">
         <button class="login-btn" id="login" (click)="loginSignup(Login.LOGIN)">
           Login
         </button>
@@ -38,6 +38,10 @@
         >
           Sign up
         </button>
+      </div>
+      <div *ngIf="isLoggedIn" class="user-panel">
+        <span>User</span>
+        <button class="signout-btn" (click)="signOut()">Log out</button>
       </div>
     </div>
   </div>

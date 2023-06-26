@@ -36,6 +36,24 @@ $text-color: rgb(0, 108, 231);
           border: 1px solid $text-color;
         }
       }
+      .user-panel {
+        display: flex;
+        gap: 8;
+        span {
+          color: white;
+        }
+        .signout-btn {
+          background: none;
+          padding: 4px 10px;
+          color: red;
+          border-radius: 16px;
+          border: 1px solid red;
+          &:hover {
+            background: red;
+            color: white;
+          }
+        }
+      }
     }
   }
 }

@@ -26,4 +26,16 @@ export class ToasterService {
     if (error?.id == 'USER_EXIST') this.toast.warning(error.message);
     else this.toast.error('Something went wrong');
   }
+
+  notLoggedIn() {
+    this.toast.error('You are not Logged In');
+  }
+
+  signedOut() {
+    this.toast.info('You are signed out');
+  }
+
+  tokenExpired() {
+    this.toast.warning('token expired, Please login again');
+  }
 }
