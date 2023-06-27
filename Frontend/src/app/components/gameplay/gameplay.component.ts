@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Round } from 'src/app/Classes/Round';
 import { GameConfig, Result, Vals } from 'src/app/enums/config';
 import { GameRoundService } from 'src/app/services/game-round.service';
@@ -8,6 +8,7 @@ import { ThemeService } from 'src/app/services/theme.service';
 import { ResultModalComponent } from './result-modal/result-modal.component';
 import { isAlphaNum } from 'src/app/Classes/common';
 import { GameStateService } from 'src/app/services/game-state.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-gameplay',
@@ -27,6 +28,12 @@ export class GameplayComponent implements OnInit {
     private dialog: MatDialog,
     private gameState: GameStateService
   ) {
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.gameState.reset();
+      }
+    });
+
     this.initialize();
   }
 

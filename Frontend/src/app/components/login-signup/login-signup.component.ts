@@ -104,6 +104,7 @@ export class LoginSignupComponent implements OnInit {
           const tokenPayload = this.auth.decodedToken();
           this.userStore.setUserName(tokenPayload.unique_name);
           this.userStore.setRole(tokenPayload.role);
+          this.auth.updatePayload();
           this.loginForm.reset();
           this.dialogRef.close();
         },

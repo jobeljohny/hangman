@@ -62,6 +62,10 @@ export class AuthService {
     return jwtHelper.decodeToken(token);
   }
 
+  updatePayload() {
+    this.userPayload = this.decodedToken();
+  }
+
   getUsername() {
     if (this.userPayload) return this.userPayload.unique_name;
   }
