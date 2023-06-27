@@ -1,46 +1,46 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
-/tmp
-/out-tsc
+/Frontend/dist
+/Frontend/tmp
+/Frontend/out-tsc
 # Only exists if Bazel was run
-/bazel-out
+/Frontend/bazel-out
 
 # dependencies
-/node_modules
+/Frontend/node_modules
 
 # profiling files
-chrome-profiler-events*.json
+/Frontend/chrome-profiler-events*.json
 
 # IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+/Frontend/.idea
+/Frontend/.project
+/Frontend/.classpath
+/Frontend/.c9/
+/Frontend/*.launch
+/Frontend/.settings/
+/Frontend/*.sublime-workspace
 
 # IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
+/Frontend/.vscode/*
+!/Frontend/.vscode/settings.json
+!/Frontend/.vscode/tasks.json
+!/Frontend/.vscode/launch.json
+!/Frontend/.vscode/extensions.json
+/Frontend/.history/*
 
 # misc
-/.angular/cache
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/typings
+/Frontend/.angular/cache
+/Frontend/.sass-cache
+/Frontend/connect.lock
+/Frontend/coverage
+/Frontend/libpeerconnection.log
+/Frontend/npm-debug.log
+/Frontend/yarn-error.log
+/Frontend/testem.log
+/Frontend/typings
 
 # System Files
-.DS_Store
-Thumbs.db
+/Frontend/.DS_Store
+/Frontend/Thumbs.db
