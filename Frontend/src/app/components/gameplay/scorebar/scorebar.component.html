@@ -4,9 +4,9 @@
   [ngClass]="{ 'wrapbox-light': !isDarkMode }"
 >
   <p [ngClass]="{ 'text-light-theme': !isDarkMode }">
-    ROUND : <b>{{ round }}</b>
+    ROUND : <b>{{ GameState.Round }}</b>
   </p>
   <p [ngClass]="{ 'text-light-theme': !isDarkMode }">
-    SCORE : <b>{{ score }}</b>
+    SCORE : <b>{{ GameState.Score }}</b>
   </p>
 </div>

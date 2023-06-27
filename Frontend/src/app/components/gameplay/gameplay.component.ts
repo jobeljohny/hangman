@@ -7,6 +7,7 @@ import { GameRoundService } from 'src/app/services/game-round.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ResultModalComponent } from './result-modal/result-modal.component';
 import { isAlphaNum } from 'src/app/Classes/common';
+import { GameStateService } from 'src/app/services/game-state.service';
 
 @Component({
   selector: 'app-gameplay',
@@ -16,8 +17,6 @@ import { isAlphaNum } from 'src/app/Classes/common';
 export class GameplayComponent implements OnInit {
   pressedKey = '';
   panelMsgType = -1;
-  Round = 1;
-  Score = 0;
   interval: any = undefined;
   guessBlinker: string = Vals.NORMAL;
   errorBlinker: string = Vals.NORMAL;
@@ -25,7 +24,8 @@ export class GameplayComponent implements OnInit {
     private gameRound: GameRoundService,
     private router: Router,
     private theme: ThemeService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private gameState: GameStateService
   ) {
     this.initialize();
   }
@@ -104,10 +104,10 @@ export class GameplayComponent implements OnInit {
     this.stopTimer();
     this.round.LOST = true;
     this.showModal();
+    this.gameState.reset();
   }
   goToNextRound() {
-    this.Round += 1;
-    this.Score += 10 + Math.round((this.round.timeLeft * this.Round) / 2);
+    this.gameState.nextRound(this.round.timeLeft);
     this.initialize();
   }
 
@@ -133,10 +133,10 @@ export class GameplayComponent implements OnInit {
     let dialogRef = this.dialog.open(ResultModalComponent, {
       width: '500px',
       data: {
-        round: this.Round,
+        round: this.gameState.Round,
         name: this.round.movieName,
         isWin: this.round.WIN,
-        score: this.Score,
+        score: this.gameState.Score,
       },
     });
 
