@@ -1,0 +1,41 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  .border {
+    border-radius: 25px;
+    box-shadow: 1px 1px 6px white;
+    width: 90%;
+    height: 400px;
+    margin-top: 18%;
+  }
+  .user-name {
+    margin-top: 125px;
+    margin-right: 63%;
+    position: absolute;
+    color: white;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 40px;
+  }
+  .profile-frame {
+    display: flex;
+    position: absolute;
+    border: 3px solid white;
+    border-radius: 1rem 1rem 1rem;
+    box-shadow: 0px 0px 3px white;
+    width: 80px;
+    height: 80px;
+    margin-top: 100px;
+    margin-right: 80%;
+  }
+  .career-stats {
+    margin-top: 230px;
+    margin-right: 75%;
+    position: absolute;
+    color: white;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+  }
+}
