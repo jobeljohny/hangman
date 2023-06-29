@@ -1,8 +1,19 @@
 <div class="wrap">
+  <img
+    id="hangman-bg"
+    src="../../../../assets/hangman-grey-icon.png"
+    alt="logo"
+  />
   <div class="profile-frame">
-    <img src="../../../../assets/user.png" alt="user" />
+    <img id="player-img" src="../../../../assets/user.png" alt="user" />
   </div>
   <div class="user-name">{{ username }}</div>
   <div class="career-stats">CAREER STATS</div>
-  <div class="border"></div>
+  <div class="border">
+    <div id="firstname" class="stats-box">{{ firstname }}</div>
+    <div id="lastname" class="stats-box">{{ lastname }}</div>
+    <div id="gamesplayed" class="stats-box">{{ gamesPlayed }}</div>
+    <div id="highestscore" class="stats-box">{{ highestScore }}</div>
+    <div id="highestround" class="stats-box">{{ highestRound }}</div>
+  </div>
 </div>

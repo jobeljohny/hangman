@@ -13,7 +13,7 @@ export class StatsPageComponent implements OnInit {
   firstname = 'Godwin';
   lastname = 'VS';
   gamesPlayed = 45;
-  higestScore = 456.56;
+  highestScore = 456.56;
   highestRound = 8;
   constructor(private api: ApiService) {}
 

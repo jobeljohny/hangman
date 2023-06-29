@@ -2,12 +2,55 @@
   display: flex;
   justify-content: center;
   position: relative;
+  #hangman-bg {
+    width: 50%;
+    position: absolute;
+    opacity: 0.1;
+  }
   .border {
     border-radius: 25px;
     box-shadow: 1px 1px 6px white;
     width: 90%;
     height: 400px;
     margin-top: 18%;
+  }
+  .stats-box {
+    border-radius: 1rem 1rem 1rem;
+    box-shadow: 1px 1px 6px white;
+    width: 10%;
+    height: 20%;
+    font-weight: bold;
+    font-size: 150%;
+    color: white;
+    font-family: monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #firstname {
+    position: absolute;
+    margin-left: 10%;
+    margin-top: 10px;
+  }
+  #lastname {
+    position: absolute;
+    margin-left: 40%;
+    margin-top: 120px;
+  }
+  #gamesplayed {
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 250px;
+  }
+  #highestscore {
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 10px;
+  }
+  #highestround {
+    position: absolute;
+    margin-left: 10%;
+    margin-top: 250px;
   }
   .user-name {
     margin-top: 125px;
