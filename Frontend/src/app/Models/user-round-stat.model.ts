@@ -1,4 +1,4 @@
-export class UserStat {
+export class UserRoundStat {
   username!: string;
   highscore!: number;
   highestRound!: number;

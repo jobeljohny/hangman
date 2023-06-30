@@ -29,14 +29,9 @@
       position: relative;
       width: 0;
       height: 0;
-      color: #fff;
-      background-color: #191919;
-      animation: 1s grow ease forwards;
+      background-color: #2b2d3013;
+      animation: 0.7s grow ease forwards;
       text-align: center;
-
-      &-light {
-        background-color: #fcf3fb;
-      }
 
       .nav_list {
         list-style-type: none;
@@ -44,7 +39,7 @@
         a {
           text-decoration: none;
           font-size: 20px;
-          color: #fff;
+          color: #f3f5ff;
         }
 
         .nav_list_item {
@@ -55,7 +50,7 @@
             text-transform: uppercase;
             transform: translateY(200px);
             opacity: 0;
-            animation: 2s slideUp ease forwards 0.5s;
+            animation: 0.5s slideUp ease forwards 0.5s;
             position: relative;
 
             &::before {

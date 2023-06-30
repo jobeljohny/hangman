@@ -17,6 +17,7 @@ import { LoginSignupComponent } from './components/login-signup/login-signup.com
 import { ToastrModule } from 'ngx-toastr';
 import { StatsPageComponent } from './components/stats-page/stats-page.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     HeaderComponent,
     LoginSignupComponent,
     StatsPageComponent,
+    LeaderboardComponent,
   ],
   imports: [
     BrowserModule,

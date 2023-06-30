@@ -1,0 +1,41 @@
+$rain: #2c3845;
+
+* {
+  box-sizing: border-box;
+}
+
+.table-container {
+  background-color: $rain;
+  margin: 0px 60px;
+
+  table {
+    width: 100%;
+
+    thead {
+      tr {
+        border-top: none;
+      }
+      th {
+        text-align: center;
+        background-color: darken($rain, 6%);
+        color: #fff;
+        padding: 16px 0px;
+      }
+    }
+
+    tr {
+      border-top: 6px solid black;
+      &:nth-child(2n + 2) {
+        td {
+          background-color: darken($rain, 4%);
+        }
+      }
+    }
+
+    td {
+      padding: 14px 0px;
+      text-align: center;
+      color: rgb(253, 240, 215);
+    }
+  }
+}

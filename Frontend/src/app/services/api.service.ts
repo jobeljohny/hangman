@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MyMovies } from '../Classes/movies';
+import { UserRoundStat } from '../Models/user-round-stat.model';
+import { UserStatistic } from '../Models/user-statistics.model';
 import { AuthService } from './auth.service';
-import { UserStat } from '../Models/user-stat.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,11 +24,16 @@ export class ApiService {
 
   updateUserStat(score: number, round: number) {
     let url = this.baseUrl + 'api/Statistics/updateStat';
-    const statObj = new UserStat();
+    const statObj = new UserRoundStat();
     statObj.username = this.auth.getUsername();
     statObj.highscore = score;
     statObj.highestRound = round;
 
     return this.http.put<any>(url, statObj);
+  }
+
+  getLeaderboard() {
+    let url = this.baseUrl + 'api/Statistics/leaderboard';
+    return this.http.get<UserStatistic[]>(url);
   }
 }

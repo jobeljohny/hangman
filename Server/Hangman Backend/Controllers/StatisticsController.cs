@@ -3,6 +3,7 @@ using Hangman_Backend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hangman_Backend.Controllers
@@ -20,7 +21,7 @@ namespace Hangman_Backend.Controllers
         [HttpPut("updateStat")]
         public async Task<IActionResult> UpdateState([FromBody] UserStatistics userObj)
         {
-             if (userObj == null)
+            if (userObj == null)
                 return BadRequest();
 
             var user = await _context.UserStatistics
@@ -28,7 +29,7 @@ namespace Hangman_Backend.Controllers
 
             if (user == null)
                 return NotFound(new { Message = "User not found", Id = "USER_NOT_FOUND" });
-            
+
             UpdateUserStatistics(user, userObj);
 
             try
@@ -40,7 +41,35 @@ namespace Hangman_Backend.Controllers
                 return Conflict(new { Message = "Update conflict occurred" });
             }
 
-            return Ok(new {Message = "user stat updated"});
+            return Ok(new { Message = "user stat updated" });
+        }
+
+        [HttpGet("leaderboard")]
+        public async Task<ActionResult<UserStatistics>> GetLeaderBoard()
+        {
+            var leaderBoard = await _context.UserStatistics
+                .OrderByDescending(s => s.Highscore)
+                .Take(50).ToListAsync();
+
+            return Ok(leaderBoard);
+        }
+
+        [Authorize]
+        [HttpGet("getUserRank")]
+        public async Task<ActionResult<Stats>> GetUserRank(string username)
+        {
+            var userObj =  _context.UserStatistics
+                        .Where(x => x.Username == username);
+
+            var rank =  _context.UserStatistics
+                .Where(s => s.Username == username)
+                .Select(s => _context.UserStatistics.Count(st => st.Highscore > s.Highscore) + 1)
+                .FirstOrDefault();
+
+            return Ok(new {
+                    User = userObj,
+                    Rank = rank,
+            });
         }
 
         private void UpdateUserStatistics(UserStatistics user, UserStatistics userObj)

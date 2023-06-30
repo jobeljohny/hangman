@@ -1,19 +1,11 @@
 <div class="gameplay-container mx-5">
   <app-scorebar style="width: 100%"></app-scorebar>
 
-  <div
-    class="game-panel mx-5 shadow-lg p-3 mb-2 rounded card-container"
-    [ngClass]="{ 'wrapbox-light': !isDarkMode }"
-  >
+  <div class="game-panel mx-5 shadow-lg p-3 mb-2 rounded card-container">
     <app-progressbar></app-progressbar>
     <div class="name-hang-container">
       <div id="gameArea">
-        <p
-          id="movieGuesser"
-          class="text"
-          [style.color]="guessBlinker"
-          [ngClass]="{ 'text-light-theme': !isDarkMode }"
-        >
+        <p id="movieGuesser" class="text" [style.color]="guessBlinker">
           {{ round.template.join("") }}
         </p>
       </div>
@@ -23,11 +15,7 @@
           src="assets/hangman{{ Lives - round.lives }}.png"
           alt="lives"
         />
-        <p
-          id="errorBuffer"
-          [style.color]="errorBlinker"
-          [ngClass]="{ 'text-light-theme': !isDarkMode }"
-        >
+        <p id="errorBuffer" [style.color]="errorBlinker">
           {{ round.wrongBuffer.join("") }}
         </p>
       </div>

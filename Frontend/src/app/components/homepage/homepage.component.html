@@ -1,22 +1,26 @@
 <div id="wrapper">
   <div id="logo-container">
-    <img id="logo" src="../../../assets/hangman_title.png" alt="logo">
+    <img id="logo" src="../../../assets/hangman_title.png" alt="logo" />
   </div>
-  
-  <div class="container" >
-    
-    <div class="content shadow-lg rounded card-container" [ngClass]="{'content-light': !isDarkMode}">
+
+  <div class="container">
+    <div class="content shadow-lg rounded card-container">
       <div class="nav">
         <ul class="nav_list">
-          
-          <div class="nav_list_item" [ngClass]="{'menu-light': !isDarkMode}">
-            <li><a routerLink="/game" [ngClass]="{'text-light-theme': !isDarkMode}">Start Game</a></li>
+          <div class="nav_list_item">
+            <li>
+              <a routerLink="/game">Start Game</a>
+            </li>
           </div>
           <div class="nav_list_item">
-            <li><a [ngClass]="{'text-light-theme': !isDarkMode}" href="#">Help</a></li>
+            <li>
+              <a href="#">Help</a>
+            </li>
           </div>
           <div class="nav_list_item">
-            <li><a [ngClass]="{'text-light-theme': !isDarkMode}" href="#">About</a></li>
+            <li>
+              <a href="#">About</a>
+            </li>
           </div>
         </ul>
       </div>
