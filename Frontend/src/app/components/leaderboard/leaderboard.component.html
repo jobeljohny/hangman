@@ -1,23 +1,28 @@
 <div class="heading">
-  <p>LEADERBOARD</p>
+  <img src="../../../assets/crown.svg" />
+  <span>LEADERBOARD</span>
 </div>
 <div class="table-container">
   <table>
     <thead>
       <tr>
-        <th>Rank</th>
-        <th>Username</th>
-        <th>Highest Round</th>
-        <th>Highscore</th>
+        <th><img src="../../../assets/leaderboard.svg" alt="icon" />Rank</th>
+        <th><img src="../../../assets/user.svg" alt="icon" />Username</th>
+        <th>
+          <img src="../../../assets/ribbon.svg" alt="icon" />Highest Round
+        </th>
+        <th>
+          <img src="../../../assets/trophyIcon.svg" alt="icon" />Highscore
+        </th>
       </tr>
     </thead>
 
     <tbody>
       <tr *ngFor="let item of leaderboards; index as i">
-        <td>#{{ i + 1 }}</td>
-        <td>{{ item.username }}</td>
-        <td>{{ item.highestRound }}</td>
-        <td>{{ item.highscore }}</td>
+        <td class="rank"># {{ i + 1 }}</td>
+        <td class="username">{{ item.username }}</td>
+        <td class="round">{{ item.highestRound }}</td>
+        <td class="score">{{ item.highscore }}</td>
       </tr>
     </tbody>
   </table>
