@@ -1,7 +1,19 @@
-$rain: #2c3845;
+$rain: #2c384541;
+$drain: #4a576442;
+$title: #131f2b;
 
 * {
   box-sizing: border-box;
+}
+.heading {
+  display: flex;
+  justify-content: center;
+  margin: 26px 0px;
+  p {
+    font-size: 2.2rem;
+    color: white;
+    font-family: american typewriter, serif;
+  }
 }
 
 .table-container {
@@ -10,6 +22,8 @@ $rain: #2c3845;
 
   table {
     width: 100%;
+    font-family: courier, "Courier New", Courier, monospace;
+    text-transform: uppercase;
 
     thead {
       tr {
@@ -17,25 +31,54 @@ $rain: #2c3845;
       }
       th {
         text-align: center;
-        background-color: darken($rain, 6%);
+        background-color: $title;
         color: #fff;
         padding: 16px 0px;
+        font-size: 1.2rem;
       }
     }
+    tbody {
+      display: block;
+      overflow-y: auto;
+      height: calc(100vh - 240px);
 
-    tr {
-      border-top: 6px solid black;
-      &:nth-child(2n + 2) {
-        td {
-          background-color: darken($rain, 4%);
+      tr {
+        border-top: 6px solid black;
+        &:nth-child(2n + 2) {
+          td {
+            background-color: $drain;
+          }
         }
       }
-    }
 
-    td {
-      padding: 14px 0px;
-      text-align: center;
-      color: rgb(253, 240, 215);
+      td {
+        padding: 14px 0px;
+        text-align: center;
+        color: rgb(253, 240, 215);
+        font-size: 1.1rem;
+        font-family: palatino, serif;
+      }
     }
   }
+}
+thead,
+tr,
+tbody {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #55515f;
 }
