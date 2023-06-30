@@ -1,84 +1,9 @@
-.wrap {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  #hangman-bg {
-    width: 50%;
-    position: absolute;
-    opacity: 0.1;
+.page-container {
+  margin-left: 40px;
+  .profile-container {
   }
-  .border {
-    border-radius: 25px;
-    box-shadow: 1px 1px 6px white;
-    width: 90%;
-    height: 400px;
-    margin-top: 18%;
-  }
-  .stats-box {
-    border-radius: 1rem 1rem 1rem;
-    box-shadow: 1px 1px 6px white;
-    width: 10%;
-    height: 20%;
-    font-weight: bold;
-    font-size: 150%;
-    color: white;
-    font-family: monospace;
+  .stats-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  #firstname {
-    position: absolute;
-    margin-left: 10%;
-    margin-top: 10px;
-  }
-  #lastname {
-    position: absolute;
-    margin-left: 40%;
-    margin-top: 120px;
-  }
-  #gamesplayed {
-    position: absolute;
-    margin-left: 70%;
-    margin-top: 250px;
-  }
-  #highestscore {
-    position: absolute;
-    margin-left: 70%;
-    margin-top: 10px;
-  }
-  #highestround {
-    position: absolute;
-    margin-left: 10%;
-    margin-top: 250px;
-  }
-  .user-name {
-    margin-top: 125px;
-    margin-right: 63%;
-    position: absolute;
-    color: white;
-    font-family: monospace;
-    font-weight: bold;
-    font-size: 40px;
-  }
-  .profile-frame {
-    display: flex;
-    position: absolute;
-    border: 3px solid white;
-    border-radius: 1rem 1rem 1rem;
-    box-shadow: 0px 0px 3px white;
-    width: 80px;
-    height: 80px;
-    margin-top: 100px;
-    margin-right: 80%;
-  }
-  .career-stats {
-    margin-top: 230px;
-    margin-right: 75%;
-    position: absolute;
-    color: white;
-    font-family: monospace;
-    font-weight: bold;
-    font-size: 20px;
+    gap: 12px;
   }
 }
