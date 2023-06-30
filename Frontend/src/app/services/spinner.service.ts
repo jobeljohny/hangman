@@ -12,13 +12,10 @@ export class SpinnerService {
   }
 
   show() {
-    console.log('showing');
-
     this.visibility.next(true);
   }
 
   hide() {
-    console.log('hiding');
     this.visibility.next(false);
   }
 }
