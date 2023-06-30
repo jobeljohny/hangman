@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { StatsPageComponent } from './components/stats-page/stats-page.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+import { StatBoxComponent } from './components/stat-box/stat-box.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { LeaderboardComponent } from './components/leaderboard/leaderboard.compo
     LoginSignupComponent,
     StatsPageComponent,
     LeaderboardComponent,
+    StatBoxComponent,
   ],
   imports: [
     BrowserModule,
