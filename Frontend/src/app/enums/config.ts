@@ -1,6 +1,6 @@
 export enum GameConfig {
   LIVES = 6,
-  GAME_TIME = 600,
+  GAME_TIME = 60,
 }
 
 export enum Vals {
