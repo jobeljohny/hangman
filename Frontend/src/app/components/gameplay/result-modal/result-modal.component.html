@@ -1,18 +1,7 @@
-<div id="dbody" class="dialog-container" [ngClass]="{ 'modal-light': !isDarkMode }">
-    <h5
-      class="lead"
-      id="title"
-      [ngClass]="{ 'text-light-theme': !isDarkMode }"
-    >
-      YOU {{ Status ? "WON" : "LOST" }}
-    </h5>
-  <div  class="dialog-body">
-    <p
-      *ngIf="!Status"
-      id="score-card"
-      class="lead"
-      [ngClass]="{ 'text-light-theme': !isDarkMode }"
-    >
+<div id="dbody" class="dialog-container">
+  <h5 class="lead" id="title">YOU {{ Status ? "WON" : "LOST" }}</h5>
+  <div class="dialog-body">
+    <p *ngIf="!Status" id="score-card" class="lead">
       Your Score : <b>{{ score }}</b>
     </p>
     <div id="imageContainer">
@@ -27,11 +16,7 @@
       />
     </div>
 
-    <p
-      id="movie-name"
-      class="lead"
-      [ngClass]="{ 'text-light-theme': !isDarkMode }"
-    >
+    <p id="movie-name" class="lead">
       Movie : <b>{{ movie }}</b>
     </p>
   </div>

@@ -122,17 +122,11 @@ export class GameplayComponent implements OnInit {
     switch (entity) {
       case 'GUESSER':
         this.guessBlinker = blinker;
-        setTimeout(
-          () => (this.guessBlinker = this.isDarkMode ? Vals.WHITE : Vals.BLACK),
-          Vals.BLINK_TIMER
-        );
+        setTimeout(() => (this.guessBlinker = Vals.WHITE), Vals.BLINK_TIMER);
         break;
       case 'ERROR_BUFFER':
         this.errorBlinker = blinker;
-        setTimeout(
-          () => (this.errorBlinker = this.isDarkMode ? Vals.WHITE : Vals.BLACK),
-          Vals.BLINK_TIMER
-        );
+        setTimeout(() => (this.errorBlinker = Vals.WHITE), Vals.BLINK_TIMER);
         break;
     }
   }
