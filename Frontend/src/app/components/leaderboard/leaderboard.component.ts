@@ -12,7 +12,7 @@ export class LeaderboardComponent implements OnInit {
 
   constructor(private api: ApiService) {
     //TODO remove this
-    this.generateLB();
+    // this.generateLB();
   }
 
   ngOnInit() {

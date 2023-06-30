@@ -28,7 +28,7 @@ $title: #131f2b;
 
 .table-container {
   background-color: $rain;
-  margin: 0px 60px;
+  margin: 0px 100px;
 
   table {
     width: 100%;
@@ -77,20 +77,22 @@ $title: #131f2b;
         text-align: center;
         color: rgb(253, 240, 215);
         font-size: 1.1rem;
-        font-family: palatino, serif;
+        font-family: bradley hand, cursive;
       }
       .rank {
-        font-family: bradley hand, cursive;
         color: white;
         font-style: italic;
       }
       .username {
-        font-family: bradley hand, cursive;
-        font-style: italic;
+        font-family: Verdana, sans-serif;
         color: rgb(253, 229, 210);
       }
       .round {
+        font-weight: bold;
         color: white;
+      }
+      .score {
+        font-weight: bold;
       }
     }
   }
