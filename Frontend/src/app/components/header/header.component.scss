@@ -17,14 +17,19 @@ $login-btn-color: orange;
         margin-left: 16px;
         .nav-item {
           margin-right: 16px;
-          display: flex;
-          img {
-            width: 20px;
-            filter: $svg-filter;
-          }
+
           a {
             color: $text-color;
             font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            img {
+              width: 18px;
+              filter: $svg-filter;
+              margin-bottom: 4px;
+            }
             &:hover {
               transform: scale(1.06);
             }
@@ -84,4 +89,10 @@ $login-btn-color: orange;
       }
     }
   }
+}
+
+.activeLink {
+  padding-bottom: 2px;
+  border-bottom: 1px solid orange;
+  width: 100%;
 }
