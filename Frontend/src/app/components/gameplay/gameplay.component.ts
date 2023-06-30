@@ -51,7 +51,6 @@ export class GameplayComponent implements OnInit {
 
   initialize(): void {
     this.gameRound.initialize();
-    console.log(this.round.movieName);
     this.setPanelMsg(-1, '');
     this.activateTimer();
   }
@@ -150,7 +149,6 @@ export class GameplayComponent implements OnInit {
     });
   }
   resultHandler(result: string) {
-    console.log(result);
     if (result == Result.PASSED) this.goToNextRound();
     else {
       this.router.navigate(['/']);

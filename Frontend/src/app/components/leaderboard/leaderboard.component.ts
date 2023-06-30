@@ -32,7 +32,6 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
       )
       .subscribe((data) => {
         this.leaderboards = data;
-        console.log(this.leaderboards);
       });
   }
 
