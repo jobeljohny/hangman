@@ -1,43 +1,40 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Round } from 'src/app/Classes/Round';
+import { isAlphaNum } from 'src/app/Classes/common';
 import { GameConfig, Result, Vals } from 'src/app/enums/config';
 import { GameRoundService } from 'src/app/services/game-round.service';
+import { GameStateService } from 'src/app/services/game-state.service';
+import { GameTimerService } from 'src/app/services/game-timer.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ResultModalComponent } from './result-modal/result-modal.component';
-import { isAlphaNum } from 'src/app/Classes/common';
-import { GameStateService } from 'src/app/services/game-state.service';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-gameplay',
   templateUrl: './gameplay.component.html',
   styleUrls: ['./gameplay.component.scss'],
 })
-export class GameplayComponent implements OnInit {
+export class GameplayComponent implements OnInit, OnDestroy {
   pressedKey = '';
   panelMsgType = -1;
   interval: any = undefined;
   guessBlinker: string = Vals.NORMAL;
   errorBlinker: string = Vals.NORMAL;
+
   constructor(
     private gameRound: GameRoundService,
     private router: Router,
     private theme: ThemeService,
     private dialog: MatDialog,
+    private timer: GameTimerService,
     private gameState: GameStateService
-  ) {
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationEnd) {
-        this.gameState.reset();
-      }
-    });
+  ) {}
 
+  ngOnInit(): void {
+    this.timer.setTimeOutFn(this.assignLost.bind(this));
     this.initialize();
   }
-
-  ngOnInit(): void {}
   get isDarkMode() {
     return this.theme.isDarkMode;
   }
@@ -52,19 +49,8 @@ export class GameplayComponent implements OnInit {
   initialize(): void {
     this.gameRound.initialize();
     this.setPanelMsg(-1, '');
-    this.activateTimer();
-  }
-  activateTimer() {
-    this.interval = setInterval(() => {
-      if (this.round.timeLeft > 0) {
-        this.gameRound.decrementGameTime();
-      } else {
-        this.assignLost();
-      }
-    }, 1000);
-  }
-  stopTimer() {
-    clearInterval(this.interval);
+    this.timer.start();
+    console.log(this.gameRound.round.movieName);
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -101,13 +87,13 @@ export class GameplayComponent implements OnInit {
   checkWin() {
     if (!this.round.template.includes('-')) {
       this.round.WIN = true;
-      this.stopTimer();
+      this.timer.stop();
       this.showModal();
     }
   }
 
   assignLost() {
-    this.stopTimer();
+    this.timer.stop();
     this.round.LOST = true;
     this.showModal();
     this.gameState.reset();
@@ -153,5 +139,10 @@ export class GameplayComponent implements OnInit {
     else {
       this.router.navigate(['/']);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.timer.stop();
+    this.gameState.reset();
   }
 }

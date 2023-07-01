@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { GameRoundService } from 'src/app/services/game-round.service';
+import { GameTimerService } from 'src/app/services/game-timer.service';
 import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
@@ -12,13 +12,10 @@ export class ProgressbarComponent implements OnInit {
   value = 0;
   transitionFlag: boolean = false;
   private subscription!: Subscription;
-  constructor(
-    private theme: ThemeService,
-    private gameRound: GameRoundService
-  ) {}
+  constructor(private theme: ThemeService, private timer: GameTimerService) {}
 
   ngOnInit(): void {
-    this.subscription = this.gameRound.getProgressValue.subscribe(
+    this.subscription = this.timer.getProgressValue.subscribe(
       (progressValue: number) => {
         this.value = progressValue;
       }
