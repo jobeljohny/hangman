@@ -1,6 +1,27 @@
+@import "../../../styles.scss";
+$border-color: rgb(79, 79, 79);
 .page-container {
   margin-left: 40px;
   .profile-container {
+    color: white;
+    font-family: bolditalic;
+    font-weight: bold;
+    font-size: 300%;
+    padding: 40px 0px 60px;
+    img {
+      width: 100px;
+    }
+  }
+  .career-stats {
+    color: white;
+    font-family: bolditalic;
+    font-weight: bold;
+  }
+  .hr-bar {
+    border-bottom: 3px solid $border-color;
+    width: 755px;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
   .stats-container {
     display: flex;

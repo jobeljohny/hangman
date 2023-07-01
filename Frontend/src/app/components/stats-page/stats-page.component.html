@@ -1,5 +1,10 @@
 <div class="page-container">
-  <div class="profile-container"><span>Username</span></div>
+  <div class="profile-container">
+    <img id="username" src="../../../assets/username.png" />
+    <span>{{ username }}</span>
+  </div>
+  <span class="career-stats">CAREER STATS</span>
+  <div class="hr-bar"></div>
   <div class="stats-container">
     <app-stat-box
       [title]="'Games Played'"
