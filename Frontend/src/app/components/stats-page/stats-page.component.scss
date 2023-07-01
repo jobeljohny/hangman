@@ -2,25 +2,15 @@
 $border-color: rgb(79, 79, 79);
 .page-container {
   margin-left: 40px;
-  .profile-container {
-    color: white;
-    font-family: bolditalic;
-    font-weight: bold;
-    font-size: 300%;
-    padding: 40px 0px 60px;
-    img {
-      width: 100px;
-    }
-  }
+
   .career-stats {
     color: white;
-    font-family: bolditalic;
-    font-weight: bold;
+    margin-top: 50px;
   }
   .hr-bar {
     border-bottom: 3px solid $border-color;
     width: 755px;
-    margin: 15px 0px;
+    margin: 10px 0px;
   }
   .stats-container {
     display: flex;

@@ -21,6 +21,7 @@ import { LeaderboardComponent } from './components/leaderboard/leaderboard.compo
 import { StatBoxComponent } from './components/stat-box/stat-box.component';
 import { HttpLoaderInterceptor } from './interceptors/http-loader.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { StatProfileComponent } from './components/stat-profile/stat-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     StatsPageComponent,
     LeaderboardComponent,
     StatBoxComponent,
+    StatProfileComponent,
   ],
   imports: [
     BrowserModule,

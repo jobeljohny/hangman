@@ -1,29 +1,28 @@
 <div class="page-container">
-  <div class="profile-container">
-    <img id="username" src="../../../assets/username.png" />
-    <span>{{ username }}</span>
+  <div class="mt-5">
+    <app-stat-profile [profile]="stat"></app-stat-profile>
   </div>
-  <span class="career-stats">YOUR STATS</span>
+  <div class="career-stats lead">YOUR STATS</div>
   <div class="hr-bar"></div>
   <div class="stats-container">
     <app-stat-box
       [title]="'Games Played'"
-      [value]="231"
-      [ImgSrc]="'../../../assets/joystick-icon.svg'"
+      [value]="stat.gamesPlayed"
+      [ImgSrc]="'../../../assets/joystick.svg'"
     ></app-stat-box>
     <app-stat-box
       [title]="'Highscore'"
-      [value]="329.34"
+      [value]="stat.highscore"
       [ImgSrc]="'../../../assets/trophyIcon.svg'"
     ></app-stat-box>
     <app-stat-box
       [title]="'Highest Round'"
-      [value]="16"
-      [ImgSrc]="'../../../assets/highest-round.svg'"
+      [value]="stat.highestRound"
+      [ImgSrc]="'../../../assets/hround.svg'"
     ></app-stat-box>
     <app-stat-box
       [title]="'Global Rank'"
-      [value]="17"
+      [value]="userStat.rank"
       [ImgSrc]="'../../../assets/crown.svg'"
     ></app-stat-box>
   </div>
