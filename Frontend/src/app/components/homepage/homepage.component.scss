@@ -1,3 +1,4 @@
+@import "../../../styles.scss";
 #wrapper {
   display: flex;
   flex-direction: column;
@@ -9,8 +10,9 @@
     justify-content: center;
 
     #logo {
-      height: 50%;
       width: 60%;
+      filter: invert(19%) sepia(98%) saturate(1000%) hue-rotate(208deg)
+        brightness(99%) contrast(94%);
     }
   }
   .container {
@@ -38,7 +40,12 @@
         a {
           text-decoration: none;
           font-size: 20px;
-          color: #f3f5ff;
+          color: white;
+          img {
+            width: 25px;
+            filter: $svg-filter;
+            margin-right: 5px;
+          }
         }
 
         .nav_list_item {
@@ -58,7 +65,7 @@
               height: 2px;
               width: 0;
               left: 0;
-              bottom: 10px;
+              bottom: 5px;
               background: #bf2e97;
               transition: all 0.5s ease;
             }
