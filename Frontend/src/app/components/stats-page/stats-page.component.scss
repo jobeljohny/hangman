@@ -1,0 +1,19 @@
+@import "../../../styles.scss";
+$border-color: rgb(79, 79, 79);
+.page-container {
+  margin-left: 40px;
+
+  .career-stats {
+    color: white;
+    margin-top: 50px;
+  }
+  .hr-bar {
+    border-bottom: 3px solid $border-color;
+    width: 755px;
+    margin: 10px 0px;
+  }
+  .stats-container {
+    display: flex;
+    gap: 12px;
+  }
+}

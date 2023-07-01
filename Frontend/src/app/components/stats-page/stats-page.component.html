@@ -1,1 +1,29 @@
-<h1 class="lead" style="color: white">Stats</h1>
+<div class="page-container">
+  <div class="mt-5">
+    <app-stat-profile [profile]="stat"></app-stat-profile>
+  </div>
+  <div class="career-stats lead">YOUR STATS</div>
+  <div class="hr-bar"></div>
+  <div class="stats-container">
+    <app-stat-box
+      [title]="'Games Played'"
+      [value]="stat.gamesPlayed"
+      [ImgSrc]="'../../../assets/joystick.svg'"
+    ></app-stat-box>
+    <app-stat-box
+      [title]="'Highscore'"
+      [value]="stat.highscore"
+      [ImgSrc]="'../../../assets/trophyIcon.svg'"
+    ></app-stat-box>
+    <app-stat-box
+      [title]="'Highest Round'"
+      [value]="stat.highestRound"
+      [ImgSrc]="'../../../assets/hround.svg'"
+    ></app-stat-box>
+    <app-stat-box
+      [title]="'Global Rank'"
+      [value]="userStat.rank"
+      [ImgSrc]="'../../../assets/crown.svg'"
+    ></app-stat-box>
+  </div>
+</div>

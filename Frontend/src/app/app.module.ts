@@ -18,8 +18,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { StatsPageComponent } from './components/stats-page/stats-page.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+import { StatBoxComponent } from './components/stat-box/stat-box.component';
 import { HttpLoaderInterceptor } from './interceptors/http-loader.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { StatProfileComponent } from './components/stat-profile/stat-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +35,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LoginSignupComponent,
     StatsPageComponent,
     LeaderboardComponent,
+    StatBoxComponent,
+    StatProfileComponent,
   ],
   imports: [
     BrowserModule,

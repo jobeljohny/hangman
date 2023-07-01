@@ -1,0 +1,25 @@
+@import "../../../styles.scss";
+.profile-container {
+  color: white;
+  display: flex;
+  .image-container {
+    img {
+      width: 80px;
+      filter: $svg-filter;
+    }
+  }
+  .name-container {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    .username {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .fullname {
+      font-size: 1.3rem;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+@import "../../../styles.scss";
+$border-color: rgb(79, 79, 79);
+.stats-box {
+  height: 140px;
+  width: 180px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  .head-bar {
+    height: 45px;
+
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    .img-holder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      border-right: 1px solid $border-color;
+      img {
+        width: 30px;
+        filter: $svg-filter;
+      }
+    }
+    .title-holder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      text-transform: uppercase;
+    }
+  }
+  .content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}
