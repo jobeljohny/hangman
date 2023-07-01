@@ -19,6 +19,8 @@ import { StatsPageComponent } from './components/stats-page/stats-page.component
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { StatBoxComponent } from './components/stat-box/stat-box.component';
+import { HttpLoaderInterceptor } from './interceptors/http-loader.interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +40,7 @@ import { StatBoxComponent } from './components/stat-box/stat-box.component';
     BrowserModule,
     AppRoutingModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -46,6 +49,11 @@ import { StatBoxComponent } from './components/stat-box/stat-box.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoaderInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

@@ -11,7 +11,6 @@ export class GameStateService {
   constructor(private api: ApiService, private auth: AuthService) {
     this.Round = 1;
     this.Score = 0;
-    console.log('initializing game state');
   }
 
   nextRound(timeLeft: number) {

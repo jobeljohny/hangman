@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Login } from 'src/app/enums/config';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomValidationService } from 'src/app/services/custom-validation.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import { ToasterService } from 'src/app/services/toaster.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 
@@ -33,6 +34,7 @@ export class LoginSignupComponent implements OnInit {
     private auth: AuthService,
     private toaster: ToasterService,
     private userStore: UserStoreService,
+    private spinner: SpinnerService,
     private dialogRef: MatDialogRef<LoginSignupComponent>,
     @Inject(MAT_DIALOG_DATA) data: Login
   ) {
@@ -66,6 +68,10 @@ export class LoginSignupComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+
+  get Spinner() {
+    return this.spinner;
   }
 
   get registerFormControl() {
@@ -105,7 +111,6 @@ export class LoginSignupComponent implements OnInit {
           this.userStore.setUserName(tokenPayload.unique_name);
           this.userStore.setRole(tokenPayload.role);
           this.auth.updatePayload();
-          this.loginForm.reset();
           this.dialogRef.close();
         },
         error: (err) => {

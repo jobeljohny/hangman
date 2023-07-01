@@ -43,10 +43,8 @@ export class ResultModalComponent {
   }
 
   showModal(currentStatus: Boolean, movieName: string) {
-    console.log('show modal');
     this.Status = currentStatus;
     this.movie = movieName;
-    console.log(currentStatus);
     if (this.Status)
       setTimeout(
         () =>
