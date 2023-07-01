@@ -10,8 +10,8 @@ export class StatsPageComponent implements OnInit {
   users: any = [];
 
   username = 'Brute7';
-  firstname = 'Godwin';
-  lastname = 'VS';
+  firstname = 'Robert';
+  lastname = ' sterly';
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
