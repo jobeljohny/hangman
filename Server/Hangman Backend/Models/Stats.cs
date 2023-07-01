@@ -2,7 +2,7 @@
 {
     public class Stats
     {
-        public UserStatistics statistics;
+        public UserStatistics? statistics { get; set; }
         public int? rank { get; set; }
     }
 }

@@ -55,21 +55,23 @@ namespace Hangman_Backend.Controllers
         }
 
         [Authorize]
-        [HttpGet("getUserRank")]
-        public async Task<ActionResult<Stats>> GetUserRank(string username)
+        [HttpGet("getUserStat")]
+        public async Task<ActionResult<Stats>> GetUserStat(string username)
         {
-            var userObj =  _context.UserStatistics
-                        .Where(x => x.Username == username);
+            var userObj =  await _context.UserStatistics
+                        .Where(x => x.Username == username).FirstOrDefaultAsync();
 
-            var rank =  _context.UserStatistics
+            var rank =  await _context.UserStatistics
                 .Where(s => s.Username == username)
                 .Select(s => _context.UserStatistics.Count(st => st.Highscore > s.Highscore) + 1)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
-            return Ok(new {
-                    User = userObj,
-                    Rank = rank,
-            });
+            var statObj = new Stats
+            {
+                statistics = userObj,
+                rank = rank,
+            };
+            return Ok(statObj);
         }
 
         private void UpdateUserStatistics(UserStatistics user, UserStatistics userObj)

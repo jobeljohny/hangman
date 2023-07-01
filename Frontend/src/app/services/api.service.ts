@@ -4,6 +4,7 @@ import { MyMovies } from '../Classes/movies';
 import { UserRoundStat } from '../Models/user-round-stat.model';
 import { UserStatistic } from '../Models/user-statistics.model';
 import { AuthService } from './auth.service';
+import { UserStat } from '../Models/stats.model';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +36,12 @@ export class ApiService {
   getLeaderboard() {
     let url = this.baseUrl + 'api/Statistics/leaderboard';
     return this.http.get<UserStatistic[]>(url);
+  }
+
+  getUserStatistics() {
+    let url =
+      this.baseUrl +
+      `api/Statistics/getUserStat?username=${this.auth.getUsername()}`;
+    return this.http.get<UserStat>(url);
   }
 }

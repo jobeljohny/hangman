@@ -1,4 +1,12 @@
-<div class="page-container">
+<div
+  *ngIf="Spinner.visibility | async"
+  class="d-flex flex-column justify-content-center align-items-center"
+  style="margin-top: 16rem"
+>
+  <mat-spinner [diameter]="50"> </mat-spinner>
+  <p class="lead mt-4 text-white">Stats are brewing... Almost ready!</p>
+</div>
+<div *ngIf="userStat" class="page-container">
   <div class="mt-5">
     <app-stat-profile [profile]="stat"></app-stat-profile>
   </div>
@@ -26,4 +34,14 @@
       [ImgSrc]="'../../../assets/crown.svg'"
     ></app-stat-box>
   </div>
+</div>
+<div
+  class="d-flex justify-content-center"
+  style="margin-top: 18rem"
+  *ngIf="!userStat && !(Spinner.visibility | async)"
+>
+  <p class="lead text-white">
+    Our stat-fetching hamsters encountered a virtual traffic jam, causing a
+    delay in loading your numbers. We're coaxing them back on track!
+  </p>
 </div>

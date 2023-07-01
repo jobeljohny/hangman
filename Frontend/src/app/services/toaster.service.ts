@@ -42,4 +42,8 @@ export class ToasterService {
   errorLeaderboard() {
     this.toast.error('error fetching the leaderboard');
   }
+
+  errorUserStat() {
+    this.toast.error('error fetching user stats');
+  }
 }
