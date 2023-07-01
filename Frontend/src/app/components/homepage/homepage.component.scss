@@ -1,3 +1,4 @@
+@import "../../../styles.scss";
 #wrapper {
   display: flex;
   flex-direction: column;
@@ -9,8 +10,9 @@
     justify-content: center;
 
     #logo {
-      height: 50%;
       width: 60%;
+      filter: invert(19%) sepia(98%) saturate(1000%) hue-rotate(208deg)
+        brightness(99%) contrast(94%);
     }
   }
   .container {
@@ -19,7 +21,6 @@
     align-items: center;
     scroll-behavior: smooth;
     font-family: "Helvetica Neue", sans-serif;
-    max-width: 100%;
     height: 50vh;
 
     .content {
@@ -29,14 +30,9 @@
       position: relative;
       width: 0;
       height: 0;
-      color: #fff;
-      background-color: #191919;
-      animation: 1s grow ease forwards;
+      background-color: #2b2d3013;
+      animation: 0.7s grow ease forwards;
       text-align: center;
-
-      &-light {
-        background-color: #fcf3fb;
-      }
 
       .nav_list {
         list-style-type: none;
@@ -44,7 +40,12 @@
         a {
           text-decoration: none;
           font-size: 20px;
-          color: #fff;
+          color: white;
+          img {
+            width: 25px;
+            filter: $svg-filter;
+            margin-right: 5px;
+          }
         }
 
         .nav_list_item {
@@ -55,7 +56,7 @@
             text-transform: uppercase;
             transform: translateY(200px);
             opacity: 0;
-            animation: 2s slideUp ease forwards 0.5s;
+            animation: 0.5s slideUp ease forwards 0.5s;
             position: relative;
 
             &::before {
@@ -64,7 +65,7 @@
               height: 2px;
               width: 0;
               left: 0;
-              bottom: 10px;
+              bottom: 5px;
               background: #bf2e97;
               transition: all 0.5s ease;
             }

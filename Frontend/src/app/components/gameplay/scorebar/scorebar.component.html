@@ -1,12 +1,8 @@
-<div
-  id="scorePanel"
-  class="shadow p-1 px-5 mb-1 rounded"
-  [ngClass]="{ 'wrapbox-light': !isDarkMode }"
->
-  <p [ngClass]="{ 'text-light-theme': !isDarkMode }">
-    ROUND : <b>{{ round }}</b>
+<div id="scorePanel" class="shadow p-1 px-5 py-3 mb-1 rounded">
+  <p>
+    ROUND : <b>{{ GameState.Round }}</b>
   </p>
-  <p [ngClass]="{ 'text-light-theme': !isDarkMode }">
-    SCORE : <b>{{ score }}</b>
+  <p>
+    SCORE : <b>{{ GameState.Score }}</b>
   </p>
 </div>

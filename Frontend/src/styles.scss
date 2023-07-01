@@ -3,12 +3,14 @@
 @import "bootstrap/scss/mixins";
 @import "ngx-toastr/toastr-bs5-alert";
 
-$card-background-dark: #1d1d1d;
+$card-background-dark: #1d1d1d49;
 $body-dark: #131313;
 $body-light: #fff9f1;
 $card-background-light: white;
 $text-light: black;
 $text-dark: white;
+$svg-filter: invert(46%) sepia(99%) saturate(1986%) hue-rotate(12deg)
+  brightness(105%) contrast(101%);
 
 body {
   background-color: $body-dark;
@@ -36,6 +38,7 @@ body {
 html,
 body {
   height: 100%;
+  background-image: url("./assets/hangman-bg.png");
 }
 body {
   margin: 0;

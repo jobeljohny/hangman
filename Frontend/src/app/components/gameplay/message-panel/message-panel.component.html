@@ -1,11 +1,3 @@
-<div
-  class="shadow-lg p-2 rounded card-container"
-  [ngClass]="{ 'wrapbox-light': !isDarkMode }"
->
-  <p
-    [innerHTML]="panelMessage"
-    id="messageBox"
-    class="lead text"
-    [ngClass]="{ 'text-light-theme': !isDarkMode }"
-  ></p>
+<div class="shadow-lg p-2 py-3 rounded card-container">
+  <p [innerHTML]="panelMessage" id="messageBox" class="lead text"></p>
 </div>

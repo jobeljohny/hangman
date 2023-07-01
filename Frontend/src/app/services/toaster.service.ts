@@ -38,4 +38,8 @@ export class ToasterService {
   tokenExpired() {
     this.toast.warning('token expired, Please login again');
   }
+
+  errorLeaderboard() {
+    this.toast.error('error fetching the leaderboard');
+  }
 }

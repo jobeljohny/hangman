@@ -1,0 +1,44 @@
+<div class="heading">
+  <img src="../../../assets/crown.svg" />
+  <span>LEADERBOARD</span>
+</div>
+<div
+  *ngIf="Spinner.visibility | async"
+  class="mt-5 d-flex justify-content-center"
+>
+  <mat-spinner [diameter]="50"> </mat-spinner>
+</div>
+<div class="table-container" *ngIf="leaderboards.length">
+  <table>
+    <thead>
+      <tr>
+        <th><img src="../../../assets/leaderboard.svg" alt="icon" />Rank</th>
+        <th><img src="../../../assets/user.svg" alt="icon" />Username</th>
+        <th>
+          <img src="../../../assets/ribbon.svg" alt="icon" />Highest Round
+        </th>
+        <th>
+          <img src="../../../assets/trophyIcon.svg" alt="icon" />Highscore
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of leaderboards; index as i">
+        <td class="rank">#{{ i + 1 }}</td>
+        <td class="username">{{ item.username }}</td>
+        <td class="round">{{ item.highestRound }}</td>
+        <td class="score">{{ item.highscore }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div
+  class="mt-5 d-flex justify-content-center"
+  *ngIf="!leaderboards.length && !(Spinner.visibility | async)"
+>
+  <p class="lead text-white">
+    There is no content available at the moment. Please try again at a later
+    time.
+  </p>
+</div>

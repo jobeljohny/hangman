@@ -17,6 +17,9 @@ import { LoginSignupComponent } from './components/login-signup/login-signup.com
 import { ToastrModule } from 'ngx-toastr';
 import { StatsPageComponent } from './components/stats-page/stats-page.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+import { HttpLoaderInterceptor } from './interceptors/http-loader.interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,11 +32,13 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     HeaderComponent,
     LoginSignupComponent,
     StatsPageComponent,
+    LeaderboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -42,6 +47,11 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoaderInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

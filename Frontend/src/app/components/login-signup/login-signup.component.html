@@ -46,7 +46,18 @@
           Password is required
         </span>
       </div>
-      <input type="submit" name="" value="Login" />
+      <input
+        *ngIf="!(Spinner.visibility | async)"
+        type="submit"
+        name=""
+        value="Login"
+      />
+      <div
+        *ngIf="Spinner.visibility | async"
+        class="mt-3 d-flex justify-content-center"
+      >
+        <mat-spinner [diameter]="50"> </mat-spinner>
+      </div>
     </form>
   </div>
   <!--REGISTRATION FORM-->
@@ -172,7 +183,18 @@
         </span>
       </div>
 
-      <input type="submit" name="" value="Register" />
+      <input
+        *ngIf="!(Spinner.visibility | async)"
+        type="submit"
+        name=""
+        value="Register"
+      />
+      <div
+        *ngIf="Spinner.visibility | async"
+        class="mt-3 d-flex justify-content-center"
+      >
+        <mat-spinner [diameter]="50"> </mat-spinner>
+      </div>
     </form>
   </div>
 </div>

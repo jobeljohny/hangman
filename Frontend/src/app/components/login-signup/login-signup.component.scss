@@ -1,11 +1,6 @@
 $white: #fff;
 $font-family_1: sans-serif;
-$card-color-dark: linear-gradient(
-  70deg,
-  rgb(2, 0, 54) 0%,
-  rgb(5, 13, 31) 50%,
-  rgb(14, 5, 34) 100%
-);
+$card-color-dark: url("../../../assets/hangman-bg.png");
 .dialog-container {
   height: 600px;
   display: flex;
