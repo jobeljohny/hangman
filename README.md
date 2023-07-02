@@ -17,10 +17,16 @@
 
 # Hangman🚀
 
-<div>
-<img src="./repo_assets/h3UI.png" height="250px">
-<img src="./repo_assets/h2UI.png" height="250px">
-<img src="./repo_assets/h0UI.png" height="250px">
+- **Straightforward UI**: Our game's interface is as easy as making popcorn! No complicated menus or confusing buttons, just pure movie-guessing fun.
+  <br>
+- **Leaderboard**: Ascend to the ranks of elites as you compete with other players for the coveted title of Movie Mogul. Will your movie knowledge shine brighter than a blockbuster?
+  <br>
+- **stats**: Keep track of your movie-solving skills and stats. Discover your top scores, total games played, and other stats that would make even the most prestigious movie critic blush.
+<hr/>
+<div style="display:flex;flex-direction:column;gap:5px">
+<img src="./repo_assets/h3UI.png" width="380px">
+<img src="./repo_assets/h2UI.png" width="380px">
+<img src="./repo_assets/h0UI.png" width="380px">
 <div>
 
 ### contributors
