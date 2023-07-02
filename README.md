@@ -15,14 +15,13 @@
  
 </p>
 
-# Hangman 1.0 🚀
+# Hangman🚀
 
-### Features 🛠️
-
-- Profile Management
-- Leaderboards
-- User stats
-- Facile UI
+<div>
+<img src="./repo_assets/h3UI.png" height="250px">
+<img src="./repo_assets/h2UI.png" height="250px">
+<img src="./repo_assets/h0UI.png" height="250px">
+<div>
 
 ### contributors
 

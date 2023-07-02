@@ -50,7 +50,6 @@ export class GameplayComponent implements OnInit, OnDestroy {
     this.gameRound.initialize();
     this.setPanelMsg(-1, '');
     this.timer.start();
-    console.log(this.gameRound.round.movieName);
   }
 
   @HostListener('document:keydown', ['$event'])
