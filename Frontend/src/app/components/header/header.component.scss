@@ -1,7 +1,7 @@
 @import "../../../styles.scss";
 
 $text-color: rgb(255, 254, 247);
-$login-btn-color: orange;
+$login-btn-color: $theme-foreground;
 .navbar {
   font-family: "helvetica", sans-serif;
   height: 60px;
@@ -54,7 +54,7 @@ $login-btn-color: orange;
           border: 0;
         }
         #sign-up {
-          border: 1px solid orange;
+          border: 1px solid $theme-foreground;
         }
       }
       .user-panel {
@@ -63,14 +63,15 @@ $login-btn-color: orange;
         .profile-panel {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 3px;
           img {
-            width: 27px;
-            height: 27px;
+            width: 24px;
+            height: 24px;
+            filter: $svg-filter;
           }
           span {
-            color: orange;
-            font-size: 1rem;
+            color: rgb(255, 255, 255);
+            font-size: 1.1rem;
             text-transform: capitalize;
           }
         }
@@ -93,6 +94,6 @@ $login-btn-color: orange;
 
 .activeLink {
   padding-bottom: 2px;
-  border-bottom: 1px solid orange;
+  border-bottom: 1px solid $theme-foreground;
   width: 100%;
 }

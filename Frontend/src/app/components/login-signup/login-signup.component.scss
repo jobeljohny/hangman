@@ -1,3 +1,4 @@
+@import "../../../styles.scss";
 $white: #fff;
 $font-family_1: sans-serif;
 $card-color-dark: url("../../../assets/hangman-bg.png");
@@ -81,12 +82,13 @@ $card-color-dark: url("../../../assets/hangman-bg.png");
   margin: 0 auto;
   display: block;
   margin-bottom: 16px;
+  filter: $svg-filter;
 }
 
 h4 {
   margin: 0;
   padding: 0 0 10px;
-  color: rgb(77, 148, 255);
+  color: white;
   text-align: center;
 }
 

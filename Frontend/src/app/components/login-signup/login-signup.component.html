@@ -12,7 +12,7 @@
     >
   </div>
   <div class="loginBox" *ngIf="page === Login.LOGIN">
-    <img class="user regular" src="../../../assets/profile-icon.png" />
+    <img class="user regular" src="../../../assets/user.svg" />
     <h4 class="lead">Sign in</h4>
     <form class="form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
       <div class="form-wrapper">
@@ -62,7 +62,7 @@
   </div>
   <!--REGISTRATION FORM-->
   <div class="loginBox" *ngIf="page === Login.SIGNUP">
-    <img class="user small" src="../../../assets/profile-icon.png" />
+    <img class="user small" src="../../../assets/user.svg" />
     <form
       class="form"
       [formGroup]="registerForm"
