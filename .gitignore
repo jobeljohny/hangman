@@ -53,3 +53,6 @@
 /Server/.vs
 /Server/Hangman Backend/bin
 /Server/Hangman Backend/obj
+
+
+/.vscode
