@@ -5,17 +5,18 @@ import { UserRoundStat } from '../Models/user-round-stat.model';
 import { UserStatistic } from '../Models/user-statistics.model';
 import { AuthService } from './auth.service';
 import { UserStat } from '../Models/stats.model';
+import { baseUrl } from '../Config/api-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'https://localhost:7197/';
-  private getUsersUrl = this.baseUrl + 'api/User';
+ 
+  private getUsersUrl = baseUrl + 'User';
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   getUsers() {
-    return this.http.get<any>(this.getUsersUrl);
+    return this.http.get<any>(baseUrl + 'User');
   }
 
   getMovie() {
@@ -24,7 +25,7 @@ export class ApiService {
   }
 
   updateUserStat(score: number, round: number) {
-    let url = this.baseUrl + 'api/Statistics/updateStat';
+    let url = baseUrl+'Statistics/updateStat';
     const statObj = new UserRoundStat();
     statObj.username = this.auth.getUsername();
     statObj.highscore = score;
@@ -34,14 +35,14 @@ export class ApiService {
   }
 
   getLeaderboard() {
-    let url = this.baseUrl + 'api/Statistics/leaderboard';
+    let url = baseUrl+'Statistics/leaderboard';
     return this.http.get<UserStatistic[]>(url);
   }
 
   getUserStatistics() {
     let url =
-      this.baseUrl +
-      `api/Statistics/getUserStat?username=${this.auth.getUsername()}`;
+      baseUrl+
+      `Statistics/getUserStat?username=${this.auth.getUsername()}`;
     return this.http.get<UserStat>(url);
   }
 }

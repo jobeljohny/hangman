@@ -3,15 +3,15 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenApiModel } from '../Models/token-api.model';
+import { baseUrl } from '../Config/api-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'https://localhost:7197';
-  private loginUrl = this.baseUrl + '/api/User/authenticate';
-  private registerUrl = this.baseUrl + '/api/User/register';
-  private refreshUrl = this.baseUrl + '/api/User/refresh';
+  private loginUrl = baseUrl + 'User/authenticate';
+  private registerUrl = baseUrl + 'User/register';
+  private refreshUrl = baseUrl + 'User/refresh';
 
   private userPayload: any;
 
