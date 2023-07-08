@@ -17,6 +17,7 @@ namespace Hangman_Backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private string symKey = Environment.GetEnvironmentVariable("HANGMAN_SYM_KEY");
         private readonly AppDbContext _context;
         public UserController(AppDbContext appDbContext) {
             _context = appDbContext;
@@ -132,7 +133,7 @@ namespace Hangman_Backend.Controllers
         private string CreateJwtToken(User user) {
 
             var jwtTokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("testtesttesttesttest");
+            var key = Encoding.ASCII.GetBytes(symKey);
             var identity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Role,user.Role),
@@ -162,7 +163,7 @@ namespace Hangman_Backend.Controllers
 
         private ClaimsPrincipal GetPrincipleFromExpiredToken(string token)
         {
-            var key = Encoding.ASCII.GetBytes("testtesttesttesttest");
+            var key = Encoding.ASCII.GetBytes(symKey);
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateAudience = false,

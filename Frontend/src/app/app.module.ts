@@ -14,7 +14,7 @@ import { ScorebarComponent } from './components/gameplay/scorebar/scorebar.compo
 import { HeaderComponent } from './components/header/header.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginSignupComponent } from './components/login-signup/login-signup.component';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { StatsPageComponent } from './components/stats-page/stats-page.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
@@ -22,6 +22,7 @@ import { StatBoxComponent } from './components/stat-box/stat-box.component';
 import { HttpLoaderInterceptor } from './interceptors/http-loader.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StatProfileComponent } from './components/stat-profile/stat-profile.component';
+import { InstructionsPageComponent } from './components/instructions-page/instructions-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { StatProfileComponent } from './components/stat-profile/stat-profile.com
     LeaderboardComponent,
     StatBoxComponent,
     StatProfileComponent,
+    InstructionsPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,10 @@ import { StatProfileComponent } from './components/stat-profile/stat-profile.com
     ToastrModule.forRoot(),
   ],
   providers: [
+    provideToastr({
+      timeOut: 1500,
+      positionClass: 'toast-top-right',
+    }),
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
