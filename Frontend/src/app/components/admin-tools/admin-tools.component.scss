@@ -1,0 +1,59 @@
+@import "../../../styles.scss";
+.tools-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 20px;
+  .user-remove-panel {
+    .input-wrapper {
+      display: flex;
+      gap: 12px;
+      .user-submit {
+        background: none;
+        border: 1px solid #ff0000;
+        color: white;
+        border-radius: 24px;
+        padding: 0px 12px;
+        &:hover {
+          background: rgba(255, 0, 0, 0.767);
+        }
+      }
+    }
+  }
+  .stat-reset {
+    button {
+      background: none;
+      border: 1px solid #2700b3;
+      color: white;
+      border-radius: 24px;
+      padding: 9px 12px;
+      &:hover {
+        background: rgba(2, 13, 119, 0.767);
+      }
+    }
+  }
+}
+
+label {
+  margin-bottom: 2px;
+  margin-left: 6px;
+  display: block;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #d6d6d6;
+}
+
+.form-control {
+  border: 1px solid #ccc;
+  color: whitesmoke;
+  display: block;
+  width: 200px;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 20px;
+  font-family: "Muli-Bold";
+  background: none;
+  &:focus {
+    border: 1px solid #7476ff;
+  }
+}

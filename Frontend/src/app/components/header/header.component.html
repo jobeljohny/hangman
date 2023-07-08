@@ -45,6 +45,12 @@
             Stats</a
           >
         </li>
+        <li *ngIf="Role == 'admin'" class="nav-item">
+          <a routerLink="/admin" class="nav-link" routerLinkActive="activeLink">
+            <img src="../../../assets/user.svg" alt="" />
+            Admin</a
+          >
+        </li>
       </ul>
       <div *ngIf="!isLoggedIn" class="login-panel">
         <button class="login-btn" id="login" (click)="loginSignup(Login.LOGIN)">

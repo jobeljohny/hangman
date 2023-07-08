@@ -23,6 +23,7 @@ import { HttpLoaderInterceptor } from './interceptors/http-loader.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StatProfileComponent } from './components/stat-profile/stat-profile.component';
 import { InstructionsPageComponent } from './components/instructions-page/instructions-page.component';
+import { AdminToolsComponent } from './components/admin-tools/admin-tools.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { InstructionsPageComponent } from './components/instructions-page/instru
     StatBoxComponent,
     StatProfileComponent,
     InstructionsPageComponent,
+    AdminToolsComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,8 @@ import { StatsPageComponent } from './components/stats-page/stats-page.component
 import { authGuard } from './gaurds/auth.guard';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { InstructionsPageComponent } from './components/instructions-page/instructions-page.component';
+import { AdminToolsComponent } from './components/admin-tools/admin-tools.component';
+import { adminGuard } from './gaurds/admin.guard';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -13,6 +15,11 @@ const routes: Routes = [
   { path: 'leaderboard', component: LeaderboardComponent },
   { path: 'stats', component: StatsPageComponent, canActivate: [authGuard] },
   { path: 'instructions', component: InstructionsPageComponent },
+  {
+    path: 'admin',
+    component: AdminToolsComponent,
+    canActivate: [authGuard, adminGuard],
+  },
 ];
 
 @NgModule({

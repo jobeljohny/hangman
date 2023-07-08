@@ -1,0 +1,14 @@
+<div class="tools-container">
+  <div class="user-remove-panel">
+    <label>REMOVE USER</label>
+    <div class="input-wrapper">
+      <input #username type="text" class="form-control" />
+      <button (click)="removeUser(username.value)" class="user-submit">
+        Delete
+      </button>
+    </div>
+  </div>
+  <div class="stat-reset">
+    <button (click)="resetStats()">Reset Statistics</button>
+  </div>
+</div>

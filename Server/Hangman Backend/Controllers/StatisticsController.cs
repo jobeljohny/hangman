@@ -74,6 +74,30 @@ namespace Hangman_Backend.Controllers
             return Ok(statObj);
         }
 
+        //ADMIN TOOLS
+        [Authorize("AdminOnly")]
+        [HttpPost("resetStatistics")]
+        public async Task<IActionResult> resetStatistics()
+        {
+            List<UserStatistics> userStatisticsList =await _context.UserStatistics.ToListAsync();
+
+            if (userStatisticsList.Any())
+            {
+                foreach (UserStatistics userStatistics in userStatisticsList)
+                {
+                    userStatistics.HighestRound = 0;
+                    userStatistics.Highscore = 0;
+                    userStatistics.GamesPlayed = 0;
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { Message = "All users reset successfully" });
+            }
+
+            return NotFound(new {Message= "No users found" });
+        }
+
         private void UpdateUserStatistics(UserStatistics user, UserStatistics userObj)
         {
             user.GamesPlayed++;

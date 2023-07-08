@@ -47,4 +47,8 @@ export class HeaderComponent implements OnInit {
     this.auth.signOut();
     this.toast.signedOut();
   }
+
+  get Role() {
+    return this.auth.getRole();
+  }
 }

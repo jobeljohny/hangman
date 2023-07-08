@@ -45,11 +45,7 @@ export class LoginSignupComponent implements OnInit {
       {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        username: [
-          '',
-          [Validators.required, Validators.minLength(4)],
-          this.validator.userNameValidator.bind(this.validator),
-        ],
+        username: ['', [Validators.required, Validators.minLength(4)]],
         password: [
           '',
           Validators.compose([

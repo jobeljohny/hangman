@@ -11,8 +11,6 @@ import { baseUrl } from '../Config/api-config';
   providedIn: 'root',
 })
 export class ApiService {
- 
-  private getUsersUrl = baseUrl + 'User';
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   getUsers() {
@@ -25,7 +23,7 @@ export class ApiService {
   }
 
   updateUserStat(score: number, round: number) {
-    let url = baseUrl+'Statistics/updateStat';
+    let url = baseUrl + 'Statistics/updateStat';
     const statObj = new UserRoundStat();
     statObj.username = this.auth.getUsername();
     statObj.highscore = score;
@@ -35,14 +33,13 @@ export class ApiService {
   }
 
   getLeaderboard() {
-    let url = baseUrl+'Statistics/leaderboard';
+    let url = baseUrl + 'Statistics/leaderboard';
     return this.http.get<UserStatistic[]>(url);
   }
 
   getUserStatistics() {
     let url =
-      baseUrl+
-      `Statistics/getUserStat?username=${this.auth.getUsername()}`;
+      baseUrl + `Statistics/getUserStat?username=${this.auth.getUsername()}`;
     return this.http.get<UserStat>(url);
   }
 }

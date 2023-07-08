@@ -125,6 +125,29 @@ namespace Hangman_Backend.Controllers
 
         }
 
+        //ADMIN TOOLS
+        [Authorize("AdminOnly")]
+        [HttpDelete("{username}")]
+        public async Task<IActionResult> DeleteUser(string username)
+        {
+            User userToDelete = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+
+            if (userToDelete != null)
+            {
+                 _context.Users.Remove(userToDelete);
+                await _context.SaveChangesAsync();
+                return Ok(new { Message = "User deleted successfully" });
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            
+        }
+
+        
+
         private Task<bool> CheckUserNameExistAsync(string userName)
         {
             return _context.Users.AnyAsync(x => x.Username == userName);
