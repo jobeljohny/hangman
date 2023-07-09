@@ -53,7 +53,5 @@
 /Server/.vs
 /Server/Hangman Backend/bin
 /Server/Hangman Backend/obj
-/Server/Hangman Backend/appsettings.json
-/Server/Hangman Backend/appsettings.Development.json
 
 /.vscode
