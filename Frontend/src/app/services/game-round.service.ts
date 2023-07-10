@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GameConfig, Vals } from '../enums/config';
-import { ApiService } from './api.service';
 import { Round } from '../Classes/Round';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { GameTimerService } from './game-timer.service';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',

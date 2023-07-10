@@ -11,13 +11,22 @@
       >SIGN UP</span
     >
   </div>
+  <h2 class="dialog-title">HANGMAN</h2>
   <div class="loginBox" *ngIf="page === Login.LOGIN">
-    <img class="user regular" src="../../../assets/user.svg" />
-    <h4 class="lead">Sign in</h4>
-    <form class="form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+    <img class="user regular" src="../../../assets/hangman-menu-logo.png" />
+    <h4 class="lead mb-3" style="font-size: 1.5rem">Sign in</h4>
+    <form
+      class="form px-4"
+      [formGroup]="loginForm"
+      (ngSubmit)="onLoginSubmit()"
+    >
       <div class="form-wrapper">
-        <label>Username</label>
-        <input type="text" class="form-control" formControlName="username" />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="username"
+          placeholder="Username"
+        />
         <span
           class="text-danger"
           *ngIf="
@@ -30,11 +39,11 @@
       </div>
 
       <div class="form-wrapper">
-        <label>Password</label>
         <input
           type="password"
           class="form-control"
           formControlName="password"
+          placeholder="Password"
         />
         <span
           class="text-danger"
@@ -50,7 +59,7 @@
         *ngIf="!(Spinner.visibility | async)"
         type="submit"
         name=""
-        value="Login"
+        value="Log in"
       />
       <div
         *ngIf="Spinner.visibility | async"
@@ -62,7 +71,7 @@
   </div>
   <!--REGISTRATION FORM-->
   <div class="loginBox" *ngIf="page === Login.SIGNUP">
-    <img class="user small" src="../../../assets/user.svg" />
+    <h3 class="lead registration mb-4 mt-2">Create your account here</h3>
     <form
       class="form"
       [formGroup]="registerForm"
@@ -70,8 +79,12 @@
     >
       <div class="form-group">
         <div class="form-wrapper">
-          <label>First Name</label>
-          <input type="text" class="form-control" formControlName="firstName" />
+          <input
+            type="text"
+            class="form-control"
+            formControlName="firstName"
+            placeholder="First Name"
+          />
           <span
             class="text-danger"
             *ngIf="
@@ -84,8 +97,12 @@
           </span>
         </div>
         <div class="form-wrapper">
-          <label>Last Name</label>
-          <input type="text" class="form-control" formControlName="lastName" />
+          <input
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+            placeholder="Last Name"
+          />
           <span
             class="text-danger"
             *ngIf="
@@ -99,8 +116,12 @@
         </div>
       </div>
       <div class="form-wrapper">
-        <label>Username</label>
-        <input type="text" class="form-control" formControlName="username" />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="username"
+          placeholder="Username"
+        />
         <span
           class="text-danger"
           *ngIf="
@@ -130,11 +151,11 @@
         </span>
       </div>
       <div class="form-wrapper">
-        <label>Password</label>
         <input
           type="password"
           class="form-control"
           formControlName="password"
+          placeholder="Password"
         />
         <span
           class="text-danger"
@@ -156,11 +177,11 @@
         </span>
       </div>
       <div class="form-wrapper">
-        <label>Confirm Password</label>
         <input
           type="password"
           class="form-control"
           formControlName="confirmPassword"
+          placeholder="Confirm Password"
         />
         <span
           class="text-danger"
