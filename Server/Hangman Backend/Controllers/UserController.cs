@@ -135,6 +135,8 @@ namespace Hangman_Backend.Controllers
             if (userToDelete != null)
             {
                  _context.Users.Remove(userToDelete);
+                UserStatistics userStat = await _context.UserStatistics.FirstOrDefaultAsync(u => u.Username == username);
+                _context.UserStatistics.Remove(userStat);
                 await _context.SaveChangesAsync();
                 return Ok(new { Message = "User deleted successfully" });
             }
