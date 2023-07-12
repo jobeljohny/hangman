@@ -25,7 +25,8 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("sqlServerConnStr"));
 });
-string symKey = Environment.GetEnvironmentVariable("HANGMAN_SYM_KEY");
+var symKey = builder.Configuration.GetValue<string>("SymmetricKey");
+
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

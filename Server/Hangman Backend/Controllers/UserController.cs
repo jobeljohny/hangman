@@ -17,10 +17,13 @@ namespace Hangman_Backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
         private string symKey = Environment.GetEnvironmentVariable("HANGMAN_SYM_KEY");
         private readonly AppDbContext _context;
-        public UserController(AppDbContext appDbContext) {
+        public UserController(AppDbContext appDbContext, IConfiguration configuration) {
             _context = appDbContext;
+            _configuration = configuration;
+            symKey=_configuration.GetValue<string>("SymmetricKey");
         }
 
         [HttpPost("authenticate")]
