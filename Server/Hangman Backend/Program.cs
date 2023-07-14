@@ -1,22 +1,21 @@
 using Hangman_Backend.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+string remoteOrigin = builder.Configuration.GetValue<string>("hostedOrigin");
+string symKey = builder.Configuration.GetValue<string>("SymmetricKey");
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(option=>
 {
     option.AddPolicy("corsPolicy", builder => { 
-        builder.AllowAnyOrigin()
+        builder.WithOrigins("http://localhost:4200", remoteOrigin)
         .AllowAnyMethod()
         .AllowAnyHeader();
     });
@@ -25,7 +24,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("sqlServerConnStr"));
 });
-var symKey = builder.Configuration.GetValue<string>("SymmetricKey");
+
 
 builder.Services.AddAuthentication(x =>
 {

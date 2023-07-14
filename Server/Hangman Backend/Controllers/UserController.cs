@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -18,7 +17,7 @@ namespace Hangman_Backend.Controllers
     public class UserController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private string symKey = Environment.GetEnvironmentVariable("HANGMAN_SYM_KEY");
+        private string symKey;
         private readonly AppDbContext _context;
         public UserController(AppDbContext appDbContext, IConfiguration configuration) {
             _context = appDbContext;
@@ -42,22 +41,30 @@ namespace Hangman_Backend.Controllers
             {
                 return BadRequest(new { Message = "Invalid Credentials", id = "INVALID_PASSWORD" });
             }
-
-            user.Token = CreateJwtToken(user);
-
-            var newAccessToken = user.Token;
-            var newRefreshToken = createRefreshToken();
-
-            user.RefreshToken = newRefreshToken;
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(5);
-
-            await _context.SaveChangesAsync();
-
-            return Ok(new TokenApiDto()
+            try
             {
-                AccessToken=newAccessToken,
-                RefreshToken=newRefreshToken
-            });
+                user.Token = CreateJwtToken(user);
+
+                var newAccessToken = user.Token;
+                var newRefreshToken = createRefreshToken();
+
+                user.RefreshToken = newRefreshToken;
+                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(5);
+
+                await _context.SaveChangesAsync();
+                return Ok(new TokenApiDto()
+                {
+                    AccessToken = newAccessToken,
+                    RefreshToken = newRefreshToken
+                });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
+
+           
             
         }
 
@@ -112,7 +119,7 @@ namespace Hangman_Backend.Controllers
             var principal = GetPrincipleFromExpiredToken(accessToken);
             var username = principal.Identity.Name;
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
-            if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+            if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
                 return BadRequest("Invalid Request");
             var newAccessToken = CreateJwtToken(user);
             var newRefreshToken = createRefreshToken();
@@ -169,7 +176,7 @@ namespace Hangman_Backend.Controllers
             });
 
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
-            var tokenDescriptor = new SecurityTokenDescriptor{ Subject = identity,Expires=DateTime.Now.AddMinutes(5),SigningCredentials = credentials};
+            var tokenDescriptor = new SecurityTokenDescriptor{ Subject = identity,Expires=DateTime.UtcNow.AddMinutes(5),SigningCredentials = credentials};
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
 
             return jwtTokenHandler.WriteToken(token);
