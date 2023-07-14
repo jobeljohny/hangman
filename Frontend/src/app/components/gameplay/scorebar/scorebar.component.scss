@@ -1,4 +1,7 @@
-@import "../../../../styles.scss";
+$card-background-dark: #1d1d1d49;
+
+
+
 #scorePanel {
   display: flex;
   flex: 1;
@@ -8,6 +11,6 @@
     margin: 0;
     font-size: 18px;
     white-space: pre;
-    color: $text-dark;
+    color: white;
   }
 }

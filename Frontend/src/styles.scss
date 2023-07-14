@@ -6,12 +6,9 @@
 $card-background-dark: #1d1d1d49;
 $body-dark: #131313;
 $body-light: #fff9f1;
-$card-background-light: white;
 $text-light: black;
 $text-dark: white;
-$theme-foreground: #ec8300;
-$svg-filter: invert(46%) sepia(99%) saturate(1986%) hue-rotate(12deg)
-  brightness(105%) contrast(101%);
+
 
 body {
   background-color: $body-dark;
@@ -26,15 +23,11 @@ body {
   background-color: $card-background-dark;
 }
 
-.wrapbox-light {
-  background-color: $card-background-light !important;
-}
+
 .text {
   color: $text-dark;
 }
-.text-light-theme {
-  color: $text-light !important;
-}
+
 
 .toast-top-right {
   top: 60px;
