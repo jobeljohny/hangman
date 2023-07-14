@@ -55,7 +55,7 @@ builder.Services.AddAuthorization(options =>
 });
 
 var app = builder.Build();
-
+app.UseCors("corsPolicy");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -63,7 +63,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
-app.UseCors("corsPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 
