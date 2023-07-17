@@ -12,7 +12,12 @@ $login-btn-color: $theme-foreground;
         width: 40px;
       }
     }
+    .navbar-hamburger {
+      display: none;
+    }
     .content {
+      display: flex;
+      width: 100%;
       .navbar-nav {
         margin-left: 16px;
         .nav-item {
@@ -36,55 +41,58 @@ $login-btn-color: $theme-foreground;
           }
         }
       }
-      .login-panel {
-        display: flex;
-        gap: 8px;
-        .login-btn {
-          background: none;
-          color: $login-btn-color;
-          font-size: 1.1rem;
-          padding: 4px 10px;
-          border-radius: 16px;
-          &:hover {
-            background: $login-btn-color;
-            color: white;
-          }
-        }
-        #login {
-          border: 0;
-        }
-        #sign-up {
-          border: 1px solid $theme-foreground;
-        }
-      }
-      .user-panel {
-        display: flex;
-        gap: 16px;
-        .profile-panel {
+      .auth-panel {
+        margin-left: auto;
+        .login-panel {
           display: flex;
-          align-items: center;
-          gap: 3px;
-          img {
-            width: 24px;
-            height: 24px;
-            filter: $svg-filter;
-          }
-          span {
-            color: rgb(255, 255, 255);
+          gap: 8px;
+          .login-btn {
+            background: none;
+            color: $login-btn-color;
             font-size: 1.1rem;
-            text-transform: capitalize;
+            padding: 4px 10px;
+            border-radius: 16px;
+            &:hover {
+              background: $login-btn-color;
+              color: white;
+            }
+          }
+          #login {
+            border: 0;
+          }
+          #sign-up {
+            border: 1px solid $theme-foreground;
           }
         }
-        .signout-btn {
-          background: none;
-          padding: 4px 10px;
-          color: red;
-          border-radius: 16px;
-          background: rgba(255, 0, 0, 0.068);
-          border: 1px solid red;
-          &:hover {
-            background: red;
-            color: white;
+        .user-panel {
+          display: flex;
+          gap: 16px;
+          .profile-panel {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            img {
+              width: 24px;
+              height: 24px;
+              filter: $svg-filter;
+            }
+            span {
+              color: rgb(255, 255, 255);
+              font-size: 1.1rem;
+              text-transform: capitalize;
+            }
+          }
+          .signout-btn {
+            background: none;
+            padding: 4px 10px;
+            color: red;
+            border-radius: 16px;
+            background: rgba(255, 0, 0, 0.068);
+            border: 1px solid red;
+            &:hover {
+              background: red;
+              color: white;
+            }
           }
         }
       }
@@ -96,4 +104,28 @@ $login-btn-color: $theme-foreground;
   padding-bottom: 2px;
   border-bottom: 1px solid $theme-foreground;
   width: 100%;
+}
+
+@media only screen and (max-width: 576px) {
+  .container-fluid {
+    .navbar-brand {
+      display: none;
+    }
+    .navbar-hamburger {
+      display: block !important;
+      img {
+        width: 40px;
+        filter: $svg-filter;
+      }
+    }
+    .content {
+      width: fit-content !important;
+      .navbar-container {
+        display: none;
+      }
+    }
+  }
+  .activeLink {
+    border-bottom: none;
+  }
 }

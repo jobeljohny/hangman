@@ -5,7 +5,11 @@
     <app-progressbar></app-progressbar>
     <div class="name-hang-container">
       <div id="gameArea">
-        <p id="movieGuesser" class="text" [style.color]="guessBlinker">
+        <p
+          id="movieGuesser"
+          class="text not-selectable"
+          [style.color]="guessBlinker"
+        >
           {{ round.template.join("") }}
         </p>
       </div>
