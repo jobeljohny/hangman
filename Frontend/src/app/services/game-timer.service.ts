@@ -15,6 +15,7 @@ import { GameConfig } from '../enums/config';
 })
 export class GameTimerService {
   progressValue: number = 0.0;
+  timeRemaining: number = 0.0;
   progressValue$: BehaviorSubject<number>;
   getProgressValue: Observable<number>;
   timerDestroy$ = new Subject<void>();
@@ -44,6 +45,7 @@ export class GameTimerService {
   }
 
   updateProgress(timeLeft: number) {
+    this.timeRemaining = timeLeft;
     this.progressValue =
       (100 * (GameConfig.GAME_TIME - timeLeft)) / GameConfig.GAME_TIME;
 
