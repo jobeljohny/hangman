@@ -98,7 +98,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
     this.gameState.reset();
   }
   goToNextRound() {
-    this.gameState.nextRound(this.round.timeLeft);
+    this.gameState.nextRound(this.timer.progressValue);
     this.initialize();
   }
 

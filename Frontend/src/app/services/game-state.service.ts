@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
+import { GameConfig } from '../enums/config';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class GameStateService {
   }
 
   nextRound(timeLeft: number) {
+    timeLeft = GameConfig.GAME_TIME - timeLeft;
     this.Round += 1;
     this.Score += 10 + Math.round((timeLeft * this.Round) / 3);
     this.updateServer();
