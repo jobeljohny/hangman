@@ -10,6 +10,13 @@ import { AdminToolsComponent } from './components/admin-tools/admin-tools.compon
 import { adminGuard } from './gaurds/admin.guard';
 
 const routes: Routes = [
+  {
+    path: 'about',
+    loadChildren: () =>
+      new Promise(() => {
+        window.open('https://github.com/jobeljohny/hangman', '_blank');
+      }),
+  },
   { path: '', component: HomepageComponent },
   { path: 'game', component: GameplayComponent },
   { path: 'leaderboard', component: LeaderboardComponent },

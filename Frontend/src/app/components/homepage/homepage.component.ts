@@ -1,19 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { ThemeService } from 'src/app/services/theme.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription, interval } from 'rxjs';
+import { tips } from 'src/app/enums/config';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
 })
-export class HomepageComponent implements OnInit {
-  constructor(private theme: ThemeService) {
-    let mode = localStorage.getItem('isDarkMode');
-    if (mode !== null) theme.setMode(mode);
-  }
-  get isDarkMode() {
-    return this.theme.isDarkMode;
+export class HomepageComponent implements OnInit, OnDestroy {
+  currentTipIndex = 0;
+  currentTip = tips[this.currentTipIndex];
+  private timerSubscription!: Subscription;
+  constructor() {}
+
+  ngOnInit() {
+    this.startSlideshow();
   }
 
-  ngOnInit(): void {}
+  ngOnDestroy() {
+    this.stopSlideshow();
+  }
+
+  startSlideshow() {
+    this.timerSubscription = interval(5000).subscribe(() => {
+      this.currentTipIndex = (this.currentTipIndex + 1) % tips.length;
+      this.currentTip = tips[this.currentTipIndex];
+    });
+  }
+
+  stopSlideshow() {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
+  }
 }

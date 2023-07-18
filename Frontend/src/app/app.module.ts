@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StatProfileComponent } from './components/stat-profile/stat-profile.component';
 import { InstructionsPageComponent } from './components/instructions-page/instructions-page.component';
 import { AdminToolsComponent } from './components/admin-tools/admin-tools.component';
+import { HomeOptionComponent } from './components/home-option/home-option.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { AdminToolsComponent } from './components/admin-tools/admin-tools.compon
     StatProfileComponent,
     InstructionsPageComponent,
     AdminToolsComponent,
+    HomeOptionComponent,
   ],
   imports: [
     BrowserModule,

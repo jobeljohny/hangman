@@ -9,7 +9,6 @@ $body-light: #fff9f1;
 $text-light: black;
 $text-dark: white;
 
-
 body {
   background-color: $body-dark;
 }
@@ -23,14 +22,12 @@ body {
   background-color: $card-background-dark;
 }
 
-
 .text {
   color: $text-dark;
 }
 
-
 .toast-top-right {
-  top: 60px;
+  top: 70px;
 }
 
 html,

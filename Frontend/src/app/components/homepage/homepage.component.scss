@@ -1,95 +1,49 @@
 @import "../../Styles/palette.scss";
 #wrapper {
+  .head-division {
+    background: #ffffff;
+    height: 1px;
+    opacity: 0.2;
+    mix-blend-mode: difference;
+  }
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 70px);
+  background: url("../../../assets/hangman-banner.png");
+  background-size: 100%;
 
   #logo-container {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 15px 70px rgba(0, 0, 0, 0.2);
 
     #logo {
-      width: 60%;
-      filter: invert(28%) sepia(90%) saturate(3280%) hue-rotate(201deg)
-        brightness(94%) contrast(102%);
+      width: 50%;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
     }
   }
-  .container {
+
+  .content {
+    margin-top: 6rem;
     display: flex;
     justify-content: center;
-    align-items: center;
-    scroll-behavior: smooth;
-    font-family: "Helvetica Neue", sans-serif;
-    height: 50vh;
-
-    .content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      width: 0;
-      height: 0;
-      background-color: #2b2d3013;
-      animation: 0.7s grow ease forwards;
+    align-items: flex-end;
+    gap: 6rem;
+    .top-tile {
+      margin-bottom: 4.5rem;
+    }
+  }
+  .tips-container {
+    margin-top: auto;
+    margin-bottom: 1.5rem;
+    color: white;
+    background: rgba(27, 27, 27, 0.733);
+    p {
+      margin: 0;
       text-align: center;
-
-      .nav_list {
-        list-style-type: none;
-
-        a {
-          text-decoration: none;
-          font-size: 20px;
-          color: white;
-          img {
-            width: 25px;
-            filter: $svg-filter;
-            margin-right: 5px;
-          }
-        }
-
-        .nav_list_item {
-          overflow: hidden;
-
-          li {
-            padding: 15px 0;
-            text-transform: uppercase;
-            transform: translateY(200px);
-            opacity: 0;
-            animation: 0.5s slideUp ease forwards 0.5s;
-            position: relative;
-
-            &::before {
-              content: "";
-              position: absolute;
-              height: 2px;
-              width: 0;
-              left: 0;
-              bottom: 5px;
-              background: #bf2e97;
-              transition: all 0.5s ease;
-            }
-
-            &:hover::before {
-              width: 100%;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  @keyframes grow {
-    100% {
-      height: 90%;
-      width: 90%;
-    }
-  }
-
-  @keyframes slideUp {
-    100% {
-      transform: translateY(0);
-      opacity: 1;
     }
   }
 }
