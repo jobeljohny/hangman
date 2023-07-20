@@ -13,10 +13,6 @@ import { baseUrl } from '../Config/api-config';
 export class ApiService {
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  getUsers() {
-    return this.http.get<any>(baseUrl + 'User');
-  }
-
   getMovie() {
     const movie = MyMovies[Math.floor(Math.random() * MyMovies.length)];
     return movie;
