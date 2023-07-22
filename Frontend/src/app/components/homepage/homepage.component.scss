@@ -48,3 +48,35 @@
     }
   }
 }
+
+@media only screen and (max-width: 576px) {
+  #wrapper {
+    height: calc(100vh - $header-size-mobile);
+    #logo-container {
+      #logo {
+        width: 100%;
+      }
+    }
+
+    .content {
+      margin-top: 3rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+
+      .top-tile {
+        margin-bottom: unset;
+        order: -1;
+      }
+    }
+    .tips-container {
+      margin-left: 10px !important;
+      margin-right: 10px !important;
+      margin-bottom: 5rem;
+      p {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

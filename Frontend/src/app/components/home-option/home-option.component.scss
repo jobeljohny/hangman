@@ -38,3 +38,22 @@
     }
   }
 }
+
+@media only screen and (max-width: 576px) {
+  .option-container {
+    width: 280px;
+    padding: 20px;
+
+    flex-direction: row;
+
+    gap: 12px;
+    .logo-container {
+      img {
+        width: 32px;
+      }
+    }
+    .option-tile {
+      font-size: 1rem;
+    }
+  }
+}
