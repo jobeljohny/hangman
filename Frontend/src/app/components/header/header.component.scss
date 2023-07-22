@@ -4,7 +4,7 @@ $text-color: rgb(255, 254, 247);
 $login-btn-color: $theme-foreground;
 .navbar {
   font-family: "helvetica", sans-serif;
-  height: 70px;
+  height: $header-size-destop;
   background: none !important;
   .container-fluid {
     .navbar-brand {
@@ -110,21 +110,51 @@ $login-btn-color: $theme-foreground;
 }
 
 @media only screen and (max-width: 576px) {
-  .container-fluid {
-    .navbar-brand {
-      display: none;
-    }
-    .navbar-hamburger {
-      display: block !important;
-      img {
-        width: 40px;
-        filter: $svg-filter;
-      }
-    }
-    .content {
-      width: fit-content !important;
-      .navbar-container {
+  .navbar {
+    height: $header-size-mobile;
+    .container-fluid {
+      .navbar-brand {
         display: none;
+      }
+      .navbar-hamburger {
+        display: block !important;
+        img {
+          width: 40px;
+          filter: $svg-filter;
+        }
+      }
+      .content {
+        width: fit-content !important;
+        .navbar-container {
+          display: none;
+        }
+        .auth-panel {
+          .login-panel {
+            gap: 2px !important;
+            .login-btn {
+              font-size: 1rem !important;
+              padding: 6px 16px !important;
+            }
+          }
+          .user-panel {
+            gap: 16px;
+            .profile-panel {
+              gap: 8px;
+              img {
+                width: 20px !important;
+                height: 20px !important;
+              }
+              span {
+                margin-top: 4px;
+                font-size: 1rem !important;
+              }
+            }
+            .signout-btn {
+              padding: 6px 16px !important;
+              font-size: 0.9rem !important;
+            }
+          }
+        }
       }
     }
   }
