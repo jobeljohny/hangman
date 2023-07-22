@@ -39,3 +39,11 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.headerOptionBackdrop {
+  backdrop-filter: blur(16px);
+}
+
+.mdc-dialog__surface {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}

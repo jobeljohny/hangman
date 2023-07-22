@@ -1,0 +1,31 @@
+@import "../../Styles/palette.scss";
+
+$text-color: rgb(255, 254, 247);
+.dialog-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  .navbar-nav {
+    width: 100%;
+    .nav-item {
+      border: 1px solid rgb(199, 199, 199);
+      margin: 20px 20px;
+      padding: 10px;
+      .nav-link {
+        color: $text-color;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        img {
+          width: 22px;
+          filter: $svg-filter;
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+}

@@ -25,6 +25,7 @@ import { StatProfileComponent } from './components/stat-profile/stat-profile.com
 import { InstructionsPageComponent } from './components/instructions-page/instructions-page.component';
 import { AdminToolsComponent } from './components/admin-tools/admin-tools.component';
 import { HomeOptionComponent } from './components/home-option/home-option.component';
+import { HeaderOptionsDialogComponent } from './components/header-options-dialog/header-options-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +44,7 @@ import { HomeOptionComponent } from './components/home-option/home-option.compon
     InstructionsPageComponent,
     AdminToolsComponent,
     HomeOptionComponent,
+    HeaderOptionsDialogComponent,
   ],
   imports: [
     BrowserModule,
