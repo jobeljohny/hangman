@@ -22,7 +22,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
   interval: any = undefined;
   guessBlinker: string = Vals.NORMAL;
   errorBlinker: string = Vals.NORMAL;
-  isKeyboardVisible: boolean = false;
+  isKeyboardVisible: boolean = true;
 
   constructor(
     private gameRound: GameRoundService,
@@ -39,10 +39,12 @@ export class GameplayComponent implements OnInit, OnDestroy {
     this.loadKeypadToggleState();
   }
   private loadKeypadToggleState() {
-    const state = localStorage.getItem('keyboardToggleState');
-    this.isKeyboardVisible = state === 'true';
-    if (state === null) {
-      this.isKeyboardVisible = false;
+    if (window.innerWidth >= 576) {
+      const state = localStorage.getItem('keyboardToggleState');
+      this.isKeyboardVisible = state === 'true';
+      if (state === null) {
+        this.isKeyboardVisible = false;
+      }
     }
   }
   toggleKeyboardVisibility(vilisbility: boolean) {
