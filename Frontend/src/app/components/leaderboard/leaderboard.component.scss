@@ -124,6 +124,15 @@ tbody {
 }
 
 @media only screen and (max-width: 576px) {
+  .heading {
+    margin-bottom: 10px;
+    img {
+      width: 30px;
+    }
+    span {
+      font-size: 1.5rem;
+    }
+  }
   .table-container {
     margin: 0px 10px;
 
