@@ -42,3 +42,20 @@ export const tips = [
   'In case of frustration 😤, take a deep breath and repeat after us: "It\'s just a game"',
   "Feeling like a rebel? Guess ' Fight Club ' and break the first and second rules simultaneously.",
 ];
+export const keyMap = {
+  numRow: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+  topRow: ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+  middleRow: ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+  bottomRow: ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+};
+
+export interface keyState {
+  key: string;
+  enabled: boolean;
+}
+export interface keySet {
+  numbers: keyState[];
+  topRow: keyState[];
+  middleRow: keyState[];
+  bottomRow: keyState[];
+}

@@ -1,8 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { keyState } from 'src/app/enums/config';
 
 @Component({
   selector: 'app-keypad-key',
-  template: ` <div [ngClass]="'not-selectable'">{{ key }}</div> `,
+  template: `
+    <div [ngClass]="'not-selectable'" (click)="keyClick()">
+      {{ keyState.key }}
+    </div>
+  `,
   styles: [
     `
       div {
@@ -37,5 +42,10 @@ import { Component, Input } from '@angular/core';
   ],
 })
 export class KeypadKeyComponent {
-  @Input('key') key = '0';
+  @Input('key') keyState: keyState = { key: ' ', enabled: false };
+  @Output() onKeyClicked = new EventEmitter<string>();
+
+  keyClick() {
+    this.onKeyClicked.emit(this.keyState.key);
+  }
 }
