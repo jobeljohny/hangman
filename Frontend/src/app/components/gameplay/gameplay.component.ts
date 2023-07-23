@@ -84,7 +84,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
     this.panelMsgType = type;
   }
   checkWin() {
-    if (!this.round.template.includes('-')) {
+    if (!this.round.template.includes('_')) {
       this.round.WIN = true;
       this.timer.stop();
       this.showModal();

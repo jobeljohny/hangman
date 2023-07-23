@@ -30,7 +30,7 @@
   }
   &:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.02);
     .logo-container {
       img {
         transform: rotateY(360deg);
@@ -43,6 +43,7 @@
   .option-container {
     width: 280px;
     padding: 20px;
+    border-radius: 10px;
 
     flex-direction: row;
 
