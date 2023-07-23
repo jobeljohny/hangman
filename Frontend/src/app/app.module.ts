@@ -28,6 +28,7 @@ import { HomeOptionComponent } from './components/home-option/home-option.compon
 import { HeaderOptionsDialogComponent } from './components/header-options-dialog/header-options-dialog.component';
 import { VirtualKeypadComponent } from './components/virtual-keypad/virtual-keypad.component';
 import { KeypadKeyComponent } from './components/keypad-key/keypad-key.component';
+import { KeyboardToggleComponent } from './components/keyboard-toggle/keyboard-toggle.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { KeypadKeyComponent } from './components/keypad-key/keypad-key.component
     HeaderOptionsDialogComponent,
     VirtualKeypadComponent,
     KeypadKeyComponent,
+    KeyboardToggleComponent,
   ],
   imports: [
     BrowserModule,

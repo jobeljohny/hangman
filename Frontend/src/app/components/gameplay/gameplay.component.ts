@@ -22,6 +22,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
   interval: any = undefined;
   guessBlinker: string = Vals.NORMAL;
   errorBlinker: string = Vals.NORMAL;
+  isKeyboardVisible: boolean = false;
 
   constructor(
     private gameRound: GameRoundService,
@@ -35,6 +36,17 @@ export class GameplayComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.timer.setTimeOutFn(this.assignLost.bind(this));
     this.initialize();
+    this.loadKeypadToggleState();
+  }
+  private loadKeypadToggleState() {
+    const state = localStorage.getItem('keyboardToggleState');
+    this.isKeyboardVisible = state === 'true';
+    if (state === null) {
+      this.isKeyboardVisible = false;
+    }
+  }
+  toggleKeyboardVisibility(vilisbility: boolean) {
+    this.isKeyboardVisible = vilisbility;
   }
   get isDarkMode() {
     return this.theme.isDarkMode;
