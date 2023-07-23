@@ -1,0 +1,22 @@
+<div class="keypad">
+  <div class="krow num-row">
+    <span *ngFor="let key of nums">
+      <app-keypad-key [key]="key"></app-keypad-key>
+    </span>
+  </div>
+  <div class="krow char-row1">
+    <span *ngFor="let key of chars1">
+      <app-keypad-key [key]="key"></app-keypad-key>
+    </span>
+  </div>
+  <div class="krow char-row2">
+    <span *ngFor="let key of chars2">
+      <app-keypad-key [key]="key"></app-keypad-key>
+    </span>
+  </div>
+  <div class="krow char-row3">
+    <span *ngFor="let key of chars3">
+      <app-keypad-key [key]="key"></app-keypad-key>
+    </span>
+  </div>
+</div>

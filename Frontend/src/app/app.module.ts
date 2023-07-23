@@ -26,6 +26,8 @@ import { InstructionsPageComponent } from './components/instructions-page/instru
 import { AdminToolsComponent } from './components/admin-tools/admin-tools.component';
 import { HomeOptionComponent } from './components/home-option/home-option.component';
 import { HeaderOptionsDialogComponent } from './components/header-options-dialog/header-options-dialog.component';
+import { VirtualKeypadComponent } from './components/virtual-keypad/virtual-keypad.component';
+import { KeypadKeyComponent } from './components/keypad-key/keypad-key.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +47,8 @@ import { HeaderOptionsDialogComponent } from './components/header-options-dialog
     AdminToolsComponent,
     HomeOptionComponent,
     HeaderOptionsDialogComponent,
+    VirtualKeypadComponent,
+    KeypadKeyComponent,
   ],
   imports: [
     BrowserModule,

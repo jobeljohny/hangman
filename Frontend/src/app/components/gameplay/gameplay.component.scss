@@ -20,7 +20,7 @@
           font-size: 2.6vw;
           text-align: center;
           margin: 0px;
-          height: 320px;
+          height: 280px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -48,14 +48,6 @@
       }
     }
   }
-}
-.not-selectable {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 @media only screen and (max-width: 576px) {
