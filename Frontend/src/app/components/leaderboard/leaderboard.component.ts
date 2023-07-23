@@ -33,7 +33,6 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.leaderboards = data;
       });
-    this.generateLB();
   }
 
   get Spinner() {

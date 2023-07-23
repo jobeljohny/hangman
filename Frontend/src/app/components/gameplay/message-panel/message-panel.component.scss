@@ -2,3 +2,12 @@
   margin: 0px;
   text-align: center;
 }
+
+@media only screen and (max-width: 576px) {
+  div {
+    padding: 0.8rem !important;
+    #messageBox {
+      font-size: 0.9rem;
+    }
+  }
+}
