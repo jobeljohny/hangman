@@ -51,6 +51,10 @@ export class GameplayComponent implements OnInit, OnDestroy {
     return this.gameRound.keyMap;
   }
 
+  get isDigitPresent() {
+    return this.gameRound.isNumberPresent;
+  }
+
   initialize(): void {
     this.gameRound.initialize();
     this.setPanelMsg(-1, '');

@@ -1,5 +1,5 @@
 <div class="keypad">
-  <div class="krow num-row">
+  <div *ngIf="digits" class="krow num-row">
     <span *ngFor="let key of keys.numbers">
       <app-keypad-key
         [key]="key"

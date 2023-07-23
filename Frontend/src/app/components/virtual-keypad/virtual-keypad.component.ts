@@ -8,6 +8,7 @@ import { KeyStates } from 'src/app/Classes/key-states';
 })
 export class VirtualKeypadComponent {
   @Input('keyStates') keystates!: KeyStates;
+  @Input('digits') digits = false;
   @Output() keyClick = new EventEmitter<string>();
   constructor() {}
 

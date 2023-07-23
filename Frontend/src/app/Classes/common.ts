@@ -12,3 +12,8 @@ export function getAlphanumericCharacter(input: string): string | null {
   }
   return null;
 }
+export function containsNumber(input: string): boolean {
+  const regex = /\d/;
+
+  return regex.test(input);
+}
