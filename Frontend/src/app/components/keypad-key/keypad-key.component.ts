@@ -4,7 +4,10 @@ import { keyState } from 'src/app/enums/config';
 @Component({
   selector: 'app-keypad-key',
   template: `
-    <div [ngClass]="'not-selectable'" (click)="keyClick()">
+    <div
+      [ngClass]="{ 'not-selectable': true, disabled: !keyState.enabled }"
+      (click)="keyClick()"
+    >
       {{ keyState.key }}
     </div>
   `,
@@ -28,6 +31,9 @@ import { keyState } from 'src/app/enums/config';
           cursor: pointer;
         }
       }
+      .disabled {
+        background: #292828;
+      }
     `,
     `
       @media only screen and (max-width: 576px) {
@@ -46,6 +52,6 @@ export class KeypadKeyComponent {
   @Output() onKeyClicked = new EventEmitter<string>();
 
   keyClick() {
-    this.onKeyClicked.emit(this.keyState.key);
+    if (this.keyState.enabled) this.onKeyClicked.emit(this.keyState.key);
   }
 }

@@ -9,7 +9,6 @@ export class KeyStates {
       middleRow: this.initializeKeys(keyMap.middleRow),
       bottomRow: this.initializeKeys(keyMap.bottomRow),
     };
-    this.resetAllKeys();
   }
   resetAllKeys() {
     Object.values(this.keys).forEach((row) => {

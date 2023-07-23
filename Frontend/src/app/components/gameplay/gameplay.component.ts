@@ -9,6 +9,7 @@ import { GameStateService } from 'src/app/services/game-state.service';
 import { GameTimerService } from 'src/app/services/game-timer.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ResultModalComponent } from './result-modal/result-modal.component';
+import { KeyStates } from 'src/app/Classes/key-states';
 
 @Component({
   selector: 'app-gameplay',
@@ -46,6 +47,10 @@ export class GameplayComponent implements OnInit, OnDestroy {
     return GameConfig.LIVES;
   }
 
+  get keys(): KeyStates {
+    return this.gameRound.keyMap;
+  }
+
   initialize(): void {
     this.gameRound.initialize();
     this.setPanelMsg(-1, '');
@@ -60,6 +65,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
   }
 
   process(key: string) {
+    this.gameRound.keyMap.disableKey(key);
     if (this.round.movie.includes(key)) {
       this.blink('GUESSER', Vals.CORRECT);
       this.round.updateTemplate(key);

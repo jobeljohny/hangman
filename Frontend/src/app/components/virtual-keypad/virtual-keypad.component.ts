@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { KeyStates } from 'src/app/Classes/key-states';
 
 @Component({
@@ -7,11 +7,9 @@ import { KeyStates } from 'src/app/Classes/key-states';
   styleUrls: ['./virtual-keypad.component.scss'],
 })
 export class VirtualKeypadComponent {
-  keystates: KeyStates;
+  @Input('keyStates') keystates!: KeyStates;
   @Output() keyClick = new EventEmitter<string>();
-  constructor() {
-    this.keystates = new KeyStates();
-  }
+  constructor() {}
 
   get keys() {
     return this.keystates.keys;
