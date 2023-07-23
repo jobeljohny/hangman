@@ -41,6 +41,28 @@ $border-color: rgb(79, 79, 79);
   }
   &:hover {
     cursor: pointer;
-    transform: scale(1.05);
+    transform: scale(1.02);
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .stats-box {
+    height: 120px;
+    width: 150px;
+    .head-bar {
+      height: 40px;
+      .img-holder {
+        width: 40px;
+        img {
+          width: 20px;
+        }
+      }
+      .title-holder {
+        font-size: 0.8rem;
+      }
+    }
+    .content {
+      font-size: 2rem;
+    }
   }
 }
