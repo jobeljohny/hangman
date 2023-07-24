@@ -29,6 +29,7 @@ import { HeaderOptionsDialogComponent } from './components/header-options-dialog
 import { VirtualKeypadComponent } from './components/virtual-keypad/virtual-keypad.component';
 import { KeypadKeyComponent } from './components/keypad-key/keypad-key.component';
 import { KeyboardToggleComponent } from './components/keyboard-toggle/keyboard-toggle.component';
+import { TipsSliderComponent } from './components/tips-slider/tips-slider.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { KeyboardToggleComponent } from './components/keyboard-toggle/keyboard-t
     VirtualKeypadComponent,
     KeypadKeyComponent,
     KeyboardToggleComponent,
+    TipsSliderComponent,
   ],
   imports: [
     BrowserModule,
