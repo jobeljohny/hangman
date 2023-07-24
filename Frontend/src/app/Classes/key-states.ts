@@ -18,12 +18,13 @@ export class KeyStates {
     });
   }
   disableKey(key: string) {
-    Object.values(this.keys).forEach((row) => {
+    for (const row of Object.values(this.keys)) {
       const foundKey = row.find((k: keyState) => k.key === key);
       if (foundKey) {
         foundKey.enabled = false;
+        break;
       }
-    });
+    }
   }
 
   private initializeKeys(keyArray: string[]): keyState[] {

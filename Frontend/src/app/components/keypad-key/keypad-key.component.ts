@@ -22,7 +22,11 @@ import { keyState } from 'src/app/enums/config';
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #006ce7;
+        background: linear-gradient(
+          90deg,
+          rgba(0, 88, 149, 1) 0%,
+          rgba(0, 108, 231, 1) 100%
+        );
         text-transform: uppercase;
         margin-left: 10px;
         margin-right: 10px;
