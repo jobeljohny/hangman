@@ -54,9 +54,10 @@
   </table>
 </div>
 <div
-  class="mt-5 d-flex justify-content-center"
+  class="error-msg"
   *ngIf="!leaderboards.length && !(Spinner.visibility | async)"
 >
+  <img src="assets/warning.png" alt="" />
   <p class="lead text-white">
     Looks like the leaderboard decided to play hide-and-seek with us due to some
     technical shenanigans. We'll catch 'em soon!"
