@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +25,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StatProfileComponent } from './components/stat-profile/stat-profile.component';
 import { InstructionsPageComponent } from './components/instructions-page/instructions-page.component';
 import { AdminToolsComponent } from './components/admin-tools/admin-tools.component';
+import { HomeOptionComponent } from './components/home-option/home-option.component';
+import { HeaderOptionsDialogComponent } from './components/header-options-dialog/header-options-dialog.component';
+import { VirtualKeypadComponent } from './components/virtual-keypad/virtual-keypad.component';
+import { KeypadKeyComponent } from './components/keypad-key/keypad-key.component';
+import { KeyboardToggleComponent } from './components/keyboard-toggle/keyboard-toggle.component';
+import { TipsSliderComponent } from './components/tips-slider/tips-slider.component';
+import { NumWarnComponent } from './components/num-warn/num-warn.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,11 +49,19 @@ import { AdminToolsComponent } from './components/admin-tools/admin-tools.compon
     StatProfileComponent,
     InstructionsPageComponent,
     AdminToolsComponent,
+    HomeOptionComponent,
+    HeaderOptionsDialogComponent,
+    VirtualKeypadComponent,
+    KeypadKeyComponent,
+    KeyboardToggleComponent,
+    TipsSliderComponent,
+    NumWarnComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatDialogModule,
+    MatTooltipModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,

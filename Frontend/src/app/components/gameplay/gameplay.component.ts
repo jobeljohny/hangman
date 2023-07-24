@@ -9,6 +9,7 @@ import { GameStateService } from 'src/app/services/game-state.service';
 import { GameTimerService } from 'src/app/services/game-timer.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ResultModalComponent } from './result-modal/result-modal.component';
+import { KeyStates } from 'src/app/Classes/key-states';
 
 @Component({
   selector: 'app-gameplay',
@@ -21,6 +22,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
   interval: any = undefined;
   guessBlinker: string = Vals.NORMAL;
   errorBlinker: string = Vals.NORMAL;
+  isKeyboardVisible: boolean = true;
 
   constructor(
     private gameRound: GameRoundService,
@@ -34,6 +36,19 @@ export class GameplayComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.timer.setTimeOutFn(this.assignLost.bind(this));
     this.initialize();
+    this.loadKeypadToggleState();
+  }
+  private loadKeypadToggleState() {
+    if (window.innerWidth >= 576) {
+      const state = localStorage.getItem('keyboardToggleState');
+      this.isKeyboardVisible = state === 'true';
+      if (state === null) {
+        this.isKeyboardVisible = false;
+      }
+    }
+  }
+  toggleKeyboardVisibility(vilisbility: boolean) {
+    this.isKeyboardVisible = vilisbility;
   }
   get isDarkMode() {
     return this.theme.isDarkMode;
@@ -44,6 +59,14 @@ export class GameplayComponent implements OnInit, OnDestroy {
   }
   get Lives() {
     return GameConfig.LIVES;
+  }
+
+  get keys(): KeyStates {
+    return this.gameRound.keyMap;
+  }
+
+  get isDigitPresent() {
+    return this.gameRound.isNumberPresent;
   }
 
   initialize(): void {
@@ -60,6 +83,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
   }
 
   process(key: string) {
+    this.gameRound.keyMap.disableKey(key);
     if (this.round.movie.includes(key)) {
       this.blink('GUESSER', Vals.CORRECT);
       this.round.updateTemplate(key);
@@ -84,7 +108,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
     this.panelMsgType = type;
   }
   checkWin() {
-    if (!this.round.template.includes('-')) {
+    if (!this.round.template.includes('_')) {
       this.round.WIN = true;
       this.timer.stop();
       this.showModal();
@@ -98,7 +122,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
     this.gameState.reset();
   }
   goToNextRound() {
-    this.gameState.nextRound(this.round.timeLeft);
+    this.gameState.nextRound(this.timer.timeRemaining);
     this.initialize();
   }
 

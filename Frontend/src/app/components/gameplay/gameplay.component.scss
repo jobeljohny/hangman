@@ -1,10 +1,11 @@
+@import "../../Styles/palette.scss";
 
 .gameplay-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 60px);
+  height: calc(100vh - $header-size-destop);
   max-width: 100vw;
   .game-panel {
     display: flex;
@@ -12,19 +13,26 @@
     width: 100%;
     .name-hang-container {
       display: flex;
-
+      position: relative;
+      .digits-warner {
+        position: absolute;
+        top: 16px;
+        left: 0px;
+      }
       #gameArea {
         flex-grow: 1;
         #movieGuesser {
           font-size: 2.6vw;
           text-align: center;
           margin: 0px;
-          height: 320px;
+          height: 280px;
           display: flex;
           align-items: center;
           justify-content: center;
           text-transform: uppercase;
           letter-spacing: 5px;
+          line-height: 50px;
+          word-break: break-all;
         }
       }
       #hangArea {
@@ -41,6 +49,39 @@
           margin: auto;
           display: block;
           filter: invert(1);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .gameplay-container {
+    height: calc(100vh - $header-size-mobile) !important;
+    margin: 0px 4px !important;
+
+    .game-panel {
+      .name-hang-container {
+        flex-direction: column-reverse;
+
+        #gameArea {
+          #movieGuesser {
+            font-size: 5vw;
+            height: 75px;
+            line-height: 25px;
+          }
+        }
+        #hangArea {
+          margin-top: 20px;
+          margin-left: 50px;
+          #errorBuffer {
+            font-size: 3vw;
+            letter-spacing: 15px;
+            height: 8px;
+          }
+          #hangImage {
+            width: 140px;
+          }
         }
       }
     }

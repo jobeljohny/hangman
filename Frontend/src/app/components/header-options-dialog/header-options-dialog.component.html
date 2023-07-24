@@ -1,0 +1,33 @@
+<div class="dialog-container">
+  <ul class="navbar-nav">
+    <li class="nav-item" (click)="optionClicked('/')">
+      <div class="nav-link">
+        <img src="../../../assets/home-icon.svg" alt="" />
+        Home
+      </div>
+    </li>
+    <li class="nav-item" (click)="optionClicked('/leaderboard')">
+      <div class="nav-link">
+        <img src="../../../assets/trophyIcon.svg" alt="" />
+        Leaderboard
+      </div>
+    </li>
+
+    <li class="nav-item" (click)="optionClicked('/stats')">
+      <div class="nav-link">
+        <img src="../../../assets/stats.svg" alt="" />
+        Stats
+      </div>
+    </li>
+    <li
+      *ngIf="Role == 'admin'"
+      class="nav-item"
+      (click)="optionClicked('/admin')"
+    >
+      <div class="nav-link">
+        <img src="../../../assets/user.svg" alt="" />
+        Admin
+      </div>
+    </li>
+  </ul>
+</div>

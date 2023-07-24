@@ -1,0 +1,34 @@
+<div class="keypad">
+  <div *ngIf="digits" class="krow num-row">
+    <span *ngFor="let key of keys.numbers">
+      <app-keypad-key
+        [key]="key"
+        (onKeyClicked)="onKeyClick($event)"
+      ></app-keypad-key>
+    </span>
+  </div>
+  <div class="krow char-row1">
+    <span *ngFor="let key of keys.topRow">
+      <app-keypad-key
+        [key]="key"
+        (onKeyClicked)="onKeyClick($event)"
+      ></app-keypad-key>
+    </span>
+  </div>
+  <div class="krow char-row2">
+    <span *ngFor="let key of keys.middleRow">
+      <app-keypad-key
+        [key]="key"
+        (onKeyClicked)="onKeyClick($event)"
+      ></app-keypad-key>
+    </span>
+  </div>
+  <div class="krow char-row3">
+    <span *ngFor="let key of keys.bottomRow">
+      <app-keypad-key
+        [key]="key"
+        (onKeyClicked)="onKeyClick($event)"
+      ></app-keypad-key>
+    </span>
+  </div>
+</div>

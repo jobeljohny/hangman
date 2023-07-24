@@ -5,6 +5,7 @@ import { LoginSignupComponent } from '../login-signup/login-signup.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToasterService } from 'src/app/services/toaster.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { HeaderOptionsDialogComponent } from '../header-options-dialog/header-options-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -37,9 +38,15 @@ export class HeaderComponent implements OnInit {
 
   loginSignup(loginType: Login) {
     const dialogRef = this.dialog.open(LoginSignupComponent, {
-      height: '600px',
       width: '450px',
       data: loginType,
+    });
+  }
+
+  openHeaderOptions() {
+    const dialogRef = this.dialog.open(HeaderOptionsDialogComponent, {
+      width: '100%',
+      backdropClass: 'headerOptionBackdrop',
     });
   }
 

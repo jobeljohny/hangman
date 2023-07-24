@@ -1,0 +1,14 @@
+.tips-container {
+  color: white;
+  background: rgba(27, 27, 27, 0.733);
+  p {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  p {
+    font-size: 0.8rem;
+  }
+}

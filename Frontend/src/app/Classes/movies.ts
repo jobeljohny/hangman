@@ -1740,7 +1740,7 @@ export const MyMovies = [
   'Eastern Promises',
   'Teenage Mutant Ninja Turtles Out of the Shadows',
   'Red Heat',
-  'The Hangover Part',
+  'The Hangover',
   'Shaft',
   'Batman Mystery of the Batwoman',
   'Duplicity',

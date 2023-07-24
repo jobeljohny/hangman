@@ -1,7 +1,5 @@
 $card-background-dark: #1d1d1d49;
 
-
-
 #scorePanel {
   display: flex;
   flex: 1;
@@ -12,5 +10,13 @@ $card-background-dark: #1d1d1d49;
     font-size: 18px;
     white-space: pre;
     color: white;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  #scorePanel {
+    p {
+      font-size: 16px;
+    }
   }
 }

@@ -15,7 +15,7 @@ export class GameStateService {
 
   nextRound(timeLeft: number) {
     this.Round += 1;
-    this.Score += 10 + Math.round((timeLeft * this.Round) / 3);
+    this.Score += 10 + Math.round((timeLeft * this.Round) / 4);
     this.updateServer();
   }
 

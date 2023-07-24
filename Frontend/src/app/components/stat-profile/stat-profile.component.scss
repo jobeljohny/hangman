@@ -23,3 +23,28 @@
     }
   }
 }
+
+@media only screen and (max-width: 576px) {
+  .profile-container {
+    margin: 0px 20px;
+    border: 1px solid rgb(138, 138, 138);
+    border-radius: 8px;
+    padding: 10px 10px;
+    justify-content: center;
+    .image-container {
+      img {
+        width: 50px;
+      }
+    }
+    .name-container {
+      .username {
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+      }
+
+      .fullname {
+        font-size: 1rem;
+      }
+    }
+  }
+}

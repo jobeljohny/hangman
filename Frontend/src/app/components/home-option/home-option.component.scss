@@ -1,0 +1,60 @@
+@import "../../Styles/palette.scss";
+
+.option-container {
+  border: 1px solid rgb(206, 206, 206);
+  background: linear-gradient(
+    90deg,
+    rgba(232, 232, 232, 0.08) 0%,
+    rgba(219, 219, 219, 0.02) 100%
+  );
+  width: 280px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  .logo-container {
+    overflow: hidden;
+    img {
+      width: 70px;
+      filter: $svg-filter;
+      transition: all 0.5s;
+    }
+  }
+  .option-tile {
+    color: white;
+    font-family: "Helvetica Neue", Helvetica, Arial;
+    font-size: 1.7rem;
+  }
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    .logo-container {
+      img {
+        transform: rotateY(360deg);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .option-container {
+    width: 280px;
+    padding: 20px;
+    border-radius: 10px;
+
+    flex-direction: row;
+
+    gap: 12px;
+    .logo-container {
+      img {
+        width: 32px;
+      }
+    }
+    .option-tile {
+      font-size: 1rem;
+    }
+  }
+}

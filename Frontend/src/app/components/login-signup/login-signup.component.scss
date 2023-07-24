@@ -106,10 +106,6 @@ h4 {
   border-bottom: 3px solid $theme-foreground;
 }
 
-.small {
-  width: 50px;
-  height: 50px;
-}
 :focus {
   box-shadow: none !important;
 }
@@ -122,4 +118,36 @@ h4 {
 ::placeholder {
   color: white;
   opacity: 0.7;
+}
+
+@media only screen and (max-width: 576px) {
+  .dialog-container {
+    height: 520px;
+    .loginBox {
+      padding: 0;
+      .registration {
+        margin-bottom: 12px !important;
+        margin-top: 0 !important;
+        font-size: 1.1rem;
+      }
+      .user {
+        width: 80px;
+      }
+      .regForm {
+        padding-left: 12px;
+        padding-right: 12px;
+
+        .form-group {
+          .form-wrapper {
+            &:first-child {
+              margin-right: 10px;
+            }
+          }
+        }
+        input[type="submit"] {
+          margin-top: 0px;
+        }
+      }
+    }
+  }
 }

@@ -1,11 +1,19 @@
 <div class="gameplay-container mx-5">
+  <app-keyboard-toggle
+    (toggle)="toggleKeyboardVisibility($event)"
+  ></app-keyboard-toggle>
   <app-scorebar style="width: 100%"></app-scorebar>
 
-  <div class="game-panel mx-5 shadow-lg p-3 mb-2 rounded card-container">
+  <div class="game-panel shadow-lg p-3 mb-2 rounded card-container">
     <app-progressbar></app-progressbar>
     <div class="name-hang-container">
+      <app-num-warn *ngIf="isDigitPresent" class="digits-warner"></app-num-warn>
       <div id="gameArea">
-        <p id="movieGuesser" class="text" [style.color]="guessBlinker">
+        <p
+          id="movieGuesser"
+          class="text not-selectable"
+          [style.color]="guessBlinker"
+        >
           {{ round.template.join("") }}
         </p>
       </div>
@@ -26,4 +34,13 @@
     [key]="pressedKey"
     [type]="panelMsgType"
   ></app-message-panel>
+
+  <app-virtual-keypad
+    *ngIf="isKeyboardVisible"
+    class="mt-3"
+    style="width: 100%"
+    [keyStates]="keys"
+    [digits]="isDigitPresent"
+    (keyClick)="process($event)"
+  ></app-virtual-keypad>
 </div>

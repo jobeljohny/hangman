@@ -59,3 +59,25 @@
 .modal-light {
   background: white !important;
 }
+
+@media only screen and (max-width: 576px) {
+  .dialog-container {
+    .dialog-body {
+      #score-card {
+        font-size: 1rem;
+      }
+      #movie-name {
+        font-size: 1rem;
+      }
+    }
+
+    .dialog-footer {
+      .btn {
+        padding: 6px 18px;
+        border-radius: 8px;
+
+        font-size: 14px;
+      }
+    }
+  }
+}

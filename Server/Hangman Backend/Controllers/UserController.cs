@@ -103,12 +103,6 @@ namespace Hangman_Backend.Controllers
                 Message = "Registered Successfully"
             });
         }
-        [Authorize]
-        [HttpGet]
-        public async Task<ActionResult<User>> GetAllUsers()
-        {
-            return Ok(await _context.Users.ToListAsync());
-        }
 
         [HttpPost("refresh")]
         public async Task<IActionResult> Refresh(TokenApiDto tokenApiDto) {

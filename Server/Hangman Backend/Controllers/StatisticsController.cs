@@ -1,10 +1,9 @@
 ﻿using Hangman_Backend.Context;
 using Hangman_Backend.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Hangman_Backend.Controllers
 {
@@ -23,13 +22,12 @@ namespace Hangman_Backend.Controllers
         {
             if (userObj == null)
                 return BadRequest();
-
+            var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
             var user = await _context.UserStatistics
-                .FirstOrDefaultAsync(x => x.Username == userObj.Username);
-
+                .FirstOrDefaultAsync(x => x.Username == username);
+           
             if (user == null)
                 return NotFound(new { Message = "User not found", Id = "USER_NOT_FOUND" });
-
             UpdateUserStatistics(user, userObj);
 
             try

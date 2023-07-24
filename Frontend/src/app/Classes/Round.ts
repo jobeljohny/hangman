@@ -29,7 +29,7 @@ export class Round {
         template.push('/');
       } else {
         movie.push(MovieNameLower[i]);
-        template.push('-');
+        template.push('_');
       }
     }
     while (true) {

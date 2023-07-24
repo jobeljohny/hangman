@@ -44,12 +44,16 @@ $title: #131f2b;
         background-color: $title;
         color: #fff;
         padding: 16px 0px;
-        font-size: 1.2rem;
-        img {
-          width: 22px;
-          height: 22px;
-          margin-right: 8px;
-          filter: $svg-filter;
+        .head-content {
+          span {
+            font-size: 1.2rem;
+          }
+          img {
+            width: 22px;
+            height: 22px;
+            margin-right: 8px;
+            filter: $svg-filter;
+          }
         }
       }
     }
@@ -117,4 +121,75 @@ tbody {
 ::-webkit-scrollbar-thumb {
   border-radius: 2px;
   background-color: #55515f;
+}
+.error-msg {
+  display: flex;
+  flex-direction: column;
+  margin-left: 6px;
+  margin-right: 6px;
+  align-items: center;
+  margin-top: 10rem;
+  gap: 1rem;
+  img {
+    width: 80px;
+  }
+  p {
+    text-align: center;
+    line-height: 1.8rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .heading {
+    margin-bottom: 10px;
+    img {
+      width: 30px;
+    }
+    span {
+      font-size: 1.5rem;
+    }
+  }
+  .table-container {
+    margin: 0px 10px;
+
+    table {
+      thead {
+        th {
+          padding: 10px 0px;
+          .head-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            align-items: center;
+
+            span {
+              font-size: 0.8rem;
+            }
+            img {
+              width: 18px;
+              height: 18px;
+              margin-right: 0px;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          border-top: 3px solid black;
+        }
+
+        td {
+          padding: 8px 0px;
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+  .error-msg {
+    p {
+      font-size: 1rem;
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
 }

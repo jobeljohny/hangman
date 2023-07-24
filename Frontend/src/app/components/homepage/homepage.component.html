@@ -1,38 +1,28 @@
 <div id="wrapper">
-  <div id="logo-container">
+  <div class="head-division"></div>
+  <div id="logo-container" class="mt-5">
     <img id="logo" src="../../../assets/hangman_title.png" alt="logo" />
   </div>
 
-  <div class="container">
-    <div class="content shadow-lg rounded card-container">
-      <div class="nav">
-        <ul class="nav_list">
-          <div class="nav_list_item">
-            <li>
-              <a routerLink="/game">
-                <img src="../../../assets/joystick.svg" alt="" />
-                Start Game</a
-              >
-            </li>
-          </div>
-          <div class="nav_list_item">
-            <li>
-              <a routerLink="/instructions">
-                <img src="../../../assets/help.svg" alt="" />
-                Instructions</a
-              >
-            </li>
-          </div>
-          <div class="nav_list_item">
-            <li>
-              <a href="https://github.com/jobeljohny/hangman" target="_blank">
-                <img src="../../../assets/about.svg" alt="" />
-                About</a
-              >
-            </li>
-          </div>
-        </ul>
-      </div>
-    </div>
+  <div class="content">
+    <app-home-option
+      logo="../../../assets/help.svg"
+      title="INSTRUCTIONS"
+      route="/instructions"
+    ></app-home-option>
+
+    <app-home-option
+      logo="../../../assets/joystick.svg"
+      title="START GAME"
+      route="/game"
+      class="top-tile"
+    ></app-home-option>
+
+    <app-home-option
+      logo="../../../assets/about.svg"
+      title="ABOUT"
+      route="/about"
+    ></app-home-option>
   </div>
+  <app-tips-slider class="tips-container"></app-tips-slider>
 </div>

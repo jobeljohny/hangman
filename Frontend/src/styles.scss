@@ -9,7 +9,6 @@ $body-light: #fff9f1;
 $text-light: black;
 $text-dark: white;
 
-
 body {
   background-color: $body-dark;
 }
@@ -23,14 +22,12 @@ body {
   background-color: $card-background-dark;
 }
 
-
 .text {
   color: $text-dark;
 }
 
-
 .toast-top-right {
-  top: 60px;
+  top: 70px;
 }
 
 html,
@@ -41,4 +38,20 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.headerOptionBackdrop {
+  backdrop-filter: blur(16px);
+}
+
+.mdc-dialog__surface {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+.not-selectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

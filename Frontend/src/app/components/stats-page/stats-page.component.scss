@@ -13,6 +13,46 @@ $border-color: rgb(79, 79, 79);
   }
   .stats-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
+  }
+}
+.error-msg {
+  display: flex;
+  flex-direction: column;
+  margin-left: 6px;
+  margin-right: 6px;
+  align-items: center;
+  margin-top: 10rem;
+  gap: 1rem;
+  img {
+    width: 80px;
+  }
+  p {
+    text-align: center;
+    line-height: 1.8rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .page-container {
+    margin-left: 0px;
+    padding: 10px;
+    .career-stats {
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    .hr-bar {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .stats-container {
+      justify-content: center;
+    }
+  }
+  .error-msg {
+    p {
+      font-size: 1rem;
+    }
   }
 }

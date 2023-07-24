@@ -3,73 +3,81 @@
     <a class="navbar-brand">
       <img src="../../../assets/hangman-menu-logo.png" alt="" />
     </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="content collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            aria-current="page"
-            routerLink="/"
-            [routerLinkActiveOptions]="{ exact: true }"
-            routerLinkActive="activeLink"
-          >
-            <img src="../../../assets/home-icon.svg" alt="" />
-            Home</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/leaderboard"
-            routerLinkActive="activeLink"
-          >
-            <img src="../../../assets/trophyIcon.svg" alt="" />
-            Leaderboard</a
-          >
-        </li>
+    <div class="navbar-hamburger" (click)="openHeaderOptions()">
+      <img src="../../../assets/hamburger.svg" alt="" />
+    </div>
+    <div class="content">
+      <div class="navbar-container">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              aria-current="page"
+              routerLink="/"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLinkActive="activeLink"
+            >
+              <img src="../../../assets/home-icon.svg" alt="" />
+              Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/leaderboard"
+              routerLinkActive="activeLink"
+            >
+              <img src="../../../assets/trophyIcon.svg" alt="" />
+              Leaderboard</a
+            >
+          </li>
 
-        <li class="nav-item">
-          <a routerLink="/stats" class="nav-link" routerLinkActive="activeLink">
-            <img src="../../../assets/stats.svg" alt="" />
-            Stats</a
-          >
-        </li>
-        <li *ngIf="Role == 'admin'" class="nav-item">
-          <a routerLink="/admin" class="nav-link" routerLinkActive="activeLink">
-            <img src="../../../assets/user.svg" alt="" />
-            Admin</a
-          >
-        </li>
-      </ul>
-      <div *ngIf="!isLoggedIn" class="login-panel">
-        <button class="login-btn" id="login" (click)="loginSignup(Login.LOGIN)">
-          Login
-        </button>
-        <button
-          class="login-btn"
-          id="sign-up"
-          (click)="loginSignup(Login.SIGNUP)"
-        >
-          Sign up
-        </button>
+          <li class="nav-item">
+            <a
+              routerLink="/stats"
+              class="nav-link"
+              routerLinkActive="activeLink"
+            >
+              <img src="../../../assets/stats.svg" alt="" />
+              Stats</a
+            >
+          </li>
+          <li *ngIf="Role == 'admin'" class="nav-item">
+            <a
+              routerLink="/admin"
+              class="nav-link"
+              routerLinkActive="activeLink"
+            >
+              <img src="../../../assets/user.svg" alt="" />
+              Admin</a
+            >
+          </li>
+        </ul>
       </div>
-      <div *ngIf="isLoggedIn" class="user-panel">
-        <div class="profile-panel">
-          <img src="../../../assets/user.svg" alt="profile" />
-          <span>{{ username }}</span>
+      <div class="auth-panel">
+        <div *ngIf="!isLoggedIn" class="login-panel">
+          <button
+            class="login-btn"
+            id="login"
+            (click)="loginSignup(Login.LOGIN)"
+          >
+            Login
+          </button>
+          <button
+            class="login-btn"
+            id="sign-up"
+            (click)="loginSignup(Login.SIGNUP)"
+          >
+            Sign up
+          </button>
         </div>
-        <button class="signout-btn" (click)="signOut()">Log out</button>
+        <div *ngIf="isLoggedIn" class="user-panel">
+          <div class="profile-panel">
+            <img src="../../../assets/user.svg" alt="profile" />
+            <span>{{ username }}</span>
+          </div>
+          <button class="signout-btn" (click)="signOut()">Log out</button>
+        </div>
       </div>
     </div>
   </div>
