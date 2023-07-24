@@ -13,7 +13,12 @@
     width: 100%;
     .name-hang-container {
       display: flex;
-
+      position: relative;
+      .digits-warner {
+        position: absolute;
+        top: 16px;
+        left: 0px;
+      }
       #gameArea {
         flex-grow: 1;
         #movieGuesser {

@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +31,7 @@ import { VirtualKeypadComponent } from './components/virtual-keypad/virtual-keyp
 import { KeypadKeyComponent } from './components/keypad-key/keypad-key.component';
 import { KeyboardToggleComponent } from './components/keyboard-toggle/keyboard-toggle.component';
 import { TipsSliderComponent } from './components/tips-slider/tips-slider.component';
+import { NumWarnComponent } from './components/num-warn/num-warn.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,11 +55,13 @@ import { TipsSliderComponent } from './components/tips-slider/tips-slider.compon
     KeypadKeyComponent,
     KeyboardToggleComponent,
     TipsSliderComponent,
+    NumWarnComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatDialogModule,
+    MatTooltipModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,

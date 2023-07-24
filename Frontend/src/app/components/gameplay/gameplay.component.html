@@ -7,6 +7,7 @@
   <div class="game-panel shadow-lg p-3 mb-2 rounded card-container">
     <app-progressbar></app-progressbar>
     <div class="name-hang-container">
+      <app-num-warn *ngIf="isDigitPresent" class="digits-warner"></app-num-warn>
       <div id="gameArea">
         <p
           id="movieGuesser"
