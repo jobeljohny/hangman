@@ -3,13 +3,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Round } from 'src/app/Classes/Round';
 import { isAlphaNum } from 'src/app/Classes/common';
-import { GameConfig, Result, Vals } from 'src/app/enums/config';
+import { KeyStates } from 'src/app/Classes/key-states';
+import { GameConfig, GameStatus, Result, Vals } from 'src/app/enums/config';
 import { GameRoundService } from 'src/app/services/game-round.service';
+import { GameSessionService } from 'src/app/services/game-session.service';
 import { GameStateService } from 'src/app/services/game-state.service';
 import { GameTimerService } from 'src/app/services/game-timer.service';
-import { ThemeService } from 'src/app/services/theme.service';
+import { AuthService } from '../../services/auth.service';
 import { ResultModalComponent } from './result-modal/result-modal.component';
-import { KeyStates } from 'src/app/Classes/key-states';
+import { Status } from 'src/app/Models/Status.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gameplay',
@@ -23,21 +26,46 @@ export class GameplayComponent implements OnInit, OnDestroy {
   guessBlinker: string = Vals.NORMAL;
   errorBlinker: string = Vals.NORMAL;
   isKeyboardVisible: boolean = true;
+  isCompetitive = false;
 
   constructor(
     private gameRound: GameRoundService,
     private router: Router,
-    private theme: ThemeService,
     private dialog: MatDialog,
     private timer: GameTimerService,
-    private gameState: GameStateService
+    private gameState: GameStateService,
+    private auth: AuthService,
+    private session: GameSessionService,
+    private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
+    this.setGameMode();
     this.timer.setTimeOutFn(this.assignLost.bind(this));
     this.initialize();
     this.loadKeypadToggleState();
   }
+
+  setGameMode() {
+    this.isCompetitive = this.auth.isLoggedIn();
+    if (this.isCompetitive) {
+      this.session.initSession().subscribe({
+        next: (res) => {
+          console.log('session initialized');
+
+          this.toast.success('Established');
+          this.session.sessionInitialized = true;
+        },
+        error: (err) => {
+          console.error(err);
+          this.session.sessionInitialized = false;
+          this.toast.error('Connection Failed');
+        },
+      });
+    }
+    console.log('Competive mode:' + this.isCompetitive);
+  }
+
   private loadKeypadToggleState() {
     if (window.innerWidth >= 576) {
       const state = localStorage.getItem('keyboardToggleState');
@@ -50,15 +78,22 @@ export class GameplayComponent implements OnInit, OnDestroy {
   toggleKeyboardVisibility(vilisbility: boolean) {
     this.isKeyboardVisible = vilisbility;
   }
-  get isDarkMode() {
-    return this.theme.isDarkMode;
-  }
-
-  get round(): Round {
+  get round() {
     return this.gameRound.round;
   }
-  get Lives() {
-    return GameConfig.LIVES;
+  get Template() {
+    if (this.isCompetitive) return this.session.Round.template;
+    return this.gameRound.round.template.join('');
+  }
+
+  get remainingLives() {
+    if (this.isCompetitive) return GameConfig.LIVES - this.session.Round.lives;
+    return GameConfig.LIVES - this.round.lives;
+  }
+
+  get WrongBuffer() {
+    if (this.isCompetitive) return this.session.Round.errorBuffer;
+    return this.gameRound.round.wrongBuffer.join('');
   }
 
   get keys(): KeyStates {
@@ -66,20 +101,29 @@ export class GameplayComponent implements OnInit, OnDestroy {
   }
 
   get isDigitPresent() {
+    if (this.isCompetitive) return this.session.Round.isNumber;
     return this.gameRound.isNumberPresent;
   }
 
   initialize(): void {
-    this.gameRound.initialize();
-    this.setPanelMsg(-1, '');
-    this.timer.start();
+    if (this.isCompetitive) {
+      this.session.initializeGameRound();
+    } else {
+      console.log('initing movie');
+
+      this.gameRound.initialize();
+      this.setPanelMsg(-1, '');
+      this.timer.start();
+    }
   }
 
   @HostListener('document:keydown', ['$event'])
   onKeyPress(event: KeyboardEvent) {
     let key = event.key;
     if (!isAlphaNum(key)) return;
-    if (!this.round.LOST && !this.round.WIN) this.process(key);
+    if (this.isCompetitive) {
+      this.processCompetitive(key);
+    } else if (!this.round.LOST && !this.round.WIN) this.process(key);
   }
 
   process(key: string) {
@@ -100,6 +144,33 @@ export class GameplayComponent implements OnInit, OnDestroy {
       if (this.round.lives === 0) {
         this.assignLost();
       }
+    }
+  }
+  processCompetitive(key: string) {
+    this.gameRound.keyMap.disableKey(key);
+    this.session.validateKey(key).subscribe({
+      next: (res: Status) => {
+        console.log(res);
+
+        this.handleValidationResult(res);
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  handleValidationResult(status: Status) {
+    switch (status.flag) {
+      case GameStatus.CORRECT_GUESS:
+        this.session.updateTemplate(status.template);
+        break;
+      case GameStatus.INCORRECT_GUESS:
+        this.session.pushError();
+        break;
+
+      default:
+        break;
     }
   }
 
