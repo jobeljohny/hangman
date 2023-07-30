@@ -14,17 +14,17 @@
           class="text not-selectable"
           [style.color]="guessBlinker"
         >
-          {{ round.template.join("") }}
+          {{ Template }}
         </p>
       </div>
       <div id="hangArea">
         <img
           id="hangImage"
-          src="assets/hang-states/hangman{{ Lives - round.lives }}.png"
+          src="assets/hang-states/hangman{{ remainingLives }}.png"
           alt="lives"
         />
         <p id="errorBuffer" [style.color]="errorBlinker">
-          {{ round.wrongBuffer.join("") }}
+          {{ WrongBuffer }}
         </p>
       </div>
     </div>

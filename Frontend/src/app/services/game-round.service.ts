@@ -14,7 +14,7 @@ export class GameRoundService {
 
   constructor(private api: ApiService) {
     this.keyMap = new KeyStates();
-    this.initialize();
+    this.round = new Round('');
   }
 
   initialize(): void {

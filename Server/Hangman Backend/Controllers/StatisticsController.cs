@@ -16,31 +16,31 @@ namespace Hangman_Backend.Controllers
         {
             _context = appDbContext;
         }
-        [Authorize]
-        [HttpPut("updateStat")]
-        public async Task<IActionResult> UpdateState([FromBody] UserStatistics userObj)
-        {
-            if (userObj == null)
-                return BadRequest();
-            var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            var user = await _context.UserStatistics
-                .FirstOrDefaultAsync(x => x.Username == username);
+        //[Authorize]
+        //[HttpPut("updateStat")]
+        //public async Task<IActionResult> UpdateState([FromBody] UserStatistics userObj)
+        //{
+        //    if (userObj == null)
+        //        return BadRequest();
+        //    var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+        //    var user = await _context.UserStatistics
+        //        .FirstOrDefaultAsync(x => x.Username == username);
            
-            if (user == null)
-                return NotFound(new { Message = "User not found", Id = "USER_NOT_FOUND" });
-            UpdateUserStatistics(user, userObj);
+        //    if (user == null)
+        //        return NotFound(new { Message = "User not found", Id = "USER_NOT_FOUND" });
+        //    UpdateUserStatistics(user, userObj);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return Conflict(new { Message = "Update conflict occurred" });
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        return Conflict(new { Message = "Update conflict occurred" });
+        //    }
 
-            return Ok(new { Message = "user stat updated" });
-        }
+        //    return Ok(new { Message = "user stat updated" });
+        //}
 
         [HttpGet("leaderboard")]
         public async Task<ActionResult<UserStatistics>> GetLeaderBoard()
@@ -96,19 +96,6 @@ namespace Hangman_Backend.Controllers
             return NotFound(new {Message= "No users found" });
         }
 
-        private void UpdateUserStatistics(UserStatistics user, UserStatistics userObj)
-        {
-            user.GamesPlayed++;
-
-            if (userObj.HighestRound > user.HighestRound)
-            {
-                user.HighestRound = userObj.HighestRound;
-            }
-
-            if (userObj.Highscore > user.Highscore)
-            {
-                user.Highscore = userObj.Highscore;
-            }
-        }
+        
     }
 }
