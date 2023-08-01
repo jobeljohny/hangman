@@ -56,6 +56,32 @@ namespace Hangman_Backend.Controllers
         }
 
         [Authorize]
+        [HttpPut("gameTimeout")]
+        public async Task<IActionResult> gameTimeout()
+        {
+
+            var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            var user = await _context.gameSessions
+                    .FirstOrDefaultAsync(x => x.Username == username);
+
+            if (user == null)
+                return NotFound(new { Message = "User not found", Id = "USER_NOT_FOUND" });
+
+            StatusFlag FlagStub = MovieProcessor.handleFlag(user, GameStatus.TIMEOUT);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return Conflict(new { Message = "Update conflict occurred" });
+            }
+
+            return Ok(FlagStub);
+        }
+
+        [Authorize]
         [HttpPut("newRound")]
         public async Task<IActionResult> newRound()
         {
@@ -104,23 +130,30 @@ namespace Hangman_Backend.Controllers
             GameStatus status = MovieProcessor.ValidateKey(user, key.k);
             StatusFlag FlagStub = MovieProcessor.handleFlag(user,status);
 
-            await _context.SaveChangesAsync();
+            if (status == GameStatus.WON)
+            {
+                UserStatistics statUser = await _context.UserStatistics.FirstOrDefaultAsync(x => x.Username == username);
+                UpdateUserStatistics(statUser, user);
+            }
+           
+          await _context.SaveChangesAsync();
+            
+
+           
             return Ok(FlagStub);
         }
 
-        private static void UpdateUserStatistics(UserStatistics user, UserStatistics userObj)
+
+
+        private static void UpdateUserStatistics(UserStatistics user, GameSession userObj)
         {
             user.GamesPlayed++;
 
-            if (userObj.HighestRound > user.HighestRound)
-            {
-                user.HighestRound = userObj.HighestRound;
-            }
+            if (userObj.round > user.HighestRound)
+                user.HighestRound = userObj.round;
 
-            if (userObj.Highscore > user.Highscore)
-            {
-                user.Highscore = userObj.Highscore;
-            }
+            if (userObj.score > user.Highscore)
+                user.Highscore = (int)userObj.score;  
         }
     }
     

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
+import { RoundStub } from '../Models/roundStub.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { AuthService } from './auth.service';
 export class GameStateService {
   Round = 1;
   Score = 0;
-  constructor(private api: ApiService, private auth: AuthService) {
+  constructor() {
     this.Round = 1;
     this.Score = 0;
   }
@@ -16,20 +17,15 @@ export class GameStateService {
   nextRound(timeLeft: number) {
     this.Round += 1;
     this.Score += 10 + Math.round((timeLeft * this.Round) / 4);
-    this.updateServer();
   }
 
-  updateServer() {
-    if (this.auth.isLoggedIn())
-      this.api.updateUserStat(this.Score, this.Round).subscribe({
-        next: (res) => {},
-        error: (err) => {
-          console.log(err);
-        },
-      });
-  }
   reset() {
     this.Round = 1;
     this.Score = 0;
+  }
+
+  setData(round: RoundStub) {
+    this.Round = round.round;
+    this.Score = round.score;
   }
 }

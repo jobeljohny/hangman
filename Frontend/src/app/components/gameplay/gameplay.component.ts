@@ -1,9 +1,9 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Round } from 'src/app/Classes/Round';
 import { isAlphaNum } from 'src/app/Classes/common';
 import { KeyStates } from 'src/app/Classes/key-states';
+import { Status } from 'src/app/Models/Status.model';
 import { GameConfig, GameStatus, Result, Vals } from 'src/app/enums/config';
 import { GameRoundService } from 'src/app/services/game-round.service';
 import { GameSessionService } from 'src/app/services/game-session.service';
@@ -11,8 +11,6 @@ import { GameStateService } from 'src/app/services/game-state.service';
 import { GameTimerService } from 'src/app/services/game-timer.service';
 import { AuthService } from '../../services/auth.service';
 import { ResultModalComponent } from './result-modal/result-modal.component';
-import { Status } from 'src/app/Models/Status.model';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gameplay',
@@ -35,8 +33,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
     private timer: GameTimerService,
     private gameState: GameStateService,
     private auth: AuthService,
-    private session: GameSessionService,
-    private toast: ToastrService
+    private session: GameSessionService
   ) {}
 
   ngOnInit(): void {
@@ -48,21 +45,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
 
   setGameMode() {
     this.isCompetitive = this.auth.isLoggedIn();
-    if (this.isCompetitive) {
-      this.session.initSession().subscribe({
-        next: (res) => {
-          console.log('session initialized');
 
-          this.toast.success('Established');
-          this.session.sessionInitialized = true;
-        },
-        error: (err) => {
-          console.error(err);
-          this.session.sessionInitialized = false;
-          this.toast.error('Connection Failed');
-        },
-      });
-    }
     console.log('Competive mode:' + this.isCompetitive);
   }
 
@@ -101,13 +84,16 @@ export class GameplayComponent implements OnInit, OnDestroy {
   }
 
   get isDigitPresent() {
-    if (this.isCompetitive) return this.session.Round.isNumber;
     return this.gameRound.isNumberPresent;
   }
 
-  initialize(): void {
+  async initialize() {
     if (this.isCompetitive) {
-      this.session.initializeGameRound();
+      await this.session.initSession();
+      await this.session.initializeGameRound();
+      this.gameRound.initializeCompetitive(this.session.Round);
+      this.gameState.setData(this.session.Round);
+      this.timer.start();
     } else {
       console.log('initing movie');
 
@@ -146,29 +132,47 @@ export class GameplayComponent implements OnInit, OnDestroy {
       }
     }
   }
-  processCompetitive(key: string) {
-    this.gameRound.keyMap.disableKey(key);
-    this.session.validateKey(key).subscribe({
-      next: (res: Status) => {
-        console.log(res);
 
-        this.handleValidationResult(res);
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
+  async handleKeyClick(key: string) {
+    if (this.isCompetitive) await this.processCompetitive(key);
+    else this.process(key);
+  }
+
+  async processCompetitive(key: string) {
+    this.gameRound.keyMap.disableKey(key);
+    if (this.session.sessionInitialized && this.session.isRoundLive) {
+      let res = await this.session.validateKey(key);
+      this.handleValidationResult(res);
+    }
   }
 
   handleValidationResult(status: Status) {
     switch (status.flag) {
       case GameStatus.CORRECT_GUESS:
         this.session.updateTemplate(status.template);
+        this.blink('GUESSER', Vals.CORRECT);
+        this.setPanelMsg(Vals.CORRECT_MSG, this.session.pressedKey);
         break;
       case GameStatus.INCORRECT_GUESS:
         this.session.pushError();
+        this.blink('GUESSER', Vals.ERROR);
+        this.setPanelMsg(Vals.INCORRECT_MSG, this.session.pressedKey);
         break;
-
+      case GameStatus.ALREADY_ERROR_BUFF:
+        this.blink('ERROR_BUFFER', Vals.ERROR);
+        this.setPanelMsg(Vals.ERRORLIST_MSG, this.session.pressedKey);
+        break;
+      case GameStatus.LOST:
+      case GameStatus.TIMEOUT:
+        this.timer.stop();
+        this.showModal(status);
+        this.session.reset();
+        break;
+      case GameStatus.WON:
+        this.session.isRoundLive = false;
+        this.timer.stop();
+        this.showModal(status);
+        break;
       default:
         break;
     }
@@ -186,14 +190,19 @@ export class GameplayComponent implements OnInit, OnDestroy {
     }
   }
 
-  assignLost() {
-    this.timer.stop();
-    this.round.LOST = true;
-    this.showModal();
-    this.gameState.reset();
+  async assignLost() {
+    if (!this.isCompetitive) {
+      this.timer.stop();
+      this.round.LOST = true;
+      this.showModal();
+      this.gameState.reset();
+    } else {
+      let res = await this.session.timedOut();
+      this.handleValidationResult(res);
+    }
   }
   goToNextRound() {
-    this.gameState.nextRound(this.timer.timeRemaining);
+    if (!this.isCompetitive) this.gameState.nextRound(this.timer.timeRemaining);
     this.initialize();
   }
 
@@ -209,14 +218,21 @@ export class GameplayComponent implements OnInit, OnDestroy {
         break;
     }
   }
-  showModal() {
-    let dialogRef = this.dialog.open(ResultModalComponent, {
+  showModal(Competive?: Status) {
+    const round = Competive ? this.session.Round.round : this.gameState.Round;
+    const name = Competive ? Competive.movieName : this.round.movieName;
+    const isWin = Competive
+      ? Competive.flag === GameStatus.WON
+      : this.round.WIN;
+    const score = Competive ? this.session.Round.score : this.gameState.Score;
+
+    const dialogRef = this.dialog.open(ResultModalComponent, {
       width: '500px',
       data: {
-        round: this.gameState.Round,
-        name: this.round.movieName,
-        isWin: this.round.WIN,
-        score: this.gameState.Score,
+        round,
+        name,
+        isWin,
+        score,
       },
     });
 
@@ -224,7 +240,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
       if (result) {
         this.resultHandler(result); // logic to restart game later
       } else {
-        this.resultHandler(this.round.WIN ? Result.PASSED : Result.FAILED);
+        this.resultHandler(isWin ? Result.PASSED : Result.FAILED);
       }
     });
   }

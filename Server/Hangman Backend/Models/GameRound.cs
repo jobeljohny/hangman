@@ -26,7 +26,7 @@ namespace Hangman_Backend.Models
             WIN = false;
             wrongBuffer = string.Empty;
             startTime = DateTime.UtcNow;
-            endTime = DateTime.UtcNow.AddSeconds(GameConfig.GAME_TIME+1);
+            endTime = DateTime.UtcNow.AddSeconds(GameConfig.GAME_TIME+10);
    
         }
         private void setMovieAndTemplate()

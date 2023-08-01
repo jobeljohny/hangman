@@ -18,16 +18,6 @@ export class ApiService {
     return movie;
   }
 
-  updateUserStat(score: number, round: number) {
-    let url = baseUrl + 'Statistics/updateStat';
-    const statObj = new UserRoundStat();
-    statObj.username = this.auth.getUsername();
-    statObj.highscore = score;
-    statObj.highestRound = round;
-
-    return this.http.put<any>(url, statObj);
-  }
-
   getLeaderboard() {
     let url = baseUrl + 'Statistics/leaderboard';
     return this.http.get<UserStatistic[]>(url);

@@ -1,3 +1,5 @@
+import { baseUrl } from '../Config/api-config';
+
 export enum GameConfig {
   LIVES = 6,
   GAME_TIME = 60,
@@ -68,3 +70,9 @@ export enum GameStatus {
   LOST,
   INCORRECT_GUESS,
 }
+export const urls = {
+  sessionInit: baseUrl + 'GameSession/initializeSession',
+  initGameRound: baseUrl + 'GameSession/newRound',
+  validateKey: baseUrl + 'GameSession/validateKey',
+  gameTimeout: baseUrl + 'GameSession/gameTimeout',
+};

@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { baseUrl } from '../Config/api-config';
 import { ToastrService } from 'ngx-toastr';
-import { RoundStub } from '../Models/roundStub.model';
+import { firstValueFrom, map } from 'rxjs';
+import { KeyStates } from '../Classes/key-states';
 import { Status } from '../Models/Status.model';
+import { RoundStub } from '../Models/roundStub.model';
+import { GameStatus, urls } from '../enums/config';
 
 @Injectable({
   providedIn: 'root',
@@ -12,32 +14,71 @@ export class GameSessionService {
   sessionInitialized = false;
   Round: RoundStub;
   pressedKey!: string;
+  sessionInitializer$: any;
+  roundInitializer$: any;
+  keyMap!: KeyStates;
+  isRoundLive = false;
   constructor(private http: HttpClient, private toast: ToastrService) {
     this.Round = new RoundStub();
+
+    this.sessionInitializer$ = this.http
+      .put<any>(urls['sessionInit'], {})
+      .pipe(map((response) => response));
+
+    this.roundInitializer$ = this.http
+      .put<any>(urls['initGameRound'], {})
+      .pipe(map((response) => response));
   }
 
-  initSession() {
-    let url = baseUrl + 'GameSession/initializeSession';
-    return this.http.put<any>(url, {});
-  }
-  initializeGameRound() {
-    let url = baseUrl + 'GameSession/newRound';
-    this.http.put<any>(url, {}).subscribe({
-      next: (res) => {
-        //console.log(res);
-        this.Round = res;
-      },
-      error: (err) => {
-        console.error(err);
+  async initSession() {
+    if (!this.sessionInitialized) {
+      console.log('initializing');
 
-        this.toast.error('connection error');
-      },
-    });
+      await firstValueFrom(this.sessionInitializer$);
+      this.sessionInitialized = true;
+      console.log('initialized');
+    } else {
+      console.log('already initialized');
+    }
   }
-  validateKey(key: string) {
+  async initializeGameRound() {
+    this.Round = await firstValueFrom(this.roundInitializer$);
+    console.log(this.Round);
+
+    this.isRoundLive = true;
+  }
+  async validateKey(key: string) {
     this.pressedKey = key;
-    let url = baseUrl + 'GameSession/validateKey';
-    return this.http.put<Status>(url, { k: key });
+    let status = this.internalValidation(key);
+    if (status) return status;
+    console.log('validating backend');
+
+    return await firstValueFrom(
+      this.http
+        .put<Status>(urls['validateKey'], { k: key })
+        .pipe(map((response) => response))
+    );
+  }
+
+  async timedOut() {
+    return await firstValueFrom(
+      this.http
+        .put<Status>(urls['gameTimeout'], {})
+        .pipe(map((response) => response))
+    );
+  }
+
+  internalValidation(key: string) {
+    let status;
+    if (this.Round.errorBuffer.includes(key)) {
+      status = new Status();
+      status.flag = GameStatus.ALREADY_ERROR_BUFF;
+    } else if (this.Round.template.includes(key)) {
+      status = new Status();
+      status.flag = GameStatus.CORRECT_GUESS;
+      status.template = this.Round.template;
+    }
+    return status;
   }
 
   pushError() {
@@ -47,5 +88,12 @@ export class GameSessionService {
 
   updateTemplate(template: string | undefined) {
     this.Round.template = template as string;
+  }
+
+  reset() {
+    this.sessionInitialized = false;
+    this.Round = new RoundStub();
+    this.pressedKey = '';
+    this.isRoundLive = false;
   }
 }
