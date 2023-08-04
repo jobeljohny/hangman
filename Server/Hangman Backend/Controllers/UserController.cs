@@ -154,7 +154,16 @@ namespace Hangman_Backend.Controllers
             
         }
 
-        
+        [Authorize("AdminOnly")]
+        [HttpPost("updateMovielist")]
+        public async Task<IActionResult> updateMovielist([FromBody] List<string> movies)
+        {
+
+            return Ok();
+
+        }
+
+
 
         private Task<bool> CheckUserNameExistAsync(string userName)
         {

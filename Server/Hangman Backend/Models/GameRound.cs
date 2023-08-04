@@ -18,7 +18,7 @@ namespace Hangman_Backend.Models
 
         public GameRound() 
         {
-            movieName = movieFetcher.getMovie();
+            movieName = "the godfather";
             isNumber = ContainsNumber(movieName);
             setMovieAndTemplate();
             lives = GameConfig.LIVES;

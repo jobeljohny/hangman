@@ -11,4 +11,12 @@
   <div class="stat-reset">
     <button (click)="resetStats()">Reset Statistics</button>
   </div>
+  <div class="update-movies">
+    <div class="form-group">
+    <label for="file">Choose File</label>
+    <input type="file"
+           id="file"
+           (change)="handleFileInput($event)">
+</div>
+  </div>
 </div>

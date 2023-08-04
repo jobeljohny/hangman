@@ -1,10 +1,10 @@
-﻿namespace Hangman_Backend.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Hangman_Backend.Models
 {
     public class movieFetcher
     {
-        public static string getMovie()
-        {
-            return "The Godfather Returns 2";
-        }
+        [Key]
+        public string movie { get; set; }
     }
 }

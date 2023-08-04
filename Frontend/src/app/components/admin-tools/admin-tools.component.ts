@@ -8,6 +8,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
   styleUrls: ['./admin-tools.component.scss'],
 })
 export class AdminToolsComponent {
+  file!: File;
   constructor(private toast: ToastrService, private api: AdminApiService) {}
   resetStats() {
     this.api.resetStatistics().subscribe({
@@ -30,5 +31,23 @@ export class AdminToolsComponent {
         this.toast.error('something went wrong');
       },
     });
+  }
+
+  handleFileInput(e: Event | null) {
+    let files = (e?.target as HTMLInputElement).files;
+    if (files) {
+      let file = files[0];
+      this.file = file;
+      let fileReader: FileReader = new FileReader();
+      fileReader.onloadend = function (x) {
+        this.processMovies(fileReader.result);
+      };
+      fileReader.readAsText(file);
+    }
+    console.log(this.file);
+  }
+
+  processMovies(content:string){
+
   }
 }
