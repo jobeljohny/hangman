@@ -42,6 +42,7 @@ export class GameSessionService {
     }
   }
   async initializeGameRound() {
+    this.Round= new RoundStub();
     this.Round = await firstValueFrom(this.roundInitializer$);
     console.log(this.Round);
 

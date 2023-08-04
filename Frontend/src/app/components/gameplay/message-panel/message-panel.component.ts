@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Vals } from 'src/app/enums/config';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
@@ -12,14 +13,14 @@ export class MessagePanelComponent implements OnChanges {
   @Input('type') type = -1;
   @Input('key') key = '';
 
-  constructor(private theme: ThemeService) {}
+  constructor(private spinner:SpinnerService) {}
+
+  get Spinner(){
+    return this.spinner;
+  }
 
   ngOnChanges(): void {
     this.setPanelMsg();
-  }
-
-  get isDarkMode() {
-    return this.theme.isDarkMode;
   }
 
   setPanelMsg(): void {

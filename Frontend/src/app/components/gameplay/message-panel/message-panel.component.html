@@ -1,3 +1,9 @@
 <div class="shadow-lg py-3 rounded card-container">
-  <p [innerHTML]="panelMessage" id="messageBox" class="lead text"></p>
+  <p *ngIf="!(Spinner.visibility | async)" [innerHTML]="panelMessage" id="messageBox" class="lead text"></p>
+<div
+  *ngIf="Spinner.visibility | async"
+  class=" d-flex justify-content-center"
+>
+  <mat-spinner [diameter]="20"> </mat-spinner>
+</div>
 </div>

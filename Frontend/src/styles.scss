@@ -55,3 +55,7 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #ec8300;
+}
