@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { baseUrl } from '../Config/api-config';
 import { UserStat } from '../Models/stats.model';
-import { UserRoundStat } from '../Models/user-round-stat.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -23,5 +22,10 @@ export class AdminApiService {
   removeUser(username: string) {
     let url = baseUrl + `User/${username}`;
     return this.http.delete<UserStat>(url);
+  }
+
+  updateMovies(movies: any) {
+    let url = baseUrl + 'User/updateMovielist';
+    return this.http.post(url, movies);
   }
 }

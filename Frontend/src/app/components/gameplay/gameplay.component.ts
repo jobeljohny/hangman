@@ -254,5 +254,6 @@ export class GameplayComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.timer.stop();
     this.gameState.reset();
+    if (this.isCompetitive) this.session.reset();
   }
 }

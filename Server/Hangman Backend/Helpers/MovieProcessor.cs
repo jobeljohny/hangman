@@ -6,9 +6,9 @@ namespace Hangman_Backend.Helpers
 {
     public class MovieProcessor
     {
-        public static void CreateNewRound(GameSession user)
+        public static void CreateNewRound(GameSession user,string movie)
         {
-            var round = new GameRound();
+            var round = new GameRound(movie);
             user.errorBuffer = round.wrongBuffer;
             user.lives = round.lives;
             user.MovieName = round.movieName;

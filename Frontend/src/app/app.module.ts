@@ -32,6 +32,8 @@ import { KeypadKeyComponent } from './components/keypad-key/keypad-key.component
 import { KeyboardToggleComponent } from './components/keyboard-toggle/keyboard-toggle.component';
 import { TipsSliderComponent } from './components/tips-slider/tips-slider.component';
 import { NumWarnComponent } from './components/num-warn/num-warn.component';
+import { AddMoviesDialogComponent } from './components/add-movies-dialog/add-movies-dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,8 @@ import { NumWarnComponent } from './components/num-warn/num-warn.component';
     KeyboardToggleComponent,
     TipsSliderComponent,
     NumWarnComponent,
+    AddMoviesDialogComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

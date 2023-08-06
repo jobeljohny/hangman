@@ -1,4 +1,5 @@
 ﻿using Hangman_Backend.Configs;
+using Hangman_Backend.Context;
 using System.Text.RegularExpressions;
 
 namespace Hangman_Backend.Models
@@ -16,9 +17,9 @@ namespace Hangman_Backend.Models
         public DateTime startTime { get; set; }
         public DateTime endTime { get; set; }
 
-        public GameRound() 
+        public GameRound(string RandomMovie) 
         {
-            movieName = "the godfather";
+            movieName = RandomMovie;
             isNumber = ContainsNumber(movieName);
             setMovieAndTemplate();
             lives = GameConfig.LIVES;

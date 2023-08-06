@@ -97,7 +97,8 @@ namespace Hangman_Backend.Controllers
             {
                 return BadRequest(new { Message = "Invalid Session" });
             }
-            MovieProcessor.CreateNewRound(user);
+
+            MovieProcessor.CreateNewRound(user, getRandomMovie());
             try
             {
                 await _context.SaveChangesAsync();
@@ -154,6 +155,15 @@ namespace Hangman_Backend.Controllers
 
             if (userObj.score > user.Highscore)
                 user.Highscore = (int)userObj.score;  
+        }
+
+        private  string getRandomMovie()
+        {
+            var movieCount = _context.movieFetcher.Count();
+            var randomIndex = new Random().Next(0, movieCount);
+            var fetcher =  _context.movieFetcher.Skip(randomIndex).FirstOrDefault();
+
+            return fetcher.movie;
         }
     }
     

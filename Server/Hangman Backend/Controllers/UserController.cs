@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Numerics;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -154,16 +155,24 @@ namespace Hangman_Backend.Controllers
             
         }
 
+
+
         [Authorize("AdminOnly")]
         [HttpPost("updateMovielist")]
-        public async Task<IActionResult> updateMovielist([FromBody] List<string> movies)
+        public async Task<IActionResult> updateMovielist([FromBody] MovieListSchema MovieList)
         {
 
-            return Ok();
+            List<string> movies = MovieList.movies;
+            _context.movieFetcher.RemoveRange(_context.movieFetcher);
+            foreach (string movie in movies)
+            {
+                await _context.movieFetcher.AddAsync(new movieFetcher{ movie = movie });
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok(new { Message = "Updated" } );
 
         }
-
-
 
         private Task<bool> CheckUserNameExistAsync(string userName)
         {
