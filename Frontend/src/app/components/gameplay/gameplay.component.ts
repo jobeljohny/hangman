@@ -86,6 +86,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
   }
 
   async initialize() {
+    this.timer.reset();
     if (this.isCompetitive) {
       await this.session.initSession();
       await this.session.initializeGameRound();

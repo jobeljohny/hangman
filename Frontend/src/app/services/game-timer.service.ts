@@ -27,8 +27,7 @@ export class GameTimerService {
   }
   start() {
     this.timerDestroy$ = new Subject<void>();
-    this.progressValue = 0.0;
-    this.progressValue$.next(0);
+    this.reset();
     timer(0, 1000)
       .pipe(
         take(GameConfig.GAME_TIME),
@@ -54,5 +53,10 @@ export class GameTimerService {
 
   setTimeOutFn(fn: () => void) {
     this.timeOutFn = fn;
+  }
+
+  reset() {
+    this.progressValue = 0.0;
+    this.progressValue$.next(0);
   }
 }
