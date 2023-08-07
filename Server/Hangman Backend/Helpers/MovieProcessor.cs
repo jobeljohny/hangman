@@ -1,6 +1,5 @@
 ﻿using Hangman_Backend.Configs;
 using Hangman_Backend.Models;
-using System.Text.RegularExpressions;
 
 namespace Hangman_Backend.Helpers
 {
@@ -77,7 +76,7 @@ namespace Hangman_Backend.Helpers
 
        
 
-        public static StatusFlag handleFlag(GameSession user, GameStatus FLAG)
+        public static StatusFlag handleFlag(GameSession user, GameStatus FLAG, string key="")
         {
             StatusFlag Status = new StatusFlag(FLAG);
 
@@ -94,13 +93,19 @@ namespace Hangman_Backend.Helpers
                     user.round++;
                     user.score += 10 + (int)Math.Round((double)((ts.TotalSeconds * user.round) / 4.0));
                     Status.movieName = user.MovieName;
+
                     break;
 
                 case GameStatus.CORRECT_GUESS:
                     Status.template = user.Template;
                     break;
+
+                case GameStatus.INCORRECT_GUESS:
+                    Status.key = key; 
+                    break;
+
                 // For GameStatus.ALREADY_ERROR_BUFF
-                // and GameStatus.INCORRECT_GUESS, no specific action is needed
+                
             }
 
             return Status;

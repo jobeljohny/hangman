@@ -42,7 +42,7 @@ export class GameSessionService {
     }
   }
   async initializeGameRound() {
-    this.Round= new RoundStub();
+    this.Round = new RoundStub();
     this.Round = await firstValueFrom(this.roundInitializer$);
     console.log(this.Round);
 
@@ -82,9 +82,9 @@ export class GameSessionService {
     return status;
   }
 
-  pushError() {
+  pushError(key: string | undefined) {
     this.Round.lives--;
-    this.Round.errorBuffer += this.pressedKey;
+    this.Round.errorBuffer += key;
   }
 
   updateTemplate(template: string | undefined) {

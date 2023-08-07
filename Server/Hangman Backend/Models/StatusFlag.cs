@@ -7,6 +7,7 @@ namespace Hangman_Backend.Models
         public GameStatus Flag { get; set; }
         public string? movieName { get; set; }
         public string? template { get; set; }
+        public string? key { get; set; }
 
         public StatusFlag(GameStatus flag) {
             Flag = flag;

@@ -1,4 +1,5 @@
 using Hangman_Backend.Context;
+using Hangman_Backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -24,6 +25,8 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("sqlServerConnStr"));
 });
+
+builder.Services.AddSingleton<IGameSessionService, GameSessionService>();
 
 
 builder.Services.AddAuthentication(x =>

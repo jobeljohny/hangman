@@ -4,4 +4,5 @@ export class Status {
   flag!: GameStatus;
   movieName?: string;
   template?: string;
+  key?: string;
 }

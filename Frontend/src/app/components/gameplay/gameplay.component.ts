@@ -154,7 +154,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
         this.setPanelMsg(Vals.CORRECT_MSG, this.session.pressedKey);
         break;
       case GameStatus.INCORRECT_GUESS:
-        this.session.pushError();
+        this.session.pushError(status.key);
         this.blink('GUESSER', Vals.ERROR);
         this.setPanelMsg(Vals.INCORRECT_MSG, this.session.pressedKey);
         break;
