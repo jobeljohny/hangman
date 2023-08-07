@@ -32,13 +32,8 @@ export class GameSessionService {
 
   async initSession() {
     if (!this.sessionInitialized) {
-      console.log('initializing');
-
       await firstValueFrom(this.sessionInitializer$);
       this.sessionInitialized = true;
-      console.log('initialized');
-    } else {
-      console.log('already initialized');
     }
   }
   async initializeGameRound() {
@@ -52,7 +47,6 @@ export class GameSessionService {
     this.pressedKey = key;
     let status = this.internalValidation(key);
     if (status) return status;
-    console.log('validating backend');
 
     return await firstValueFrom(
       this.http

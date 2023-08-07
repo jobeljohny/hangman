@@ -30,36 +30,20 @@ namespace Hangman_Backend.Controllers
             _gameSessionService = gameSessionService;
         }
 
+        private string GetUsername() => User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+
         [Authorize]
         [HttpPut("initializeSession")]
         public async Task<IActionResult> initializeSession()
         {
-            
-            var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
 
-            // var user = await _context.gameSessions
-            //         .FirstOrDefaultAsync(x=>x.Username == username);
-
+            var username = GetUsername();
             var user = new GameSession(username);
 
             if (user == null)
                 return NotFound(new { Message = "User not found", Id = "USER_NOT_FOUND" });
 
-            user.isPlaying = true;
-            user.round = 1;
-            user.score = 0;
-
             _gameSessionService.StoreGameSession(user);
-
-            try
-            {
-               // await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return Conflict(new { Message = "Update conflict occurred" });
-            }
-
             return Ok(new { Message = "session initialized" });
         }
 
@@ -68,10 +52,7 @@ namespace Hangman_Backend.Controllers
         public async Task<IActionResult> gameTimeout()
         {
 
-            var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            // var user = await _context.gameSessions
-            //        .FirstOrDefaultAsync(x => x.Username == username);
-            
+            var username = GetUsername();
             var user = _gameSessionService.RetrieveGameSession(username);
 
             if (user == null)
@@ -79,14 +60,6 @@ namespace Hangman_Backend.Controllers
 
             StatusFlag FlagStub = MovieProcessor.handleFlag(user, GameStatus.TIMEOUT);
             _gameSessionService.RemoveGameSession(username);
-            try
-            {
-                //await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return Conflict(new { Message = "Update conflict occurred" });
-            }
 
             return Ok(FlagStub);
         }
@@ -95,32 +68,20 @@ namespace Hangman_Backend.Controllers
         [HttpPut("newRound")]
         public async Task<IActionResult> newRound()
         {
-
-            var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-
-            //var user = await _context.gameSessions
-            //        .FirstOrDefaultAsync(x => x.Username == username);
+            var username = GetUsername();
             var user = _gameSessionService.RetrieveGameSession(username);
             
             if (user == null)
                 return NotFound(new { Message = "User not found", Id = "USER_NOT_FOUND" });
 
             if (!user.isPlaying)
-            {
                 return BadRequest(new { Message = "Invalid Session" });
-            }
+            
 
-            MovieProcessor.CreateNewRound(user, getRandomMovie());
-            try
-            {
-                _gameSessionService.StoreGameSession(user);
-                //await _context.SaveChangesAsync();
-                return Ok(new RoundStub(user));
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return Conflict(new { Message = "Update conflict occurred" });
-            }
+            MovieProcessor.CreateNewRound(user, getRandomMovie());   
+            _gameSessionService.StoreGameSession(user);
+
+            return Ok(new RoundStub(user));
 
         }
 
@@ -129,29 +90,23 @@ namespace Hangman_Backend.Controllers
         public async Task<IActionResult> ValidateKey([FromBody] Key key)
         {
 
-            var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-
-            // db approach is stand-by
-            //var user = await _context.gameSessions
-            //        .FirstOrDefaultAsync(x => x.Username == username);
-
+            var username = GetUsername();
             var user = _gameSessionService.RetrieveGameSession(username);
 
             if (user == null)
                 return NotFound(new { Message = "User not found", Id = "USER_NOT_FOUND" });
 
             if (!user.isPlaying)
-            {
                 return BadRequest(new { Message = "Invalid Session" });
-            }
+            
 
-            GameStatus status = MovieProcessor.ValidateKey(user, key.k);
-            StatusFlag FlagStub = MovieProcessor.handleFlag(user,status,key.k);
+            var status = MovieProcessor.ValidateKey(user, key.k);
+            var flagStub = MovieProcessor.handleFlag(user, status, key.k);
             _gameSessionService.StoreGameSession(user);
 
             if (status == GameStatus.WON)
             {
-                UserStatistics statUser = await _context.UserStatistics.FirstOrDefaultAsync(x => x.Username == username);
+                var statUser = await _context.UserStatistics.FirstOrDefaultAsync(x => x.Username == username);
                 UpdateUserStatistics(statUser, user);
                 await _context.SaveChangesAsync();
             }
@@ -160,9 +115,7 @@ namespace Hangman_Backend.Controllers
                 _gameSessionService.RemoveGameSession(username);
             }
 
-            //await _context.SaveChangesAsync();
-
-            return Ok(FlagStub);
+            return Ok(flagStub);
         }
 
 

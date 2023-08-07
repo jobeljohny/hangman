@@ -22,7 +22,9 @@ namespace Hangman_Backend.Models
         public GameSession(string Username)
         {
             this.Username = Username;
-            isPlaying = false;
+            isPlaying = true;
+            round = 1;
+            score = 0;
         }
     }
 }

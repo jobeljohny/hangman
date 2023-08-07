@@ -97,7 +97,7 @@ namespace Hangman_Backend.Controllers
             var gameSession = new GameSession(userObj.Username);
 
             await _context.UserStatistics.AddAsync(statObj);
-            await _context.gameSessions.AddAsync(gameSession);
+            //await _context.gameSessions.AddAsync(gameSession);
 
             await _context.SaveChangesAsync();
 
