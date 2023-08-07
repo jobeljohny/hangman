@@ -45,8 +45,6 @@ export class GameplayComponent implements OnInit, OnDestroy {
 
   setGameMode() {
     this.isCompetitive = this.auth.isLoggedIn();
-
-    console.log('Competive mode:' + this.isCompetitive);
   }
 
   private loadKeypadToggleState() {
@@ -95,8 +93,6 @@ export class GameplayComponent implements OnInit, OnDestroy {
       this.gameState.setData(this.session.Round);
       this.timer.start();
     } else {
-      console.log('initing movie');
-
       this.gameRound.initialize();
       this.setPanelMsg(-1, '');
       this.timer.start();

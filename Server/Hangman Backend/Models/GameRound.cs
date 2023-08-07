@@ -1,5 +1,4 @@
 ﻿using Hangman_Backend.Configs;
-using Hangman_Backend.Context;
 using System.Text.RegularExpressions;
 
 namespace Hangman_Backend.Models
@@ -27,9 +26,11 @@ namespace Hangman_Backend.Models
             WIN = false;
             wrongBuffer = string.Empty;
             startTime = DateTime.UtcNow;
-            endTime = DateTime.UtcNow.AddSeconds(GameConfig.GAME_TIME+10);
+            endTime = DateTime.UtcNow.AddSeconds(GameConfig.GAME_TIME+5);
    
         }
+
+        private static Random random = new Random();
         private void setMovieAndTemplate()
         {
              movie = "";
@@ -49,7 +50,7 @@ namespace Hangman_Backend.Models
                 }
             }
 
-            Random random = new Random();
+            
             while (true)
             {
                 int randomIndex = random.Next(0, movie.Length);
